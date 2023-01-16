@@ -1,0 +1,7 @@
+{
+    "Lua.diagnostics.globals": [
+        "PANDOC_SCRIPT_FILE",
+        "pandoc",
+        "FORMAT"
+    ]
+}

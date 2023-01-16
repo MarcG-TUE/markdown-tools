@@ -1,6 +1,11 @@
+-- metadata 
+
+
 # Title
 
 This is an example document.
+
+For all $n\in{{Nats}}$
 
 ::::: {.lemma}
 This is an example lemma.
