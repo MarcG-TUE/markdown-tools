@@ -1,0 +1,29 @@
+
+:root {
+    --b-v-margin: 31px;
+    --b-h-margin: 120px;
+    --b-main-font: Source Sans Pro, Helvetica, sans-serif;
+    --b-main-font-size: 24px;
+    --b-main-color: #000;
+    }
+  
+
+  body {
+    color: white;
+    font-family: var(--b-main-font);
+    font-size: var(--b-main-font-size);
+    font-weight: normal;
+    color: var(--b-main-color);
+    }
+
+.bottom-right {
+    position: absolute;
+    right: var(--b-h-margin);
+    bottom: var(--b-v-margin);
+}
+
+.bottom-left {
+    position: absolute;
+    left: var(--b-h-margin);
+    bottom: var(--b-v-margin);
+}

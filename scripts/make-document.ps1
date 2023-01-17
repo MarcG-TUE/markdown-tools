@@ -1,9 +1,7 @@
-
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputfile
   )
-  
 
 $inputfile = Resolve-Path -Path $inputfile
 

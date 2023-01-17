@@ -23,7 +23,7 @@ local function replaceImage (el)
     -- print("Caption ", el.caption)
   end
   if el.src ~= nil then
-    el.src, _ = macroutils.doSubstitutions(Urldecode(el.src))
+    el.src, _ = macroutils.doSubstitutions(macroutils.urldecode(el.src))
   end
   if el.title ~= nil then
     el.title, _ = macroutils.doSubstitutions(el.title)
