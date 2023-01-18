@@ -11,6 +11,7 @@ macros:
   Reals: "\\mathbb{R}"
   mpReals: "\\mathbb{T}"
   PosReals: "\\mathbb{R}_{\\geq 0}"
+  Rationals: "\\mathbb{Q}"
   "actor#1": "{#1}"
   "port#1": "{#1}"
   schedule: "\\sigma{}"

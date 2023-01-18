@@ -4,11 +4,10 @@ title-slide-attributes:
 slide-attributes:
     data-background-iframe: ./background/content.html
 ---
-<!-- markdownlint-disable MD024 MD025 MD041 MD035 MD045 -->
 
-# Quality and Resource Management; Component Interface and Language {data-background-iframe="./background/title.html"}
+# Title {data-background-iframe="./background/title.html"}
 
-Marc Geilen, Twan Basten
+Marc Geilen
 
 Electronic Systems, Dept. Electrical Engineering,\
 Eindhoven university of Technology
@@ -23,7 +22,57 @@ Eindhoven university of Technology
 
 # Overview {data-background-iframe="./background/content.html"}
 
-- Budget models
-- Partially ordered sets
-- The QRML language
-- Tools
+- Item 1
+- Item 2
+- Item 3
+- Item 4
+
+# Instructions
+
+- laser pointer
+- chalk
+
+# Tex with image
+
+TODO: make default background iframe
+
+- a
+- b
+
+::: center
+![](figures/example.png){style="width: 600px;"}
+:::
+
+# Two columns
+
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+- 60%
+
+:::
+::: {.column width="40%"}
+
+- 40%
+
+:::
+::::::::::::::
+
+# CSS styling
+
+:::{style="background: blue; color: white; transform: rotate(180deg);"}
+
+- Item 1
+- Item 2
+
+:::
+
+# A table
+
+Header left                         Header center
+--------------------------------  -----------------
+Natural numbers                   ${{Nats}}$
+Rational numbers                  ${{Rationals}}$
+
+
+<!-- markdownlint-disable-file MD024 MD025 MD041 MD035 MD045 -->

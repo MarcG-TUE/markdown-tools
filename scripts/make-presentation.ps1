@@ -10,9 +10,9 @@ if (-not (Test-Path -PathType Container $outputdir)) {
 }
 
 $inputfile = Resolve-Path -Path $inputfile
+$inputdir = Split-Path -Parent $inputfile
 $outputdir = Resolve-Path -Path $outputdir
 
-Write-Output $syntaxdefinition
 
 if (! ($syntaxdefinition -eq "")) {
     $optSyntaxDef = "--syntax-definition=metadata/syntax/$syntaxdefinition"
@@ -41,4 +41,7 @@ pandoc $inputfile `
 $optSyntaxDef
 
 # copy distribution files to output dir
-Copy-Item -Recurse "$PSScriptRoot/../templates/presentation/dist/*" $outputdir
+Copy-Item -Force -Recurse "$PSScriptRoot/../templates/presentation/dist/*" $outputdir
+
+# copy figures to output dir
+Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
