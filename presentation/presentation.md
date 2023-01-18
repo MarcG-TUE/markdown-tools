@@ -1,11 +1,11 @@
 ---
 title-slide-attributes:
-    data-background-iframe: ./background/title.html
+    background: title.html
 slide-attributes:
-    data-background-iframe: ./background/content.html
+    background: content.html
 ---
 
-# Title {data-background-iframe="./background/title.html"}
+# Title {background="title.html"}
 
 Marc Geilen
 
@@ -20,7 +20,7 @@ Eindhoven university of Technology
 
 :::
 
-# Overview {data-background-iframe="./background/content.html"}
+# Overview
 
 - Item 1
 - Item 2
@@ -32,7 +32,7 @@ Eindhoven university of Technology
 - laser pointer
 - chalk
 
-# Tex with image
+# Text with image
 
 TODO: make default background iframe
 
@@ -40,7 +40,7 @@ TODO: make default background iframe
 - b
 
 ::: center
-![](figures/example.png){style="width: 600px;"}
+![](figures/example.png){style="width: 500px;"}
 :::
 
 # Two columns
@@ -67,12 +67,21 @@ TODO: make default background iframe
 
 :::
 
-# A table
+# A table with empty background {background="empty.html"}
 
 Header left                         Header center
 --------------------------------  -----------------
 Natural numbers                   ${{Nats}}$
 Rational numbers                  ${{Rationals}}$
 
+# A chart
+
+# A Speech Bubble
+
+# A Text Box
+
+# An Arrow
+
+# An Image Popup
 
 <!-- markdownlint-disable-file MD024 MD025 MD041 MD035 MD045 -->

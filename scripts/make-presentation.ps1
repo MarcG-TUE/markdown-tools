@@ -41,7 +41,8 @@ pandoc $inputfile `
 $optSyntaxDef
 
 # copy distribution files to output dir
-Copy-Item -Force -Recurse "$PSScriptRoot/../templates/presentation/dist/*" $outputdir
+$distPath = Resolve-Path $PSScriptRoot\..\templates\presentation\dist
+Copy-Item -Path "$distPath\*" -Destination $outputdir -Force -Recurse
 
 # copy figures to output dir
 Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
