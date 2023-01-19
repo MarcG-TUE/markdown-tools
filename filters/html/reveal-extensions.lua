@@ -14,7 +14,12 @@ function Header (elem)
   if elem.attributes["background"] then
     elem.attributes["data-background-iframe"] = "./background/"..elem.attributes["background"]
   else
-    elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultBackground
+    if elem.classes:includes('title') then
+      elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultTitleBackground
+    else
+  
+      elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultBackground
+    end
   end
   return elem
 end
@@ -57,7 +62,6 @@ function Div (elem)
     elem.content:insert(pandoc.RawInline('html', '</canvas>'))
     return elem
   end
-    
 
   if elem.classes:includes('speech-bubble') then
     local classes = elem.classes
@@ -101,5 +105,6 @@ end
 
 return {
   { Meta = Meta },
-  { Header = Header }
+  { Header = Header },
+  {Div = Div}
 }
