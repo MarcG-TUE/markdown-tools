@@ -109,9 +109,13 @@ function macroutils.doSubstitutions(s)
         local b, e, args, et
         b, e = res:find(pattern)
         args, et = determineArguments(res, e, numArgs)
-        local replcmnt = replaceArguments(subst, args)
-        res = res:sub(1,b-1) .. replcmnt .. res:sub(et+2,res:len())
-        changes = true
+        if args == nil then
+          print("Warning: failed to determine arguments of macro "..k:sub(3))
+        else
+          local replcmnt = replaceArguments(subst, args)
+          res = res:sub(1,b-1) .. replcmnt .. res:sub(et+2,res:len())
+          changes = true
+        end
       end
     end
   end

@@ -46,6 +46,14 @@ section.has-dark-background h6 {
 }
 
 
+/* scale text support */
+.fit-em-calculation {
+  display: block;
+  height: 1em;
+  width: 1em;
+  position: absolute;
+}
+
 /* image popup support */
 #show_image_popup{
   position: absolute; /*  so that not take place   */
@@ -514,8 +522,13 @@ code span .op {
   border-bottom: none;
 }
 
-.reveal tr:nth-child(even) {background:rgb(233, 242, 252)};
-.reveal tr:nth-child(odd) {background: #FFF};
+.reveal tbody tr:nth-child(odd) {
+  background:#FFFFFF;
+}
+
+.reveal tbody tr:nth-child(even) {
+  background:rgb(233, 242, 252);
+}
 
 .reveal sup {
   vertical-align: super;

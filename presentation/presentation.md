@@ -3,6 +3,9 @@ title-slide-attributes:
     background: title.html
 slide-attributes:
     background: content.html
+macros:
+  MyNats: "\\mathbb{N}"
+  "actorname#1": "\\textsf{#1}"
 ---
 
 # Title {.title}
@@ -34,10 +37,9 @@ Eindhoven university of Technology
 
 # Text with image
 
-TODO: make default background iframe
-
 - a
 - b
+- using a macro: ${{actorname{A}}}$
 
 ::: center
 ![](figures/example.png){style="width: 500px;"}
@@ -157,7 +159,7 @@ Rational numbers                  ${{Rationals}}$
 -->
 :::::
 
-# Text Boxes Arrows and Speech Bubbles
+# Text Boxes Arrows and Speech Bubbles {.fit}
 
 - scale title to always fit one line
 
