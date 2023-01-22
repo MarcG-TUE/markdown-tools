@@ -161,7 +161,7 @@ Rational numbers                  ${{Rationals}}$
 
 # Text Boxes Arrows and Speech Bubbles {.fit}
 
-- scale title to always fit one line
+- title scaled to always fit one line
 
 :::: fragment
 ::: {.text-box x="0%" y="18%" font-size="smaller"}

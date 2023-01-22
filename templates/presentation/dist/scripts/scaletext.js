@@ -1,53 +1,50 @@
 // https://codepen.io/amybrowndesign/pen/KNXvQm?editors=1111
 
-// Calculate width of text from DOM element or string. By Phil Freo <http://philfreo.com>
-$.fn.textWidth = function(text, font) {
-  if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
-  $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
-  return $.fn.textWidth.fakeEl.width();
-};
+// function getOneEm(el) {
+//   if($(el).find(".fit-em-calculation").length==0) {
+//     $(el).prepend('<div class="fit-em-calculation" style="width: 1em;position: absolute;"></div>');
+//   }
+//   return parseInt($(el).parent().find('.fit-em-calculation').css('width'));
+// }
 
-function scaleToFit() {
 
-    $('.fit').each(function(){
-      if ($(this).is("h1")) {
-        console.log("Fit")
 
-        console.log($(this).css('width'))
+function scaleToFit(el) {
 
-        $(this).parent().prepend('<div class="fit-em-calculation" style="width: 1em;position: absolute;"></div>');
-        var em = parseInt($('.fit-em-calculation').css('width'));
-        // console.log(`Em: ${em}`)
-        // console.log(`Em: ${$('.fit-em-calculation').css('width')}`)
-    
-        // $(this).wrapInner('<span></span>');
-        $(this).wrapInner('<span class="fit-inner"></span>');
-        var el = $(this);
-        var inner = el.find('.fit-inner');
-        // var fitWidth = parseInt(el.css('width'));
-        var innerWidth = parseInt(inner.css('width'));
-        // console.log(`fitWidth: ${fitWidth}`)
-        console.log(`innerWidth: ${innerWidth}`)
-        
-        // the magic number of 907...
-        if (innerWidth == 907) {
+  $(el).find('.fit').each(function () {
+    if ($(this).is("h1")) {
+      // var em = getOneEm($(this))
+      // console.log(`Em: ${em}`)
 
-          // don't know the right scaling...
-          // var factor = fitWidth / innerWidth;
-          var factor = 1.0;
-          var calc = em * factor;
-          console.log(`factor: ${factor}`)
-
-          $(this).css('font-size', calc + 'px');
-          $(this).css('display', 'block');
-        }
+      // wrap inner if it does not yet exist
+      var h1el = $(this);
+      if (h1el.find('.fit-inner').length==0){
+        h1el.wrapInner('<span class="fit-inner"></span>');        
       }
-    });
+      var inner = h1el.find('.fit-inner');
+      // inner.css('font-size', '1em');
+      // console.log(`innerWidth at 1em: ${inner.css('width')}`)
+      // inner.css('font-size', '50em');
+      // console.log(`innerWidth at 50em: ${inner.css('width')}`)
+      // inner.css('font-size', '0.05em');
+      // console.log(`innerWidth at 0.05em: ${inner.css('width')}`)
+      inner.css('font-size', '0.2em');
+      // console.log(`innerWidth at 0.2em: ${inner.css('width')}`)
+
+      var innerWidthFifthEm = parseInt(inner.css('width'));
+      var h1Width = parseInt(h1el.css('width'));
+      // console.log(`H1 Width: ${h1el.css('width')}`)
+      // console.log(`innerWidth at 1em: ${inner.css('width')}`)
+
+      var factor = 0.199 * h1Width / innerWidthFifthEm;
+
+      if (factor > 1) { factor = 1 }
+      inner.css('font-size', factor + 'em');
+    }
+  });
 };
 
-window.onload = function(event) {
-    scaleToFit();
-};
-window.onresize = function(event) {
-    scaleToFit();
-};
+Reveal.on('slidechanged', event => {
+  // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+  scaleToFit(event.currentSlide)
+});

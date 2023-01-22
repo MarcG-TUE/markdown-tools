@@ -46,14 +46,6 @@ section.has-dark-background h6 {
 }
 
 
-/* scale text support */
-.fit-em-calculation {
-  display: block;
-  height: 1em;
-  width: 1em;
-  position: absolute;
-}
-
 /* image popup support */
 #show_image_popup{
   position: absolute; /*  so that not take place   */
