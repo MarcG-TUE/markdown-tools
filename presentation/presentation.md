@@ -55,6 +55,26 @@ Eindhoven university of Technology
 
 :::
 
+# Highlights
+
+- *Italic*
+- **Bold**
+- [highlight]{.hl}
+- [red]{.hl-red}
+- [dark red]{.hl-darkred}
+- [green]{.hl-green}
+- [light green]{.hl-lightgreen}
+- [blue]{.hl-blue}
+- [orange]{.hl-orange}
+
+:::: {.rightalign}
+right align (does not seem to work properly?)
+:::::
+
+:::: {.center}
+center
+::::
+
 # Two columns
 
 :::::::::::::: {.columns}
@@ -69,6 +89,18 @@ Eindhoven university of Technology
 
 :::
 ::::::::::::::
+
+# Code
+
+Inline `code`
+
+TODO: fix coloring
+
+``` javascript
+function f(x) {
+    return x+1
+}
+```
 
 # CSS styling
 

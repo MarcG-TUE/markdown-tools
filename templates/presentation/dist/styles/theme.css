@@ -103,6 +103,10 @@ div.sourceCode code {
 }
 
 
+.hl {
+  color: #4472C4;
+}
+
 .hl-red {
   color: red;
 }
