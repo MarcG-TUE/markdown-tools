@@ -29,6 +29,9 @@ $if(theme)$
 $else$
   <link rel="stylesheet" href="$revealjs-url$/dist/theme/black.css" id="theme">
 $endif$
+$for(extraCss)$
+  <link rel="stylesheet" href="$extraCss$"/>
+$endfor$
 $for(css)$
   <link rel="stylesheet" href="$css$"/>
 $endfor$

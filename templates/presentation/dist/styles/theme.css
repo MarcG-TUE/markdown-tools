@@ -3,7 +3,11 @@
  *
  * By Hakim El Hattab, http://hakim.se
  */
-@import url(./fonts/source-sans-pro/source-sans-pro.css);
+
+
+
+
+ @import url(./fonts/source-sans-pro/source-sans-pro.css);
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -185,7 +189,7 @@ div.sourceCode code {
 }
 
 .xx-large {
-  font-size: ;
+  font-size: xx-large;
 }
 
 

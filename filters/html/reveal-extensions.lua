@@ -7,7 +7,18 @@ function Meta(m)
   if m["title-slide-attributes"] then
     revealExtensions.defaultTitleBackground = pandoc.utils.stringify(m["title-slide-attributes"]["background"])
   end
+  revealExtensions.includeCSS = {}
+  if m["include-css"] then
+
+    m.extraCss={}
+    for i, item in ipairs(m["include-css"]) do
+      revealExtensions.includeCSS[i] = item
+      table.insert(m.extraCss, item)
+    end
+  end
   
+  return m
+
 end
 
 function Header (elem)
