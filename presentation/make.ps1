@@ -1,1 +1,1 @@
-../scripts/make-presentation -inputfile ./presentation.md -outputdir ./dist
+../scripts/make-presentation-reveal -inputfile ./presentation.md -outputdir ./dist

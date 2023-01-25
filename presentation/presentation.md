@@ -3,6 +3,9 @@ title-slide-attributes:
     background: title.html
 slide-attributes:
     background: content.html
+include-css: [
+  "./styles/style.css"
+  ]
 macros:
   MyNats: "\\mathbb{N}"
   "actorname#1": "\\textsf{#1}"
@@ -256,6 +259,5 @@ combines
 # Auto-Animation between Slides
 
 - if need, explicitly identify parts
-
 
 <!-- markdownlint-disable-file MD024 MD025 MD041 MD035 MD045 -->

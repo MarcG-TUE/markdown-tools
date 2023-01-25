@@ -6,10 +6,22 @@
 }
 
 .reveal .title p {
-  margin-left: 15%;
+  margin-left: 0%;
+  font-size: 0.8em !important;
 }
 
+.reveal h1 {
+  color: #D0CF3F !important;
+  font-family: "Calibri Light", sans-serif !important;
+}
+
+.reveal {
+  font-family: "Calibri", sans-serif;
+}
+
+
 .reveal .title h1 {
+  color: white !important;
   margin-top: 30% !important;
   font-family: "Calibri Light", sans-serif;
 }
