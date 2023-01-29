@@ -1,4 +1,4 @@
-function Div (elem)
+function Div(elem)
     if elem.classes:includes('definition') then
         -- print(elem.attributes)
         name  = elem.attributes["name"]
@@ -47,6 +47,24 @@ function Div (elem)
             pandoc.RawInline('latex', '\\end{lemma}')
         }
     end
+    if elem.classes:includes('proof') then
+        return {
+            pandoc.RawInline('latex', '\\begin{proof}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{proof}')
+        }
+    end
+
+end
+
+function Span(elem)
+    if elem.classes:includes('remark') then
+        return {
+            pandoc.RawInline('latex', '\\remark{'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
 end
 
 
@@ -58,8 +76,7 @@ function Cite(c)
             if item.id:find("^exc:") ~= nil then
                 return pandoc.RawInline('latex', '\\ref{' .. item.id .. '}')
             end
-        end    
+        end
     end
     return c
 end
-
