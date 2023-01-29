@@ -20,9 +20,11 @@ pandoc $inputfile `
     --output $outputfile `
     --to pdf `
     --include-in-header $headerfile `
+    --lua-filter $filters/latex/macros.lua `
+    --filter pandoc-xnos `
     --lua-filter $filters/latex/environments.lua `
+    --lua-filter $filters/latex/references.lua `
     --lua-filter $filters/latex/images.lua `
     --metadata-file $macrosfile `
-    --lua-filter $filters/latex/macros.lua `
     --from markdown
 

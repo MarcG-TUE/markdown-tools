@@ -10,12 +10,12 @@ This is an example document.
 
 For all ${{myvar}}\in{{MyNats}}$
 
-::::: {.lemma}
+::::: {.lemma label="lem:something"}
 This is an example lemma.
 :::::
 
 ::::: {.theorem}
-This is an example theorem.
+This is an example theorem using Lemma @lem:something.
 :::::
 
 ![Example Image](figures/example.png){.inline scale=0.25}
