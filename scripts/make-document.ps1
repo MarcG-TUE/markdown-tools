@@ -20,8 +20,8 @@ pandoc $inputfile `
     --output $outputfile `
     --to pdf `
     --include-in-header $headerfile `
-    --lua-filter $filters/environments.lua `
-    --lua-filter $filters/images.lua `
+    --lua-filter $filters/latex/environments.lua `
+    --lua-filter $filters/latex/images.lua `
     --metadata-file $macrosfile `
     --lua-filter $filters/latex/macros.lua `
     --from markdown

@@ -1,4 +1,5 @@
 \usepackage{graphicx}
+\usepackage{amsthm}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -7,4 +8,13 @@
 \includegraphics[#2]{#1}
 \par}
 }
+\newcommand{\compmodfig}[4]{
+\begin{figure}
+\centering
+\includegraphics[#4]{#1}
+\caption{#2}
+#3
+\end{figure}
+}
 
+\newcommand{\remark}[1]{[\emph{Remark: #1}]}
