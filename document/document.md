@@ -20,4 +20,7 @@ This is an example theorem using Lemma @lem:something.
 
 ![Example Image](figures/example.png){.inline scale=0.25}
 
+This is a reference: [@Nor12]
+
+
 <!-- markdownlint-disable-file MD041 -->

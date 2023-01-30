@@ -1,6 +1,7 @@
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputfile
+    [parameter(Mandatory=$true)][string] $outputfile,
+    [parameter(Mandatory=$false)][string] $bibfile = ""
   )
 
 $inputfile = Resolve-Path -Path $inputfile
@@ -14,11 +15,22 @@ $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
+
+$bibopt = ""
+
+if ($bibfile -ne "") {
+  $bibpath = Resolve-Path -Path $bibfile
+  $bibopt = "--bibliography=$bibpath"
+}
+
+
+
 $mdDir = "$PSScriptRoot/.."
 
 pandoc $inputfile `
     --output $outputfile `
-    --to pdf `
+    --from markdown+citations `
+    --to latex `
     --include-in-header $headerfile `
     --lua-filter $filters/latex/macros.lua `
     --filter pandoc-xnos `
@@ -26,5 +38,7 @@ pandoc $inputfile `
     --lua-filter $filters/latex/references.lua `
     --lua-filter $filters/latex/images.lua `
     --metadata-file $macrosfile `
-    --from markdown
+    --citeproc `
+    --biblatex `
+$bibopt
 
