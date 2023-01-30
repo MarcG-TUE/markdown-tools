@@ -1,1 +1,1 @@
-../scripts/make-document -inputfile ./document.md -outputfile ./document.tex -bibfile ./references.bib
+../scripts/make-document -inputfile ./document.md -outputfile ./document.pdf -bibfile ./references.bib

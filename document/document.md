@@ -22,5 +22,4 @@ This is an example theorem using Lemma @lem:something.
 
 This is a reference: [@Nor12]
 
-
 <!-- markdownlint-disable-file MD041 -->

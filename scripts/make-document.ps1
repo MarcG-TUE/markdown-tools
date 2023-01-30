@@ -4,6 +4,11 @@ param(
     [parameter(Mandatory=$false)][string] $bibfile = ""
   )
 
+$Verbose = $false
+if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
+    $Verbose = $PsBoundParameters.Get_Item('Verbose')
+}
+
 $inputfile = Resolve-Path -Path $inputfile
 
 $outputpath = Split-Path -Path $outputfile -Parent
@@ -15,30 +20,41 @@ $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
-
-$bibopt = ""
+$allargs = @($inputfile, `
+  "--output", $outputfile, `
+  "--from", "markdown+citations", `
+  "--to", "pdf", `
+  "--include-in-header", $headerfile, `
+  "--lua-filter", "$filters/latex/macros.lua", `
+  "--filter", "pandoc-xnos", `
+  "--lua-filter", "$filters/latex/environments.lua", `
+  "--lua-filter", "$filters/latex/references.lua", `
+  "--lua-filter", "$filters/latex/images.lua", `
+  "--metadata-file", $macrosfile, `
+  "--citeproc")
 
 if ($bibfile -ne "") {
   $bibpath = Resolve-Path -Path $bibfile
-  $bibopt = "--bibliography=$bibpath"
+  $bibpath = $bibpath -replace '[\\]', "/"
+  $allargs += "--bibliography=$bibpath"
 }
 
+if ($Verbose) {
+  $allargs += "--verbose"
+}
+  
+& pandoc $allargs
 
-
-$mdDir = "$PSScriptRoot/.."
-
-pandoc $inputfile `
-    --output $outputfile `
-    --from markdown+citations `
-    --to latex `
-    --include-in-header $headerfile `
-    --lua-filter $filters/latex/macros.lua `
-    --filter pandoc-xnos `
-    --lua-filter $filters/latex/environments.lua `
-    --lua-filter $filters/latex/references.lua `
-    --lua-filter $filters/latex/images.lua `
-    --metadata-file $macrosfile `
-    --citeproc `
-    --biblatex `
-$bibopt
-
+    # & pandoc $inputfile `
+    # --output $outputfile `
+    # --from markdown+citations `
+    # --to pdf `
+    # --include-in-header $headerfile `
+    # --lua-filter $filters/latex/macros.lua `
+    # --filter pandoc-xnos `
+    # --lua-filter $filters/latex/environments.lua `
+    # --lua-filter $filters/latex/references.lua `
+    # --lua-filter $filters/latex/images.lua `
+    # --metadata-file $macrosfile `
+    # --citeproc `
+    # $bibopt $verboseOpt
