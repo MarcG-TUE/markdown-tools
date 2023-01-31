@@ -9,13 +9,7 @@ end
 function Cite(c)
     if #(c.citations) == 1 then
         local cite = c.citations[1]
-        if cite.id:find("^def:") ~= nil or
-            cite.id:find("^exa:") ~= nil or
-            cite.id:find("^exc:") ~= nil or
-            cite.id:find("^thm:") ~= nil or
-            cite.id:find("^eq:") ~= nil or
-            cite.id:find("^alg:") ~= nil
-        then
+        if refmap.isTag(cite.id) then
             -- return pandoc.Str(getReference(cite.id))
             return pandoc.RawInline('html', '<a href="#' .. cite.id .. '">' .. refmap.getReference(cite.id) .. '</a>')
         end

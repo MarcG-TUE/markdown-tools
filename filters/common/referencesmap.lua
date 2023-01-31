@@ -1,8 +1,37 @@
-local refmap =  {}
-refmap.references = {}
+local refmap =  {
+    references = {},
+    types = {"def", "exa", "exc", "thm", "lem", "eq", "alg"},
+    environments = {'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem'},
+    shortEnvironments = {
+        algorithm = 'alg', 
+        definition = 'def',
+        exercise = 'exc',
+        example = 'exa',
+        lemma = 'lem',
+        theorem = 'thm'
+    },
+    captionEnvironments = {
+        algorithm = 'Algorithm', 
+        definition = 'Definition',
+        exercise = 'Exercise',
+        example = 'Example',
+        lemma = 'Lemma',
+        theorem = 'Theorem'
+    }
+    
+}
 
 
 -- global list of references
+
+function refmap.isTag(t)
+    for i, tp in ipairs(refmap.types) do
+        if t:find("^"..tp..":") ~= nil then
+            return true
+        end
+    end
+    return false
+end
 
 function refmap.clearReferences()
     refmap.references = {}

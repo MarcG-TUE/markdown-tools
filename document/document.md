@@ -17,7 +17,7 @@ A lemma and a theorem with cross referencing
 This is an example lemma.
 :::::
 
-::::: {.theorem}
+::::: {.theorem label="thm:athm"}
 This is an example theorem using Lemma @lem:something.
 :::::
 
