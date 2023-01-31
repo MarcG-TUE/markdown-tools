@@ -13,6 +13,7 @@ local function replace (el)
 end
 
 local function replaceMath (el)
+  local res
   res, _ = macroutils.doSubstitutions(el.text)
   return pandoc.Math(el.mathtype, res)
 end
@@ -31,7 +32,7 @@ local function replaceImage (el)
   return el
 end
 
-function replaceDiv (d)
+local function replaceDiv (d)
   if d.attr.attributes["name"] ~= nil then
     d.attr.attributes["name"], _ = macroutils.doSubstitutions(d.attr.attributes["name"])
   end

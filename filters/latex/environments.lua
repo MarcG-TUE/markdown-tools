@@ -1,8 +1,8 @@
 function Div(elem)
     if elem.classes:includes('definition') then
         -- print(elem.attributes)
-        name  = elem.attributes["name"]
-        label = elem.attributes["label"]
+        local name  = elem.attributes["name"]
+        local label = elem.attributes["label"]
         return {
             pandoc.RawInline('latex', '\\begin{definitionbox}{' .. name .. '}{\\label{' .. label .. '}}'),
             elem,
@@ -10,8 +10,10 @@ function Div(elem)
         }
     end
     if elem.classes:includes('theorem') then
-        name  = elem.attributes["name"]
-        label = elem.attributes["label"]
+        local name  = elem.attributes["name"]
+        local label = elem.attributes["label"]
+        local nameStr
+        local labelStr
         if name == nil then
             nameStr = ""
         else
@@ -29,8 +31,10 @@ function Div(elem)
         }
     end
     if elem.classes:includes('lemma') then
-        name  = elem.attributes["name"]
-        label = elem.attributes["label"]
+        local name  = elem.attributes["name"]
+        local label = elem.attributes["label"]
+        local nameStr
+        local labelStr
         if name == nil then
             nameStr = ""
         else

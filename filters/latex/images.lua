@@ -7,7 +7,7 @@ function Image (el)
     -- print("Image", el.identifier)
     -- print("Image", el.classes)
     -- print("Image", el.attributes)
-    attrs=""
+    local attrs=""
     for k,v in pairs(el.attributes) do
         attrs = attrs .. k .. "=" .. v
     end

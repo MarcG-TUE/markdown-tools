@@ -16,20 +16,18 @@ $outputpath = Resolve-Path $outputpath
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath\$outputleaf"
 
-$headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile, `
   "--output", $outputfile, `
   "--from", "markdown+citations", `
-  "--to", "pdf", `
-  "--include-in-header", $headerfile, `
-  "--lua-filter", "$filters/latex/macros.lua", `
+  "--to", "html", `
+  "--lua-filter", "$filters/html/macros.lua", `
   "--filter", "pandoc-xnos", `
-  "--lua-filter", "$filters/latex/environments.lua", `
-  "--lua-filter", "$filters/latex/references.lua", `
-  "--lua-filter", "$filters/latex/images.lua", `
+  "--lua-filter", "$filters/html/environments.lua", `
+  "--lua-filter", "$filters/html/references.lua", `
+  "--lua-filter", "$filters/html/images.lua", `
   "--metadata-file", $macrosfile, `
   "--citeproc")
 

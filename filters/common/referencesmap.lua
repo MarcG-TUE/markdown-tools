@@ -1,17 +1,21 @@
+local refmap =  {}
+refmap.references = {}
+
+
 -- global list of references
 
-function ClearReferences()
-    References = {}
+function refmap.clearReferences()
+    refmap.references = {}
 end
 
-function SetReference(k, v)
+function refmap.setReference(k, v)
     if k ~= nil then
-        References[k] = v
+        refmap.references[k] = v
     end
 end
 
-function GetReference(k)
-    local res = References[k]
+function refmap.getReference(k)
+    local res = refmap.references[k]
     if res == nil then
         print ("Warning: reference " .. k .. " is unknown." )
         return "<Reference " .. k .. " unknown>"
@@ -20,10 +24,12 @@ function GetReference(k)
     end
 end
 
-function AllReferences()
-    return References
+function refmap.allReferences()
+    return refmap.references
 end
 
-function SetReferences(r)
-    References = r
+function refmap.setReferences(r)
+    refmap.references = r
 end
+
+return refmap

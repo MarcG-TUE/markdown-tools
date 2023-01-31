@@ -1,24 +1,21 @@
+
 local folderOfThisFile = PANDOC_SCRIPT_FILE:match("(.-)[^/]+$")
 local macroutils = dofile(folderOfThisFile .. "../common/macrosutils.lua")
 
 local function replace (el)
-  local replaced, res
-  res, replaced = macroutils.doSubstitutions(el.text)
-  if replaced then
-    return pandoc.RawInline('latex', res)
-  else
-    return pandoc.Str(res)
-  end
+  local res
+  res, _ = macroutils.doSubstitutions(el.text)
+  return pandoc.Str(res)
 end
 
 local function replaceMath (el)
   local res
-  res, _ = macroutils.doSubstitutions(el.text)
+    res, _ = macroutils.doSubstitutions(el.text)
   return pandoc.Math(el.mathtype, res)
 end
 
 local function replaceImage (el)
-  -- perform replacements in the image source and caption
+  -- perform replacements in the imace source and caption
   if el.caption ~= nil then
     -- print("Caption ", el.caption)
   end
@@ -39,11 +36,10 @@ local function replaceDiv (d)
 end
 
 return {
-  {Meta = macroutils.get_substitutions},
-  {Str = replace},
-  {Math = replaceMath},
-  {Image = replaceImage},
+  {Meta = macroutils.get_substitutions}, 
+  {Str = replace}, 
+  {Math = replaceMath}, 
+  {Image = replaceImage}, 
   {Div = replaceDiv}
 }
-
 
