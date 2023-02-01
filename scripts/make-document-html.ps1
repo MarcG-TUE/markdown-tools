@@ -22,14 +22,17 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $allargs = @($inputfile, `
   "--output", $outputfile, `
   "--from", "markdown+citations", `
+  "--mathjax", `
   "--to", "html", `
+  "--lua-filter", "$filters/common/title.lua",
   "--lua-filter", "$filters/html/macros.lua", `
   "--filter", "pandoc-xnos", `
   "--lua-filter", "$filters/html/environments.lua", `
   "--lua-filter", "$filters/html/references.lua", `
   "--lua-filter", "$filters/html/images.lua", `
   "--metadata-file", $macrosfile, `
-  "--citeproc")
+  "--citeproc",
+  "--standalone")
 
 if ($bibfile -ne "") {
   $bibpath = Resolve-Path -Path $bibfile

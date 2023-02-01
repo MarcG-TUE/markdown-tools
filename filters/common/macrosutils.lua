@@ -28,7 +28,7 @@ function macroutils.add_substitutions(s)
         km = km:sub(1, start-1)
     else numArgs = 0
     end
-    macroutils.substitutions["{{" .. km] = {numArgs=numArgs, subst = stot}
+    macroutils.substitutions[km] = {numArgs=numArgs, subst = stot}
   end
 end
 
@@ -101,7 +101,7 @@ function macroutils.doSubstitutions(s)
     changes = false
     for k, v in pairs(macroutils.substitutions) do
       -- make sure that the next char is { or }
-      local pattern = k.."[%{%}]"
+      local pattern = "%{%{"..k.."[%{%}]"
       if res:find(pattern) ~= nil then
         replaced = true
         local numArgs = v.numArgs
