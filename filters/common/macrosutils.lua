@@ -84,13 +84,35 @@ local function determineArguments(s, start, n)
   return res, k
 end
 
+local function replaceArgument(s, n, arg)
+  local placeholder = "#" .. tostring(n)
+  local i, j = string.find(s, placeholder, 1)
+  while i ~= nil do
+    if tonumber(s:sub(j+1,j+1)) == nil then
+      s = s:sub(1, i-1)..arg..s:sub(j+1,#s)
+    end
+    i, j = string.find(s, placeholder, j)
+  end
+  return s
+end
+
 local function replaceArguments(s, args)
   local res = s
   for i = 1, #args do
-    local placeholder = "#" .. tostring(i)
-    res = res:gsub(placeholder, args[i])
+    res = replaceArgument(res, i, args[i])
   end
   return res
+end
+
+local function checkRemainingMacros(text)
+  local pattern = "%{%{(%a%w*)"
+  local b=1
+  while true do
+    local x,y,k =string.find(text,pattern,b)
+    if x==nil then break end
+      print("Warning: Macro "..k.." used, but not defined.")
+      b=y+1
+  end
 end
 
 function macroutils.doSubstitutions(s)
@@ -119,6 +141,7 @@ function macroutils.doSubstitutions(s)
       end
     end
   end
+  checkRemainingMacros(res)
   return res, replaced
 end
 

@@ -16,9 +16,6 @@ end
 
 local function replaceImage (el)
   -- perform replacements in the imace source and caption
-  if el.caption ~= nil then
-    -- print("Caption ", el.caption)
-  end
   if el.src ~= nil then
     el.src, _ = macroutils.doSubstitutions(macroutils.urldecode(el.src))
   end
