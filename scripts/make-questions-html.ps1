@@ -9,9 +9,10 @@ if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbo
 }
 
 $inputfile = Resolve-Path -Path $inputfile
+$inputdir = [string](Split-Path -Parent $inputfile)
 
 $outputpath = Split-Path -Path $outputfile -Parent
-$outputpath = Resolve-Path $outputpath
+$outputpath = [string] (Resolve-Path $outputpath)
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath\$outputleaf"
 
@@ -37,3 +38,8 @@ if ($Verbose) {
 }
     
 & pandoc $allargs
+
+# copy figures to output dir
+if ($inputdir -ne $outputpath) {
+    Copy-Item -Force -Recurse "$inputdir/figures" $outputpath
+}

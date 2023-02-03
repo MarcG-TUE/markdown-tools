@@ -19,7 +19,7 @@ macros:
 ::::: {.question name="Dataflow Graphs and Max-Plus Algebra" points="27" }
 
 Consider the following Timed Dataflow Graph.
-[]{.oneex}
+
 ![](./figures/dataflow4.png){.inline scale=0.8}
   
 a. (2 pts)
