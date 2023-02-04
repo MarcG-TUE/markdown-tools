@@ -8,18 +8,40 @@
   <title>My Website</title>
   <link rel="stylesheet" href="./style/background.css">
 </head>
+<!-- 960x540 -->
 
 <body>
-  <div
-    style="position: absolute; left:0; bottom:0; height:100%;width:100%;background-color: #FFFFFF; box-sizing: border-box;border: 5px; border-color: #D0CF3F; border-style: solid; border-radius: 10px;">
-    <img style="position: absolute; right:0; top:0;" src="./img/convolve-small.png" />
-    <div class="bottom-left"
-      style="position: absolute; left:0; bottom:0; background-color: white; height:94px; width:100%;"></div>
-      <img style="position: absolute; right:0; bottom:0;height: 60px;" src="./img/logo-es.png" />
-      <div class="bottom-left" style="font-size: 22px;">
-      WP6 Kick-off Meeting, 25-1-2023
+
+  <div style="min-height: 100vh;
+    position: relative;">
+    <div style="background-image: url('img/convolve-background-content.png'); background-size: contain;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 16 / 9">
+      <div style="position: absolute; right:0; bottom:0; height:94px; width:50%;">
+        <img style="position: absolute; right:0; bottom:0;height: 60px;" src="./img/logo-es.png" />
+        <div style="font-size: 22px;position: absolute; bottom:10; height:60px;">
+          Foot Text
+        </div>
+      </div>
+
     </div>
   </div>
+  <!-- <div
+    style="position: absolute; left:0; bottom:0; height:100%;width:100%;background-color: #FFFFFF; background-image: url('img/convolve-background-content.png'); background-size: contain; box-sizing: border-box;">
+    <img style="position: absolute; right:0; top:0;" src="./img/convolve-small.png" />
+    <div class="bottom-right"
+      style="position: absolute; right:0; bottom:0; height:94px; width:50%;"></div>
+      <img style="position: absolute; right:0; bottom:0;height: 60px;" src="./img/logo-es.png" />WP6 Kick-off Meeting, 25-1-2023
+      <div style="font-size: 22px;">
+    </div>
+  </div> -->
 </body>
 
 </html>

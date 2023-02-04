@@ -21,10 +21,11 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $allargs = @($inputfile,
   "--output", $outputfile,
   "--from", "markdown+citations+fenced_divs+link_attributes",
-  "--to", "latex",
+  "--to", "markdown",
   "--metadata-file", $macrosfile,
   "--lua-filter", "$filters/latex/macros.lua",
   "--lua-filter", "$filters/latex/environments.lua",
+  "--lua-filter", "$filters/questions/ans-environments.lua",
   "--lua-filter", "$filters/latex/references.lua",
   "--lua-filter", "$filters/questions/ans-images.lua",
   "--lua-filter", "$filters/questions/ans-mathdelimiters.lua"
@@ -35,4 +36,3 @@ if ($Verbose) {
 }
     
 & pandoc $allargs
-  

@@ -38,7 +38,7 @@ function macroutils.get_substitutions (meta)
       macroutils.add_substitutions(v)
     end
     -- add output format specific substitutions
-    if FORMAT:match 'latex' then
+    if FORMAT:match 'latex' or FORMAT:match 'markdown' then
       if k=="macros-latex" then
         macroutils.add_substitutions(v)
       end

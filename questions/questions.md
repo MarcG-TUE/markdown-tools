@@ -165,3 +165,5 @@ g. (6 pts)
    [for a correct eigenvector.]{.criterion points="1"}
    [for a normal eigenvector.]{.criterion points="1"}
    :::::
+
+<!-- markdownlint-disable-file MD045 -->

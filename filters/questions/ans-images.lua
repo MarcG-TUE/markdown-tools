@@ -5,9 +5,9 @@ function Image (el)
     end
     if el.attr.classes:includes('inline') then
         return 
-        pandoc.List({pandoc.RawInline('latex', "<Insert Image: "..el.src..">")})
+        pandoc.List({pandoc.Str("«Insert Image: "..el.src.."»")})
     else
         return 
-        pandoc.List({pandoc.RawInline('latex', "<Insert Image: "..el.src..">")})
+        pandoc.List({pandoc.Str("«Insert Image: "..el.src.."»")})
     end
 end
