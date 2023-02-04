@@ -16,7 +16,9 @@ macros:
 
 ---
 
-::::: {.question name="Dataflow Graphs and Max-Plus Algebra" points="27" }
+::: {.problem name="Dataflow Graphs and Max-Plus Algebra" points="27" }
+
+::: {.question}
 
 Consider the following Timed Dataflow Graph.
 
@@ -74,7 +76,9 @@ g. (6 pts)
    Determine the largest eigenvalue of the matrix  ${{mpmatrix{M}}}$ and determine
    a normal eigenvector for this eigenvalue.
 
-:::::
+:::
+
+::: {.answer ref="exam23frb-comprot"}
 
 ## Answers {-}
 
@@ -165,5 +169,9 @@ g. (6 pts)
    [for a correct eigenvector.]{.criterion points="1"}
    [for a normal eigenvector.]{.criterion points="1"}
    :::::
+
+:::
+
+:::
 
 <!-- markdownlint-disable-file MD045 -->

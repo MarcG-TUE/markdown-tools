@@ -4,6 +4,11 @@ param(
     [parameter(Mandatory=$false)][string] $template = ""
   )
 
+$Verbose = $false
+if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
+    $Verbose = $PsBoundParameters.Get_Item('Verbose')
+}
+  
 $inputfile = Resolve-Path -Path $inputfile
 $outputdir = Split-Path -Parent $inputfile
 
@@ -19,13 +24,25 @@ if ($template -eq "") {
 $templatepath = "$PSScriptRoot\..\templates\presentation\$template"
 $templatepath = Resolve-Path $templatepath
 
-pandoc $inputfile `
---metadata-file "$PSScriptRoot/../metadata/macros.yaml" `
---output $outputfile `
---to pptx `
---reference-doc=$templatepath `
---from markdown+citations+fenced_divs+link_attributes+footnotes `
---lua-filter "$PSScriptRoot/../filters/common/macros.lua" `
---lua-filter "$PSScriptRoot/../filters/common/presentation.lua" `
-$optSyntaxDef
+$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
+$allargs = @($inputfile,
+  "--output", $outputfile,
+  "--from", "markdown+citations+fenced_divs+link_attributes+footnotes",
+  "--to", "pptx",
+  "--reference-doc=$templatepath",
+  "--metadata-file", $macrosfile,
+  "--lua-filter", "$filters/common/macros.lua",
+  "--lua-filter", "$filters/common/presentation.lua"
+)
+
+if ($optSyntaxDef) {
+    $allargs += $optSyntaxDef
+}
+    
+if ($Verbose) {
+  $allargs += "--verbose"
+}
+
+& pandoc $allargs

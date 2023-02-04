@@ -61,17 +61,12 @@ macros-latex:
   imgtypepng: "png"
   liege: "Li\\\\`ege"
   "nicefrac#2": "\\nicefrac{#1}{#2}"
-  textperiod: "${{period}}$"
   "latex#1": "#1"
   "mpvector#1": "{\\textrm{\\bf{}\\lowercase{#1}}}"
   "mpmatrix#1": "{\\textrm{\\bf{}\\uppercase{#1}}}"
   minfvector: "\\bm{\\epsilon}"
   mplsschedule: "{\\bm{\\sigma{}}}"
   zerovector: "{\\bm{0}}"
-  # iolatencymatrix: "{{mpmatrix{\\Lambda{}}}_{\\mathit{IO}}^{{{period}}}"
-  # statelatencymatrix: "{{mpmatrix{\\Lambda{}}}_{\\mathit{state}}^{{{period}}}"
-  iolatencymatrix: "{\\bm{\\Lambda{}}}_{\\mathit{IO}}^{{{period}}}"
-  statelatencymatrix: "{\\bm{\\Lambda{}}}_{\\mathit{state}}^{{{period}}}"
 
 macros-html:
   "actorname#1": "#1"
@@ -87,6 +82,4 @@ macros-html:
   minfvector: "\\bf{\\epsilon}"
   mplsschedule: "{\\bf{\\sigma{}}}"
   zerovector: "{\\bf{0}}"
-  iolatencymatrix: "{\\bf{}\\Lambda}_{\\mathit{IO}}^{{{period}}}"
-  statelatencymatrix: "{\\bf{}\\Lambda}_{\\mathit{state}}^{{{period}}}"
   

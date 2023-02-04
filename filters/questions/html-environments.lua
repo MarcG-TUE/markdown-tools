@@ -1,9 +1,8 @@
-
 function Div (elem)
-    if elem.classes:includes('question') then
+    if elem.classes:includes('problem') then
         name  = elem.attributes["name"]
         points = elem.attributes["points"]
-        elem.content:insert(1, pandoc.Strong(pandoc.Str("Prolem: "..name.." (" .. points .. " pts)")))
+        elem.content:insert(1, pandoc.Strong(pandoc.Str("Problem: "..name.." (" .. points .. " pts)")))
         return elem
     end
 
@@ -11,6 +10,16 @@ function Div (elem)
         elem.content:insert(1, pandoc.Strong(pandoc.Str("Grading:")))
         return elem
     end
+
+    if elem.classes:includes('answer') then
+        ref  = elem.attributes["ref"]
+        return {
+            pandoc.RawInline('html', '<button class="show-answer" id="'..ref..'">Show Answers</button>'),
+            pandoc.RawInline('html', '<button class="hide-answer" id="'..ref..'">Hide Answers</button>'),
+            elem
+        }
+    end
+
 
 end
 

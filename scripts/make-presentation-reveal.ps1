@@ -5,6 +5,11 @@ param(
     [parameter(Mandatory=$false)][string] $syntaxdefinition = ""
   )
 
+$Verbose = $false
+if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
+    $Verbose = $PsBoundParameters.Get_Item('Verbose')
+}
+
 if (-not (Test-Path -PathType Container $outputdir)) {
     New-Item $outputdir -ItemType Directory
 }
@@ -21,24 +26,38 @@ if (! ($syntaxdefinition -eq "")) {
 $template = "$PSScriptRoot\..\templates\presentation\presentation.html"
 $template = Resolve-Path $template
 
-pandoc $inputfile `
---metadata-file "$PSScriptRoot/../metadata/macros.yaml" `
---output $outputdir\index.html `
---to revealjs `
--V revealjs-url=./reveal.js `
--V center=0 `
--V controls=0 `
--V transition=slide `
--V slideNumber="'c'" `
---css=./styles/theme.css `
---mathjax=./libs/mathjax/tex-chtml-full.js `
---standalone `
---template=$template `
---from markdown+citations+fenced_divs+link_attributes+footnotes `
---lua-filter "$PSScriptRoot/../filters/common/macros.lua" `
---lua-filter "$PSScriptRoot/../filters/common/presentation.lua" `
---lua-filter "$PSScriptRoot/../filters/html/reveal-extensions.lua" `
-$optSyntaxDef
+$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
+
+$allargs = @($inputfile,
+  "--output", "$outputdir\index.html",
+  "--from", "markdown+citations+fenced_divs+link_attributes+footnotes",
+  "--to", "revealjs",
+  "-V", "revealjs-url=./reveal.js",
+  "-V", "center=0",
+  "-V", "controls=0",
+  "-V", "transition=slide",
+  "-V", "slideNumber=`"'c'`"",
+  "--css=./styles/theme.css",
+  "--mathjax=./libs/mathjax/tex-chtml-full.js",
+  "--standalone",
+  "--template=$template",
+  "--metadata-file", $macrosfile,
+  "--lua-filter", "$filters/common/macros.lua",
+  "--lua-filter", "$filters/common/presentation.lua"
+  "--lua-filter", "$filters/html/reveal-extensions.lua"
+)
+
+if ($optSyntaxDef) {
+    $allargs += $optSyntaxDef
+}
+    
+if ($Verbose) {
+  $allargs += "--verbose"
+}
+
+& pandoc $allargs
+
 
 # copy distribution files to output dir
 $distPath = Resolve-Path $PSScriptRoot\..\templates\presentation\dist

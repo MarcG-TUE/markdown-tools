@@ -111,6 +111,7 @@ local function checkRemainingMacros(text)
     local x,y,k =string.find(text,pattern,b)
     if x==nil then break end
       print("Warning: Macro "..k.." used, but not defined.")
+      print(text)
       b=y+1
   end
 end

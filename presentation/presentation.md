@@ -7,7 +7,8 @@ include-css: [
   "./styles/style.css"
   ]
 macros:
-  MyNats: "\\mathbb{N}"
+  Nats: "\\mathbb{N}"
+  Rationals: "\\mathbb{Q}"
   "actorname#1": "\\textsf{#1}"
 ---
 

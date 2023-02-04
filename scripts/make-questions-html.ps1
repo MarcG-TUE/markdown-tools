@@ -18,12 +18,14 @@ $outputfile = "$outputpath\$outputleaf"
 
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
+$templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 $allargs = @($inputfile,
   "--output", $outputfile,
   "--from", "markdown+citations+fenced_divs+link_attributes",
   "--to", "html",
-  "--mathjax"
+  "--mathjax",
+  "--template", "$templates/questions/questions.html",
   "--standalone",
   "--metadata-file", $macrosfile,
   "--toc", "-V", "toc-title:Table of Contents", "--toc-depth=1",

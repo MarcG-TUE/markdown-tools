@@ -1,0 +1,146 @@
+\documentclass[10pt]{exam}
+	\usepackage{graphicx}
+	\usepackage{amsfonts}
+	\usepackage{amssymb,amsmath}
+	\usepackage{lmodern}
+	\usepackage{bold-extra}
+	\usepackage{times}
+	\usepackage{textcomp}
+
+	\usepackage{color}
+	\usepackage{bm}
+	\usepackage{listings}
+	\usepackage{nicefrac}
+	\usepackage{subfigure}
+%\documentclass[fleqn,11pt]{article}		
+%\usepackage{amssymb,amsmath}
+\usepackage{epsfig}
+\usepackage{tikz,floatflt}
+\usepackage{multicol,comment}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{lipsum}
+\usepackage{titling}
+
+% some hacks to support pandoc
+\newcommand{\autocite}[1]{\cite{#1}}
+\newcommand{\textcite}[1]{\cite{#1}}
+\newcommand{\tightlist}{}
+
+
+%\footer{}{\thepage}{}
+
+% \printanswers
+
+
+%\textwidth=15.5cm
+%\textheight=24.0cm
+%\topmargin=0cm
+%\marginparsep=0cm
+%\marginparwidth=0cm
+%\oddsidemargin=0cm
+%\evensidemargin=0cm
+%\headheight=0cm
+%\headsep=0cm
+%\parindent=0cm
+%\parskip=1mm
+
+
+\newcommand{\ov}{\overline}
+\def\Z{{\mathbb{}Z}}
+\def\zz{{\mathbb{}Z}}
+\def\R{{\mathbb{}R}}
+\def\N{{\mathbb{}N}}
+\def\Q{{\mathbb{}Q}}
+\def\qq{{\mathbb{}Q}}
+\def\ggd{{\rm ggd}}
+\def\lang{{\cal L}}
+
+\newcommand{\crd}{\mathit{rd}}
+\newcommand{\cwr}{\mathit{wr}}
+\newcommand{\happenedbefore}{\lhd}
+
+
+\lstset{frame=tb,
+  language=vbscript,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newcommand{\Gfig}[4]{%
+\begin{figure}[t]
+  \begin{center}%
+        \includegraphics[#4]{{#1}.pdf}
+     \caption{{#3} {#2}}
+  \end{center}%
+\end{figure}}
+
+\newcommand\NoIndent[1]{%
+  \par\vbox{\parbox[t]{\linewidth}{#1}}%
+}
+
+\newcommand\bigO[1]{{\cal O}(#1)}
+
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{Previous Exams}{Exam Questions}{Date}
+\runningheader{Exam Questions}
+{Applications of Discrete Mathematics}
+{~}
+
+\firstpagefooter{Page \thepage\ of \numpages}
+\runningfooter{}
+\cfoot{Page \thepage\ of \numpages}
+\rfoot{}
+
+% \pointformat{(\emph{\thepoints})}
+% \qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}~~(\textit{\totalpoints~points})\hfill}
+\pointformat{(\emph{\thepoints})}
+\qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}\hfill}
+
+\begin{document}
+
+
+
+\ifprintanswers{}
+\title{Exam Problems for Applications Part of Discrete Mathematics \\ with solutions \\ ~\\  
+\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering  }  %\leavevmode \\
+\else
+\title{Exam Problems for Applications Part of Discrete Mathematics 
+\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering } %\leavevmode \\
+\fi
+
+\author{Marc Geilen}
+
+\maketitle
+
+
+%\thispagestyle{foot}
+
+
+%\begin{enumerate}
+
+%\item % Nov18 - 7
+\begin{questions}
+
+\setlength\itemsep{1.5\baselineskip}
+
+$body$
+
+\end{questions}
+
+\end{document}
