@@ -102,8 +102,8 @@ $if(mathjax)$
 $endif$
   <script src="$revealjs-url$/../libs/Chart.js/3.2.0/chart.min.js"></script>
   <script src="$revealjs-url$/../plugins/chart/plugin.js"></script>
-  <!-- <script src="$revealjs-url$/../plugins/chalkboard/plugin.js"></script>
-  <script src="$revealjs-url$/../plugins/customcontrols/plugin.js"></script> -->
+  <script src="$revealjs-url$/../plugins/chalkboard/plugin.js"></script>
+  <script src="$revealjs-url$/../plugins/customcontrols/plugin.js"></script>
 
   <script src="$revealjs-url$/../libs/jquery/jquery-3.6.1.min.js"></script>
   <script src="$revealjs-url$/../scripts/arrow.js"></script>
@@ -329,27 +329,27 @@ $if(mathjax)$
         },
 $endif$
 
-// customcontrols: {
-//           controls: [
-//             {
-//               id: 'toggle-overview',
-//               title: 'Toggle overview (O)',
-//               icon: '<i class="fa fa-th"></i>',
-//               action: 'Reveal.toggleOverview();'
-//             },
-//             { icon: '<i class="fa fa-pencil-square"></i>',
-//               title: 'Toggle chalkboard (B)',
-//               action: 'RevealChalkboard.toggleChalkboard();'
-//             },
-//             { icon: '<i class="fa fa-pencil"></i>',
-//               title: 'Toggle notes canvas (C)',
-//               action: 'RevealChalkboard.toggleNotesCanvas();'
-//             }
-//           ]
-//       	},
-// 				chalkboard: { // font-awesome.min.css must be available
-// 					colorButtons: 5
-// 				},
+customcontrols: {
+          controls: [
+            {
+              id: 'toggle-overview',
+              title: 'Toggle overview (O)',
+              icon: '<i class="fa fa-th"></i>',
+              action: 'Reveal.toggleOverview();'
+            },
+            { icon: '<i class="fa fa-pencil-square"></i>',
+              title: 'Toggle chalkboard (B)',
+              action: 'RevealChalkboard.toggleChalkboard();'
+            },
+            { icon: '<i class="fa fa-pencil"></i>',
+              title: 'Toggle notes canvas (C)',
+              action: 'RevealChalkboard.toggleNotesCanvas();'
+            }
+          ]
+      	},
+				chalkboard: { // font-awesome.min.css must be available
+					colorButtons: 5
+				},
 
 
         // reveal.js plugins
@@ -360,9 +360,9 @@ $endif$
           RevealNotes,
           RevealSearch,
           RevealZoom,
-          RevealChart
-          // RevealChalkboard,
-          // RevealCustomControls
+          RevealChart,
+          RevealChalkboard,
+          RevealCustomControls
         ]
       });
     </script>
