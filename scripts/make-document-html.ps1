@@ -24,7 +24,7 @@ $allargs = @($inputfile, `
   "--from", "markdown+citations", `
   "--mathjax", `
   "--to", "html", `
-  "--lua-filter", "$filters/common/title.lua",
+  "--lua-filter", "$filters/extractmetadata.lua",
   "--lua-filter", "$filters/html/macros.lua", `
   "--filter", "pandoc-xnos", `
   "--lua-filter", "$filters/html/environments.lua", `

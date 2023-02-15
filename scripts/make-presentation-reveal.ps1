@@ -48,7 +48,8 @@ $allargs = @($inputfile,
   "--metadata-file", $macrosfile,
   "--lua-filter", "$filters/common/macros.lua",
   "--lua-filter", "$filters/common/presentation.lua"
-  "--lua-filter", "$filters/html/reveal-extensions.lua"
+  "--lua-filter", "$filters/html/reveal-extensions.lua",
+  "--lua-filter", "$filters/common/extractmetadata.lua"
 )
 
 if ($optSyntaxDef) {
@@ -65,6 +66,11 @@ if ($Verbose) {
 # copy distribution files to output dir
 $distPath = Resolve-Path $PSScriptRoot\..\templates\presentation\dist
 Copy-Item -Path "$distPath\*" -Destination $outputdir -Force -Recurse
+
+$templates = Get-ChildItem $outputdir/background/*.html
+foreach ($f in $templates) {
+  & $PSScriptRoot\util\substitute $f "$inputdir/extracted-metadata.json"
+}
 
 # copy figures to output dir
 Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
