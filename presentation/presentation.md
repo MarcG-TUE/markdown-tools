@@ -1,4 +1,6 @@
 ---
+title: "Presentation Title"
+foot-text: "This is a slide foot text"
 title-slide-attributes:
     background: title.html
 slide-attributes:
