@@ -4,35 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>My Website</title>
-  <link rel="stylesheet" href="./style/background.css">
+  <title>Convolve Slide Background</title>
+  <link rel="stylesheet" href="./style/convolve-bg.css">
 </head>
-<!-- 960x540 -->
 
-<body style="background-color: black; margin: 0;">
+<body class="convolve">
 
-  <div style="min-height: 100vh;
-    position: relative;">
-    <div style="background-color: white; background-repeat: no-repeat;background-image: url('img/convolve-background-content.png'); background-size: contain;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 16 / 9">
-      <div style="position: absolute; right:0; bottom:0; height:9%; width:57%;">
-        <img style="position: absolute; right:0; bottom:0;height: 5vw;" src="./img/logo-es.png" />
-        <div style="position: relative; bottom:0; height:100%; width: 100%;">
-          <p style="position: absolute; bottom:0;margin: 0;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);font-size: 1.75vw;">$foot-text$</p>
-        </div>
+  <div class="page">
+    <div class="slide">
+      <div class="footer-total">
+        <img alt="Electronic Systems Logo" class="logo-es" src="./img/logo-es.png" />
+        <p class="foot-text">$foot-text$</p>
       </div>
-
     </div>
   </div>
+
 </body>
 
 </html>
