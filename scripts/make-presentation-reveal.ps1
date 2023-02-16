@@ -2,6 +2,8 @@
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputdir,
+    [parameter(Mandatory=$false)][string] $outputname = "",
+    [parameter(Mandatory=$false)][string] $macros = "",
     [parameter(Mandatory=$false)][string] $syntaxdefinition = ""
   )
 
@@ -26,11 +28,20 @@ if (! ($syntaxdefinition -eq "")) {
 $template = "$PSScriptRoot\..\templates\presentation\presentation.html"
 $template = Resolve-Path $template
 
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+if ($macros -eq "") {
+  $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+} else {
+  $macrosfile = Resolve-Path -Path $macros
+}
+
+if ($outputname -eq "") {
+  $outputname = "index.html"
+} 
+
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile,
-  "--output", "$outputdir\index.html",
+  "--output", "$outputdir\$outputname",
   "--from", "markdown+citations+fenced_divs+link_attributes+footnotes",
   "--to", "revealjs",
   "-V", "revealjs-url=./reveal.js",
@@ -75,4 +86,6 @@ foreach ($f in $templates) {
 Remove-Item "$inputdir/extracted-metadata.json"
 
 # copy figures to output dir
-Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
+if (Test-Path -Path "$inputdir/figures") {
+  Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
+}

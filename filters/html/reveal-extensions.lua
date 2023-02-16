@@ -26,10 +26,13 @@ function Header (elem)
     elem.attributes["data-background-iframe"] = "./background/"..elem.attributes["background"]
   else
     if elem.classes:includes('title') then
-      elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultTitleBackground
+      if revealExtensions.defaultTitleBackground ~= nil then
+        elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultTitleBackground
+      end
     else
-  
-      elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultBackground
+      if revealExtensions.defaultBackground ~= nil then
+        elem.attributes["data-background-iframe"] = "./background/"..revealExtensions.defaultBackground
+      end
     end
   end
   return elem

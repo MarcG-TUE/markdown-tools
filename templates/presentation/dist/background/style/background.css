@@ -1,5 +1,6 @@
 :root {
-    --footer-height: min(5vw,(5*16/9)*1vh)
+    --markdown-tools-footer-height: min(5vw,(5*16/9)*1vh)
+    --markdown-tools-slide-background-color: #F1EFEF
 }
 
 .markdown-tools {
@@ -10,7 +11,7 @@
 
   
 .markdown-tools .slide {
-    background-color: #F1EFEF;
+    background-color: var(--markdown-tools-slide-background-color);
     position: absolute;
     margin: auto;
     left: 0;
