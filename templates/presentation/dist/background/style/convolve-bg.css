@@ -56,12 +56,9 @@
 }
 
 .convolve .footer-total {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: 9%;
   width: 57%;
 }
+
 
 .convolve .acknowledgement {
   display: flex;
@@ -71,7 +68,7 @@
   position: absolute;
   bottom: 13%;
   color: #595959;
-  font-size: 1.5vw;
+  font-size: min(1.5vw,(1.5*16/9)*1vh);
 }
 
 .convolve .acknowledgement p {
@@ -80,5 +77,5 @@
 
 .convolve .foot-text {
   left: 0;
-  font-size: 1.75vw;
+  font-size: min(1.75vw,(1.75*16/9)*1vh)
 }

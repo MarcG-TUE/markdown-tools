@@ -163,12 +163,12 @@ div.sourceCode code {
 .reveal .slide-number {
   position: absolute;
   display: block;
-  right: 22.5vw;
-  height: 5vw;
+  right: 50%;
+  height: min(5vw,(5*16/9)*1vh);
   top: 50%;
   -ms-transform: translateY(-50%);
-  transform: translateY(24vw);
-  font-size: 2vw;
+  transform: translate(min(27.5vw,(27.5*16/9)*1vh), min(24vw,(24*16/9)*1vh));
+  font-size: min(2vw,(2*16/9)*1vh);
   color: #000;
   background-color: rgba(0, 0, 0, 0);
 }
