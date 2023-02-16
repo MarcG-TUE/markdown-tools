@@ -72,5 +72,7 @@ foreach ($f in $templates) {
   & $PSScriptRoot\util\substitute $f "$inputdir/extracted-metadata.json"
 }
 
+Remove-Item "$inputdir/extracted-metadata.json"
+
 # copy figures to output dir
 Copy-Item -Force -Recurse "$inputdir/figures" $outputdir

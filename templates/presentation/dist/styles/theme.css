@@ -147,18 +147,28 @@ div.sourceCode code {
   text-align: center;
 }
 
+@media only screen and (min-width: 500px) {
+	#customcontrols > ul {
+		bottom: 10px !important;
+		left: 10px !important;
+	}
+}
+
 /* MG overwrite controls position */
 .reveal .controls {
-  bottom: 100px;
+  bottom: 25px;
 }
 
 /* MG overwrite slide number position */
 .reveal .slide-number {
   position: absolute;
   display: block;
-  right: 280px;
-  bottom: 92px;
-  font-size: 22px;
+  right: 22.5vw;
+  height: 5vw;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(24vw);
+  font-size: 2vw;
   color: #000;
   background-color: rgba(0, 0, 0, 0);
 }

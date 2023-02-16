@@ -1,29 +1,65 @@
-
 :root {
-    --b-v-margin: 31px;
-    --b-h-margin: 120px;
-    --b-main-font: Source Sans Pro, Helvetica, sans-serif;
-    --b-main-font-size: 24px;
-    --b-main-color: #000;
-    }
+    --footer-height: 5vw;
+}
+
+.markdown-tools {
+    background-color: black;
+    margin: 0;
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+  }
+
+  
+.markdown-tools .slide {
+    background-color: #F1EFEF;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 16 / 9
+}
+
+.markdown-tools .footer-total {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: var(--footer-height);
+    width: 100%;
+    background-color: white;
+  }
   
 
-  body {
-    color: white;
-    font-family: var(--b-main-font);
-    font-size: var(--b-main-font-size);
-    font-weight: normal;
-    color: var(--b-main-color);
-    }
-
-.bottom-right {
-    position: absolute;
-    right: var(--b-h-margin);
-    bottom: var(--b-v-margin);
+.markdown-tools .logo-es {
+    position: relative;
+    display: inline;
+    right: 0;
+    bottom: 0;
+    margin-left: 25px;
+    float: right;
+    height: var(--footer-height);
 }
 
-.bottom-left {
-    position: absolute;
-    left: var(--b-h-margin);
-    bottom: var(--b-v-margin);
+.markdown-tools .logo-center {
+    position: relative;
+    display: inline;
+    right: 0;
+    bottom: 0;
+    margin-left: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: var(--footer-height);
 }
+
+.markdown-tools .foot-text {
+    position: absolute;
+    bottom: 0;
+    left: 5vh;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 1.75vw;
+  }
