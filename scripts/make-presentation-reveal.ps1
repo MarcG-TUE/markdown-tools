@@ -4,6 +4,7 @@ param(
     [parameter(Mandatory=$true)][string] $outputdir,
     [parameter(Mandatory=$false)][string] $outputname = "",
     [parameter(Mandatory=$false)][string] $macros = "",
+    [parameter(Mandatory=$false)][string] $filter = "",
     [parameter(Mandatory=$false)][string] $syntaxdefinition = ""
   )
 
@@ -52,6 +53,7 @@ $allargs = @($inputfile,
   "-V", "controls=0",
   "-V", "transition=slide",
   "-V", "slideNumber=`"'c'`"",
+  "-V", "pdfSeparateFragments=0",
   "--css=./styles/theme.css",
   "--mathjax=./libs/mathjax/tex-chtml-full.js",
   "--standalone",
@@ -62,6 +64,13 @@ $allargs = @($inputfile,
   "--lua-filter", "$filters/html/reveal-extensions.lua",
   "--lua-filter", "$filters/common/extractmetadata.lua"
 )
+
+if ($filter) {
+  $template = Resolve-Path $template
+  $allargs += "--lua-filter"
+  $allargs += $filter
+}
+
 
 if ($optSyntaxDef) {
     $allargs += $optSyntaxDef

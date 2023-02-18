@@ -61,9 +61,18 @@
 
 .reveal .title h1 {
   color: #014276 !important;
-  margin-top: 24% !important;
+  margin-top: 10% !important;
   font-family: "Barlow", sans-serif !important;
   font-weight: 600 !important;
   text-align: center !important;
 }
 
+.reveal strong {
+  font-weight: bold;
+}
+
+/* hide in printout */
+
+.print-pdf .reveal #customcontrols {
+  display: none !important;
+}
