@@ -83,10 +83,10 @@ section.has-dark-background h6 {
 }
 
 
-div.sourceCode code {
+/* div.sourceCode code {
   color:#ffffff;
 }
-
+ */
 .reveal div.exercise code {
   color: rgb(252, 252, 143);
 }
@@ -97,10 +97,10 @@ div.sourceCode code {
   width: 90%;
 }
 
-.reveal code {
+/* .reveal code {
   color:#4d4de7;
   font-weight: bold;
-}
+} */
 
 .reveal div.exercise p {
   color: white;
@@ -274,7 +274,7 @@ html.print-pdf .reveal .footnote {
 }
 
 
-.reveal .sourceCode .qrml {
+/* .reveal .sourceCode .qrml {
   background-color: #595959;
   color: white;
   padding: 20px;
@@ -297,7 +297,7 @@ code span .cf {
 
 code span .op {
   color: rgb(2, 204, 45);
-}
+} */
 
 
 .reveal-viewport {
