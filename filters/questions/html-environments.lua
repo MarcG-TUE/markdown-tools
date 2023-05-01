@@ -2,7 +2,12 @@ function Div (elem)
     if elem.classes:includes('problem') then
         name  = elem.attributes["name"]
         points = elem.attributes["points"]
-        elem.content:insert(1, pandoc.Strong(pandoc.Str("Problem: "..name.." (" .. points .. " pts)")))
+        pointsStr = ''
+        if (points ~= nil) then
+            pointsStr = " (" .. points .. " pts)"
+        end
+
+        elem.content:insert(1, pandoc.Strong(pandoc.Str("Problem: "..name..pointsStr)))
         return elem
     end
 

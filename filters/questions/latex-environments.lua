@@ -1,10 +1,22 @@
 function Div (elem)
 
+    if elem.classes:includes('problems') then
+        return {
+            pandoc.RawInline('latex', '\\begin{questions}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{questions}')
+        }
+    end
+
     if elem.classes:includes('problem') then
         name  = elem.attributes["name"]
         points = elem.attributes["points"]
+        pointsStr = ''
+        if (points ~= nil) then
+            pointsStr = '  ('..points..' pts)'
+        end
         return {
-            pandoc.RawInline('latex', '\\titledquestion{' .. name .. '} ('..points..' pts)'),
+            pandoc.RawInline('latex', '\\titledquestion{' .. name .. '}' .. pointsStr),
             elem
         }
     end

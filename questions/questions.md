@@ -16,6 +16,14 @@ macros:
 
 ---
 
+This is a preamble text to introduce the document
+
+
+<!-- Questions start below -->
+
+::: {.problems}
+
+
 ::: {.problem name="Dataflow Graphs and Max-Plus Algebra" points="27" }
 
 ::: {.question}
@@ -169,6 +177,8 @@ g. (6 pts)
    [for a correct eigenvector.]{.criterion points="1"}
    [for a normal eigenvector.]{.criterion points="1"}
    :::::
+
+:::
 
 :::
 

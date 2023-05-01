@@ -6,6 +6,8 @@
 	\usepackage{bold-extra}
 	\usepackage{times}
 	\usepackage{textcomp}
+  \usepackage{booktabs}
+  \usepackage{longtable}
 
 	\usepackage{color}
 	\usepackage{bm}
@@ -117,14 +119,13 @@
 
 
 \ifprintanswers{}
-\title{Exam Problems for Applications Part of Discrete Mathematics \\ with solutions \\ ~\\  
-\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering  }  %\leavevmode \\
+\title{$title$ \\ with solutions}  %\leavevmode \\
 \else
-\title{Exam Problems for Applications Part of Discrete Mathematics 
-\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering } %\leavevmode \\
+\title{$title$} %\leavevmode \\
 \fi
 
-\author{Marc Geilen}
+\author{$author$}
+\date{$date$}
 
 \maketitle
 
@@ -135,12 +136,12 @@
 %\begin{enumerate}
 
 %\item % Nov18 - 7
-\begin{questions}
+
 
 \setlength\itemsep{1.5\baselineskip}
 
 $body$
 
-\end{questions}
+
 
 \end{document}
