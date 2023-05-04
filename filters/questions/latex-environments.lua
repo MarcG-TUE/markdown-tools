@@ -1,3 +1,5 @@
+local Settings = {}
+
 function Div (elem)
 
     if elem.classes:includes('problems') then
@@ -9,9 +11,9 @@ function Div (elem)
     end
 
     if elem.classes:includes('problem') then
-        name  = elem.attributes["name"]
-        points = elem.attributes["points"]
-        pointsStr = ''
+        local name  = elem.attributes["name"]
+        local points = elem.attributes["points"]
+        local pointsStr = ''
         if (points ~= nil) then
             pointsStr = '  ('..points..' pts)'
         end
@@ -28,11 +30,25 @@ function Div (elem)
             pandoc.RawInline('latex', '\\end{itemize}')
         }
     end
+
+    if elem.classes:includes('answer') then
+
+        -- ignore if printanswers is false
+        -- replace all immediate children of type OrderedList by raw 'parts'
+        -- wrap other children in \uplevel{}
+
+        if not PrintAnswers then
+            return pandoc.List({})
+        end
+
+        return elem
+    end
+
 end
 
 function  Span (s)
     if s.classes:includes('criterion') then
-        points = s.attributes["points"]
+        local points = s.attributes["points"]
         return {
             pandoc.RawInline('latex', '\\item[+'..points..']'),
             s,
@@ -41,5 +57,34 @@ function  Span (s)
     end
 end
 
+function Meta(m)
+    if m.printanswers == nil then
+        PrintAnswers = false
+    else
+        if tostring(m.printanswers[1].text)=="true" then
+            PrintAnswers = true
+        else
+            PrintAnswers = false
+        end
+    end
+    print("Print Answers: " .. tostring(PrintAnswers))
+
+    if m.descriptor == nil then
+        Settings.descriptor = "Question"
+    else
+        Settings.descriptor = m.descriptor[1].text
+        Descriptor = Settings.descriptor
+    end
+    print("Descriptor set to: " .. Settings.descriptor)
+
+    return m
+end
+
+
+return {
+    {Meta = Meta},
+    {Span = Span},
+    {Div = Div}
+}
 
 

@@ -32,6 +32,22 @@
 \newcommand{\textcite}[1]{\cite{#1}}
 \newcommand{\tightlist}{}
 
+%% pandoc-fignos: environment to disable figure caption prefixes
+\makeatletter
+\newcounter{figno}
+\newenvironment{fignos:no-prefix-figure-caption}{
+}{
+}
+\makeatother
+
+\makeatletter
+\newcounter{tableno}
+\newenvironment{tablenos:no-prefix-table-caption}{
+}{
+}
+\makeatother
+
+
 
 %\footer{}{\thepage}{}
 
@@ -99,9 +115,9 @@
 
 \pagestyle{headandfoot}
 \runningheadrule
-\firstpageheader{Previous Exams}{Exam Questions}{Date}
-\runningheader{Exam Questions}
-{Applications of Discrete Mathematics}
+\firstpageheader{}{}{Date}
+\runningheader{$headerleft$}
+{$headermiddle$}
 {~}
 
 \firstpagefooter{Page \thepage\ of \numpages}
@@ -112,7 +128,7 @@
 % \pointformat{(\emph{\thepoints})}
 % \qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}~~(\textit{\totalpoints~points})\hfill}
 \pointformat{(\emph{\thepoints})}
-\qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}\hfill}
+\qformat{\textbf{$descriptor$~\thequestion}~~\textsc{\thequestiontitle}\hfill}
 
 \begin{document}
 

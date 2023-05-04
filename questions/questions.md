@@ -2,6 +2,10 @@
 title: "Practice Exam" 
 author: "by Marc Geilen (m.c.w.geilen@tue.nl)"
 date: "June, 2022"
+printanswers: "true"
+descriptor: "Problem"
+headerleft: "Course name"
+headermiddle: "Practice Exam"
 css: "styles/compmod.css"
 macros:
   otimes: "\\otimes"
@@ -13,8 +17,8 @@ macros:
   "mpvectortwo#2": "\\left[\\begin{array}{c}{#1}\\\\{#2}\\\\\\end{array}\\right]"
   "mpmatrixfourfour#16": "\\begin{bmatrix}{#1}&{#2}&{#3}&{#4}\\\\{#5}&{#6}&{#7}&{#8}\\\\{#9}&{#10}&{#11}&{#12}\\\\{#13}&{#14}&{#15}&{#16}\\\\\\end{bmatrix}"
   "mpmatrixthreetwo#6": "\\begin{bmatrix}{#1}&{#2}\\\\{#3}&{#4}\\\\{#5}&{#6}\\\\\\end{bmatrix}"
-
 ---
+
 
 This is a preamble text to introduce the document
 
@@ -24,7 +28,7 @@ This is a preamble text to introduce the document
 ::: {.problems}
 
 
-::: {.problem name="Dataflow Graphs and Max-Plus Algebra" points="27" }
+::: {.problem descriptor="Probl." name="Dataflow Graphs and Max-Plus Algebra" points="27" }
 
 ::: {.question}
 

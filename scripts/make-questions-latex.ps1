@@ -1,10 +1,11 @@
 param(
-    [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputfile
+    [parameter(Mandatory = $true)][string] $inputfile,
+    [parameter(Mandatory = $true)][string] $outputfile
 )
 
 $Verbose = $false
-if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
+if ($PSBoundParameters.ContainsKey('Verbose')) {
+    # Command line specifies -Verbose[:$false]
     $Verbose = $PsBoundParameters.Get_Item('Verbose')
 }
 
@@ -20,14 +21,18 @@ $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
+
 $allargs = @($inputfile,
-  "--output", $outputfile,
-  "--from", "markdown+citations+fenced_divs+link_attributes",
-  "--to", "latex",
-  "--template", "$templates/questions/questions.textmpl",
-  "--metadata-file", $macrosfile,
-  "--lua-filter", "$filters/latex/macros.lua",
-  "--lua-filter", "$filters/questions/latex-environments.lua"
+    "--output", $outputfile,
+    "--from", "markdown+citations+fenced_divs+link_attributes",
+    "--to", "latex",
+    "--lua-filter", "$filters/latex/macros.lua",
+    "--template", "$templates/questions/questions.textmpl",
+    "--metadata-file", $macrosfile,
+    "--filter", "pandoc-xnos",
+    "--lua-filter", "$filters/latex/references.lua"
+    "--lua-filter", "$filters/questions/latex-environments.lua"
+    "--lua-filter", "$filters/latex/environments.lua"
 )
 
 if ($Verbose) {
@@ -37,6 +42,8 @@ if ($Verbose) {
 & pandoc $allargs
 
 # copy figures to output dir
-if ($inputdir -ne $outputpath) {
-    Copy-Item -Force -Recurse "$inputdir/figures" $outputpath
+if (Test-Path -Path "$inputdir/figures") {
+    if ($inputdir -ne $outputpath) {
+        Copy-Item -Force -Recurse "$inputdir/figures" $outputpath
+    }
 }
