@@ -15,12 +15,21 @@ function Div (elem)
         local points = elem.attributes["points"]
         local pointsStr = ''
         if (points ~= nil) then
-            pointsStr = '  ('..points..' pts)'
+            pointsStr = '  ('..points..' points)'
         end
-        return {
-            pandoc.RawInline('latex', '\\titledquestion{' .. name .. '}' .. pointsStr),
-            elem
-        }
+        local nameStr = ''
+        if (name ~= nil) then
+            nameStr = name
+            return {
+                pandoc.RawInline('latex', '\\titledquestion{' .. nameStr .. '}' .. pointsStr),
+                elem
+            }
+        else
+            return {
+                pandoc.RawInline('latex', '\\question{}' .. pointsStr),
+                elem
+            }
+        end
     end
 
     if elem.classes:includes('grading') then
