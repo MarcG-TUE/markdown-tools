@@ -92,7 +92,7 @@ g. (6 pts)
 h. (10 pts)
    Consider the following Matlab script
 
-   ``` matlab
+   ``` matlab {fontsize=LARGE}
    function a = m(b)
      a = b*b;
    end

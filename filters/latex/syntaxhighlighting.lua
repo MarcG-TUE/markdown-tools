@@ -1,14 +1,12 @@
 function CodeBlock(block)
-    print(block.classes[1])
-    print(block)
-    -- if block.classes[1] == "abc" then
-    --     local img = abc2eps(block.text, filetype)
-    --     local fname = pandoc.sha1(img) .. "." .. filetype
-    --     pandoc.mediabag.insert(fname, mimetype, img)
-    --     return pandoc.Para{ pandoc.Image({pandoc.Str("abc tune")}, fname) }
-    -- end
-    return {
-        pandoc.RawInline("latex", "abc"),
-        block
-    }
+
+
+    if block.attributes["fontsize"] ~=nil then
+        return {
+            pandoc.RawInline("latex", "\\renewcommand{\\pandoccodeblockfontsize}{\\"..block.attributes["fontsize"].."}"),
+            block,
+            pandoc.RawInline("latex", "\\renewcommand{\\pandoccodeblockfontsize}{\\normalsize}")
+        }
+    end
+    return block
 end
