@@ -33,6 +33,7 @@ $allargs = @($inputfile,
     "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/questions/latex-environments.lua"
     "--lua-filter", "$filters/latex/environments.lua"
+    "--lua-filter", "$filters/latex/addlatexinputpath.lua"
 )
 
 if ($Verbose) {
