@@ -4,6 +4,7 @@ author: "by Marc Geilen (m.c.w.geilen@tue.nl)"
 date: "June, 2022"
 printanswers: "true"
 descriptor: "Problem"
+matlabsyntaxhighlighting: "true"
 headerleft: "Course name"
 headermiddle: "Practice Exam"
 css: "styles/compmod.css"
@@ -87,6 +88,15 @@ g. (6 pts)
 
    Determine the largest eigenvalue of the matrix  ${{mpmatrix{M}}}$ and determine
    a normal eigenvector for this eigenvalue.
+
+h. (10 pts)
+   Consider the following Matlab script
+
+   ``` matlab
+   function a = m(b)
+     a = b*b;
+   end
+   ```
 
 :::
 
