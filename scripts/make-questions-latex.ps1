@@ -34,6 +34,7 @@ $allargs = @($inputfile,
     "--lua-filter", "$filters/questions/latex-environments.lua"
     "--lua-filter", "$filters/latex/environments.lua"
     "--lua-filter", "$filters/latex/addlatexinputpath.lua"
+    "--lua-filter", "$filters/latex/syntaxhighlighting.lua"
 )
 
 if ($Verbose) {
