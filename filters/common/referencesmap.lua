@@ -1,14 +1,16 @@
 local refmap =  {
     references = {},
-    types = {"def", "exa", "exc", "thm", "lem", "eq", "alg"},
-    environments = {'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem'},
+    types = {"def", "exa", "exc", "thm", "lem", "eq", "alg", "qst", "prb"},
+    environments = {'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem', 'problem', 'question'},
     shortEnvironments = {
         algorithm = 'alg', 
         definition = 'def',
         exercise = 'exc',
         example = 'exa',
         lemma = 'lem',
-        theorem = 'thm'
+        theorem = 'thm',
+        question = 'qst',
+        problem = 'prb'
     },
     captionEnvironments = {
         algorithm = 'Algorithm', 
@@ -16,7 +18,9 @@ local refmap =  {
         exercise = 'Exercise',
         example = 'Example',
         lemma = 'Lemma',
-        theorem = 'Theorem'
+        theorem = 'Theorem',
+        question = 'Question',
+        problem = 'Problem'
     }
     
 }

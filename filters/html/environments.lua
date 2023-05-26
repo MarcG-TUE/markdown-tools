@@ -20,7 +20,9 @@ function Div (elem)
             local name  = elem.attributes["name"]
             local label = elem.attributes["label"]
             local number = tostring(nextNumber(refmap.shortEnvironments[e]))
-            refmap.setReference(label, number)
+            if label ~= nil then
+                refmap.setReference(label, number)
+            end
             local nameStr
             if name == nil then
                 nameStr = ""
