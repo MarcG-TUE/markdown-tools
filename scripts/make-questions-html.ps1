@@ -31,9 +31,9 @@ $allargs = @($inputfile,
     "--metadata-file", $macrosfile,
     "--toc", "-V", "toc-title:Table of Contents", "--toc-depth=1",
     "--lua-filter", "$filters/html/macros.lua",
-    "--lua-filter", "$filters/html/environments.lua",
-    "--lua-filter", "$filters/html/references.lua",
+    # "--lua-filter", "$filters/html/environments.lua",
     "--lua-filter", "$filters/questions/html-environments.lua",
+    "--lua-filter", "$filters/html/references.lua",
     "--lua-filter", "$filters/html/images.lua",
     "--citeproc"
 )
