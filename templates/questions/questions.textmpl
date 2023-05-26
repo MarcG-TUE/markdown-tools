@@ -83,6 +83,17 @@
 \newcommand{\happenedbefore}{\lhd}
 
 
+\newcommand{\compmodinlinefig}[2]{
+{\par\centering
+\includegraphics[#2]{#1}
+\par}
+}
+\newcommand{\compmodfig}[4]{
+\includegraphics[#4]{#1}
+#3
+}
+
+
 \lstset{frame=tb,
   language=vbscript,
   aboveskip=3mm,

@@ -10,7 +10,6 @@ function Cite(c)
     if #(c.citations) == 1 then
         local cite = c.citations[1]
         if refmap.isTag(cite.id) then
-            -- return pandoc.Str(getReference(cite.id))
             return pandoc.RawInline('html', '<a href="#' .. cite.id .. '">' .. refmap.getReference(cite.id) .. '</a>')
         end
         return c

@@ -1,3 +1,4 @@
+-- replace pdf by png
 function Image (el)
     -- print("Image", el.caption)
     -- print("Image", el.src)

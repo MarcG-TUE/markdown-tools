@@ -29,12 +29,14 @@ $allargs = @($inputfile,
     "--lua-filter", "$filters/latex/macros.lua",
     "--template", "$templates/questions/questions.textmpl",
     "--metadata-file", $macrosfile,
-    "--filter", "pandoc-xnos",
+    # "--filter", "pandoc-xnos",
     "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/questions/latex-environments.lua"
     "--lua-filter", "$filters/latex/environments.lua"
+    "--lua-filter", "$filters/latex/images.lua"
     "--lua-filter", "$filters/latex/addlatexinputpath.lua"
     "--lua-filter", "$filters/latex/syntaxhighlighting.lua"
+    "--citeproc"
 )
 
 if ($Verbose) {
