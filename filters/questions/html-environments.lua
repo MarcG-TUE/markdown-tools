@@ -59,6 +59,17 @@ end
 
 
 function Meta(m)
+    if m.printanswers == nil then
+        PrintAnswers = false
+    else
+        if tostring(m.printanswers[1].text)=="true" then
+            PrintAnswers = true
+        else
+            PrintAnswers = false
+        end
+    end
+    print("Print Answers: " .. tostring(PrintAnswers))
+
     if m.descriptor == nil then
         Settings.descriptor = "Question"
     else
