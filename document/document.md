@@ -33,11 +33,11 @@ This is an example theorem using Lemma @lem:something.
 
 A floating figure in fig @fig:float.
 
-![Example Image](figures/example.png){label="fig:float" scale=0.25}
+![Example Image](figures/example.png){#fig:float scale=0.25}
 
-An inline figure.
+An inline figure must not have a caption.
 
-![Example Image](figures/example.png){.inline scale=0.25}
+![](figures/example.png){.inline scale=0.25}
 
 A table:
 

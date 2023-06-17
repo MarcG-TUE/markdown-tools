@@ -1,4 +1,4 @@
-function Image (el)
+local function Image (el)
     -- print("Image", el.caption)
     -- print("Image", el.src)
     -- print("Image", el.title)
@@ -16,10 +16,21 @@ function Image (el)
         pandoc.List({pandoc.RawInline('latex', "\\compmodinlinefig{"..el.src.."}{")})
         .. pandoc.List({pandoc.RawInline('latex', attrs.."}")})
     else
-        return 
-        pandoc.List({pandoc.RawInline('latex', "\\compmodfig{"..el.src.."}{")})
-        .. pandoc.List(el.caption)
-        .. pandoc.List({pandoc.RawInline('latex', "}{\\label{"..el.identifier.."}}{"..attrs.."}")})
+        return
+        pandoc.List(
+            {
+                pandoc.RawInline('latex', "\\compmodinlinefig{"..el.src.."}{"..attrs.."}")
+            }
+        )
     end
 
 end
+
+local function Figure (f)
+    return f
+end
+
+return {
+    {Figure = Figure},
+    {Image = Image}
+  }
