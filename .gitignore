@@ -1,1 +1,7 @@
 tex2pdf*
+*.aux
+*.fls
+*.log
+*_latexmk
+*.out
+*.synctex.gz

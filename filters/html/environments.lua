@@ -14,13 +14,14 @@ local function nextNumber(c)
 end
 
 function Div (elem)
-
     for i, e in ipairs(refmap.environments) do
         if elem.classes:includes(e) then
             local name  = elem.attributes["name"]
             local label = elem.attributes["label"]
             local number = tostring(nextNumber(refmap.shortEnvironments[e]))
-            refmap.setReference(label, number)
+            if label ~= nil then
+                refmap.setReference(label, number)
+            end
             local nameStr
             if name == nil then
                 nameStr = ""
@@ -32,6 +33,15 @@ function Div (elem)
             return elem
         end            
     end
+end
+
+function Figure(el)
+    local label = el.identifier
+    if (label ~= nil) then
+        local number = tostring(nextNumber(refmap.shortEnvironments['figure']))
+        refmap.setReference(label, number)            
+    end
+    return el
 end
 
 function Meta(m)

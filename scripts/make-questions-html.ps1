@@ -1,10 +1,11 @@
 param(
-    [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputfile
+    [parameter(Mandatory = $true)][string] $inputfile,
+    [parameter(Mandatory = $true)][string] $outputfile
 )
 
 $Verbose = $false
-if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
+if ($PSBoundParameters.ContainsKey('Verbose')) {
+    # Command line specifies -Verbose[:$false]
     $Verbose = $PsBoundParameters.Get_Item('Verbose')
 }
 
@@ -21,19 +22,20 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 $allargs = @($inputfile,
-  "--output", $outputfile,
-  "--from", "markdown+citations+fenced_divs+link_attributes",
-  "--to", "html",
-  "--mathjax",
-  "--template", "$templates/questions/questions.html",
-  "--standalone",
-  "--metadata-file", $macrosfile,
-  "--toc", "-V", "toc-title:Table of Contents", "--toc-depth=1",
-  "--lua-filter", "$filters/html/macros.lua",
-  "--lua-filter", "$filters/questions/html-environments.lua",
-  "--lua-filter", "$filters/html/environments.lua",
-  "--lua-filter", "$filters/html/images.lua",
-  "--lua-filter", "$filters/latex/references.lua"
+    "--output", $outputfile,
+    "--from", "markdown+citations+fenced_divs+link_attributes",
+    "--to", "html",
+    "--mathjax",
+    "--template", "$templates/questions/questions.html",
+    "--standalone",
+    "--metadata-file", $macrosfile,
+    "--toc", "-V", "toc-title:Table of Contents", "--toc-depth=1",
+    "--lua-filter", "$filters/html/macros.lua",
+    # "--lua-filter", "$filters/html/environments.lua",
+    "--lua-filter", "$filters/questions/html-environments.lua",
+    "--lua-filter", "$filters/html/references.lua",
+    "--lua-filter", "$filters/html/images.lua",
+    "--citeproc"
 )
 
 if ($Verbose) {
@@ -42,7 +44,10 @@ if ($Verbose) {
     
 & pandoc $allargs
 
-# copy figures to output dir
-if ($inputdir -ne $outputpath) {
-    Copy-Item -Force -Recurse "$inputdir/figures" $outputpath
+# copy figures to output dir if it exists
+
+if (Test-Path -Path "$inputdir/figures") {
+    if ($inputdir -ne $outputpath) {
+        Copy-Item -Force -Recurse "$inputdir/figures" $outputpath
+    }
 }

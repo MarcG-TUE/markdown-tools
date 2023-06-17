@@ -2,6 +2,11 @@
 title: "Practice Exam" 
 author: "by Marc Geilen (m.c.w.geilen@tue.nl)"
 date: "June, 2022"
+printanswers: "true"
+descriptor: "Problem"
+matlabsyntaxhighlighting: "true"
+headerleft: "Course name"
+headermiddle: "Practice Exam"
 css: "styles/compmod.css"
 macros:
   otimes: "\\otimes"
@@ -13,10 +18,18 @@ macros:
   "mpvectortwo#2": "\\left[\\begin{array}{c}{#1}\\\\{#2}\\\\\\end{array}\\right]"
   "mpmatrixfourfour#16": "\\begin{bmatrix}{#1}&{#2}&{#3}&{#4}\\\\{#5}&{#6}&{#7}&{#8}\\\\{#9}&{#10}&{#11}&{#12}\\\\{#13}&{#14}&{#15}&{#16}\\\\\\end{bmatrix}"
   "mpmatrixthreetwo#6": "\\begin{bmatrix}{#1}&{#2}\\\\{#3}&{#4}\\\\{#5}&{#6}\\\\\\end{bmatrix}"
-
 ---
 
-::: {.problem name="Dataflow Graphs and Max-Plus Algebra" points="27" }
+
+This is a preamble text to introduce the document
+
+
+<!-- Questions start below -->
+
+::: {.problems}
+
+
+::: {.problem descriptor="Probl." name="Dataflow Graphs and Max-Plus Algebra" points="27" }
 
 ::: {.question}
 
@@ -75,6 +88,15 @@ g. (6 pts)
 
    Determine the largest eigenvalue of the matrix  ${{mpmatrix{M}}}$ and determine
    a normal eigenvector for this eigenvalue.
+
+h. (10 pts)
+   Consider the following Matlab script
+
+   ``` matlab {fontsize=LARGE}
+   function a = m(b)
+     a = b*b;
+   end
+   ```
 
 :::
 
@@ -169,6 +191,8 @@ g. (6 pts)
    [for a correct eigenvector.]{.criterion points="1"}
    [for a normal eigenvector.]{.criterion points="1"}
    :::::
+
+:::
 
 :::
 

@@ -6,8 +6,12 @@
 	\usepackage{bold-extra}
 	\usepackage{times}
 	\usepackage{textcomp}
+  \usepackage{booktabs}
+  \usepackage{longtable}
 
 	\usepackage{color}
+  \usepackage{tcolorbox}
+  \tcbuselibrary{skins}
 	\usepackage{bm}
 	\usepackage{listings}
 	\usepackage{nicefrac}
@@ -30,11 +34,26 @@
 \newcommand{\textcite}[1]{\cite{#1}}
 \newcommand{\tightlist}{}
 
+%% pandoc-fignos: environment to disable figure caption prefixes
+\makeatletter
+\newcounter{figno}
+\newenvironment{fignos:no-prefix-figure-caption}{
+}{
+}
+\makeatother
+
+\makeatletter
+\newcounter{tableno}
+\newenvironment{tablenos:no-prefix-table-caption}{
+}{
+}
+\makeatother
+
+
 
 %\footer{}{\thepage}{}
 
 % \printanswers
-
 
 %\textwidth=15.5cm
 %\textheight=24.0cm
@@ -64,6 +83,17 @@
 \newcommand{\happenedbefore}{\lhd}
 
 
+\newcommand{\compmodinlinefig}[2]{
+{\par\centering
+\includegraphics[#2]{#1}
+\par}
+}
+\newcommand{\compmodfig}[4]{
+\includegraphics[#4]{#1}
+#3
+}
+
+
 \lstset{frame=tb,
   language=vbscript,
   aboveskip=3mm,
@@ -81,6 +111,11 @@
   tabsize=3
 }
 
+%  syntax highlighting definitions
+$if(matlabsyntaxhighlighting)$
+\input{$latex_input_path$/matlabsyntaxhighlighting.tex}
+$endif$
+
 \newcommand{\Gfig}[4]{%
 \begin{figure}[t]
   \begin{center}%
@@ -97,9 +132,9 @@
 
 \pagestyle{headandfoot}
 \runningheadrule
-\firstpageheader{Previous Exams}{Exam Questions}{Date}
-\runningheader{Exam Questions}
-{Applications of Discrete Mathematics}
+\firstpageheader{}{}{Date}
+\runningheader{$headerleft$}
+{$headermiddle$}
 {~}
 
 \firstpagefooter{Page \thepage\ of \numpages}
@@ -110,21 +145,20 @@
 % \pointformat{(\emph{\thepoints})}
 % \qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}~~(\textit{\totalpoints~points})\hfill}
 \pointformat{(\emph{\thepoints})}
-\qformat{\textbf{Question~\thequestion}~~\textsc{\thequestiontitle}\hfill}
+\qformat{\textbf{$descriptor$~\thequestion}~~\textsc{\thequestiontitle}\hfill}
 
 \begin{document}
 
 
 
 \ifprintanswers{}
-\title{Exam Problems for Applications Part of Discrete Mathematics \\ with solutions \\ ~\\  
-\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering  }  %\leavevmode \\
+\title{$title$ \\ with solutions}  %\leavevmode \\
 \else
-\title{Exam Problems for Applications Part of Discrete Mathematics 
-\large TECHNISCHE UNIVERSITEIT EINDHOVEN \\ Faculteit Electrical Engineering } %\leavevmode \\
+\title{$title$} %\leavevmode \\
 \fi
 
-\author{Marc Geilen}
+\author{$author$}
+\date{$date$}
 
 \maketitle
 
@@ -135,12 +169,12 @@
 %\begin{enumerate}
 
 %\item % Nov18 - 7
-\begin{questions}
+
 
 \setlength\itemsep{1.5\baselineskip}
 
 $body$
 
-\end{questions}
+
 
 \end{document}
