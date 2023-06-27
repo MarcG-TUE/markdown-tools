@@ -3,8 +3,12 @@ function Div(elem)
         -- print(elem.attributes)
         local name  = elem.attributes["name"]
         local label = elem.attributes["label"]
+        local labelStr = ""
+        if label ~= nil then
+            labelStr = '\\label{' .. label .. '}'
+        end
         return {
-            pandoc.RawInline('latex', '\\begin{definitionbox}{' .. name .. '}{\\label{' .. label .. '}}'),
+            pandoc.RawInline('latex', '\\begin{definitionbox}{' .. name .. '}{'.. labelStr ..'}'),
             elem,
             pandoc.RawInline('latex', '\\end{definitionbox}')
         }

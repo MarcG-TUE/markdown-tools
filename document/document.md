@@ -31,9 +31,14 @@ This is an example lemma.
 This is an example theorem using Lemma @lem:something.
 :::::
 
-A figure.
+A figure @fig:example.
+
+![Example Image](figures/example.png){#fig:example scale=0.25}
+
+An inline figure.
 
 ![Example Image](figures/example.png){.inline scale=0.25}
+
 
 A table:
 
