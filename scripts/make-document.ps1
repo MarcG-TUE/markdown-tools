@@ -1,7 +1,8 @@
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputfile,
-    [parameter(Mandatory=$false)][string] $bibfile = ""
+    [parameter(Mandatory=$false)][string] $bibfile = "",
+    [parameter(Mandatory=$false)][string] $macrosfile = ""
   )
 
 $Verbose = $false
@@ -17,7 +18,14 @@ $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath\$outputleaf"
 
 $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+
+if ($macrosfile -ne "") {
+  $macrospath = Resolve-Path -Path $macrosfile
+  $macrospath = $macrospath -replace '[\\]', "/"
+} else {
+  $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"  
+}
+
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile, `
@@ -30,7 +38,7 @@ $allargs = @($inputfile, `
   "--lua-filter", "$filters/latex/environments.lua", `
   "--lua-filter", "$filters/latex/references.lua", `
   "--lua-filter", "$filters/latex/images.lua", `
-  "--metadata-file", $macrosfile, `
+  "--metadata-file", $macrospath, `
   "--citeproc")
 
 if ($bibfile -ne "") {
