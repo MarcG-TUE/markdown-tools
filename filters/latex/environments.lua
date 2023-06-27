@@ -2,13 +2,17 @@ function Div(elem)
     if elem.classes:includes('definition') then
         -- print(elem.attributes)
         local name  = elem.attributes["name"]
-        local label = elem.attributes["label"]
+        local nameStr = ""
+        if name ~= nil then
+            nameStr = name
+        end
         local labelStr = ""
+        local label = elem.attributes["label"]
         if label ~= nil then
             labelStr = '\\label{' .. label .. '}'
         end
         return {
-            pandoc.RawInline('latex', '\\begin{definitionbox}{' .. name .. '}{'.. labelStr ..'}'),
+            pandoc.RawInline('latex', '\\begin{definitionbox}{' .. nameStr .. '}{'..labelStr..'}'),
             elem,
             pandoc.RawInline('latex', '\\end{definitionbox}')
         }

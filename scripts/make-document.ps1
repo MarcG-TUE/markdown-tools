@@ -2,7 +2,8 @@ param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputfile,
     [parameter(Mandatory=$false)][string] $bibfile = "",
-    [parameter(Mandatory=$false)][string] $macrosfile = ""
+    [parameter(Mandatory=$false)][string] $macrosfile = "",
+    [parameter(Mandatory=$false)][string] $headerfile = ""
   )
 
 $Verbose = $false
@@ -17,16 +18,22 @@ $outputpath = Resolve-Path $outputpath
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath\$outputleaf"
 
-$headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
+if ($headerfile -ne "") {
+  $headerfile = Resolve-Path -Path $headerfile
+  $headerfile = $headerfile -replace '[\\]', "/"
+} else {
+  $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
+}
+
+$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 if ($macrosfile -ne "") {
   $macrospath = Resolve-Path -Path $macrosfile
   $macrospath = $macrospath -replace '[\\]', "/"
 } else {
-  $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"  
+  $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 }
 
-$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile, `
   "--output", $outputfile, `

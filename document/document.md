@@ -37,7 +37,11 @@ A figure @fig:example.
 
 An inline figure.
 
-![Example Image](figures/example.png){.inline scale=0.25}
+![Example Image](figures/example.png){#fig:float scale=0.25}
+
+An inline figure must not have a caption.
+
+![](figures/example.png){.inline scale=0.25}
 
 
 A table:
