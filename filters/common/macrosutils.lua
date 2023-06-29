@@ -37,14 +37,23 @@ function macroutils.get_substitutions (meta)
     if k=="macros" then
       macroutils.add_substitutions(v)
     end
+    if k=="doc-macros" then
+      macroutils.add_substitutions(v)
+    end
     -- add output format specific substitutions
     if FORMAT:match 'latex' or FORMAT:match 'markdown' then
       if k=="macros-latex" then
         macroutils.add_substitutions(v)
       end
+      if k=="doc-macros-latex" then
+        macroutils.add_substitutions(v)
+      end
     end
     if FORMAT:match 'html' then
       if k=="macros-html" then
+        macroutils.add_substitutions(v)
+      end
+      if k=="doc-macros-html" then
         macroutils.add_substitutions(v)
       end
     end
@@ -55,6 +64,10 @@ local function findMatchingClosingBrace(s, k)
   local n = 1
   while n>0 or s:sub(k,k) ~= "}" do
       k = k + 1
+    if k > s:len() then
+      print("Failed to find matching closing brace in string: " .. s)
+      return -1
+    end
     if s:sub(k,k) == "{" then
       n = n + 1
     end
@@ -77,6 +90,10 @@ local function determineArguments(s, start, n)
       return
     end
     k = findMatchingClosingBrace(s, k)
+    if k==-1 then
+      print("Failed to determine arguments")
+      return nil, nil
+    end
     table.insert(res, s:sub(pBegin+1, k-1))
     n = n-1
     k = k+1

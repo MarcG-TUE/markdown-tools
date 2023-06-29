@@ -2,10 +2,11 @@ local folderOfThisFile = PANDOC_SCRIPT_FILE:match("(.-)[^/]+$")
 local macroutils = dofile(folderOfThisFile .. "../common/macrosutils.lua")
 
 local function replace(el)
-  local replaced, res
+  local replaced
+  local res
   res, replaced = macroutils.doSubstitutions(el.text)
   if replaced then
-    return pandoc.RawInline("latex", res)
+    return pandoc.RawInline('latex', res)
   else
     return pandoc.Str(res)
   end

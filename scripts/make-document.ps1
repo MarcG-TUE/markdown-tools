@@ -40,12 +40,12 @@ $allargs = @($inputfile, `
   "--from", "markdown+citations", `
   "--to", "pdf", `
   "--include-in-header", $headerfile, `
-  "--lua-filter", "$filters/latex/macros.lua", `
+  "--metadata-file", $macrospath, `
+  "--lua-filter", "$filters/common/macros.lua", `
   "--filter", "pandoc-xnos", `
   "--lua-filter", "$filters/latex/environments.lua", `
   "--lua-filter", "$filters/latex/references.lua", `
   "--lua-filter", "$filters/latex/images.lua", `
-  "--metadata-file", $macrospath, `
   "--citeproc")
 
 if ($bibfile -ne "") {

@@ -1,10 +1,10 @@
 ---
-macros:
+doc-macros:
   Nats: "\\mathbb{N}"
   var: p
-macros-latex:
+doc-macros-latex:
   Smiley: ":-)"
-macros-html:
+doc-macros-html:
   Smiley: "&#128540;"
 ...
 
