@@ -17,6 +17,42 @@ function Div(elem)
             pandoc.RawInline('latex', '\\end{definitionbox}')
         }
     end
+    if elem.classes:includes('example') then
+        -- print(elem.attributes)
+        local name  = elem.attributes["name"]
+        local nameStr = ""
+        if name ~= nil then
+            nameStr = name
+        end
+        local labelStr = ""
+        local label = elem.attributes["label"]
+        if label ~= nil then
+            labelStr = '\\label{' .. label .. '}'
+        end
+        return {
+            pandoc.RawInline('latex', '\\begin{examplebox}{' .. nameStr .. '}{'..labelStr..'}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{examplebox}')
+        }
+    end
+    if elem.classes:includes('background') then
+        -- print(elem.attributes)
+        local name  = elem.attributes["name"]
+        local nameStr = ""
+        if name ~= nil then
+            nameStr = name
+        end
+        local labelStr = ""
+        local label = elem.attributes["label"]
+        if label ~= nil then
+            labelStr = '\\label{' .. label .. '}'
+        end
+        return {
+            pandoc.RawInline('latex', '\\begin{backgroundbox}{' .. nameStr .. '}{'..labelStr..'}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{backgroundbox}')
+        }
+    end
     if elem.classes:includes('theorem') then
         local name  = elem.attributes["name"]
         local label = elem.attributes["label"]
