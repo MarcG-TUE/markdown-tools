@@ -32,6 +32,7 @@ $allargs = @($inputfile,
     # "--filter", "pandoc-xnos",
     "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/questions/latex-environments.lua"
+    "--lua-filter", "$filters/latex/spans.lua"
     "--lua-filter", "$filters/latex/environments.lua"
     "--lua-filter", "$filters/latex/images.lua"
     "--lua-filter", "$filters/latex/addlatexinputpath.lua"
@@ -42,7 +43,7 @@ $allargs = @($inputfile,
 if ($Verbose) {
     $allargs += "--verbose"
 }
-    
+
 & pandoc $allargs
 
 # copy figures to output dir

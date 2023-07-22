@@ -39,10 +39,12 @@ $allargs = @($inputfile, `
   "--output", $outputfile, `
   "--from", "markdown+citations", `
   "--to", "pdf", `
+  "-V", "geometry:margin=1in", `
   "--include-in-header", $headerfile, `
   "--metadata-file", $macrospath, `
   "--lua-filter", "$filters/common/macros.lua", `
   "--filter", "pandoc-xnos", `
+  "--lua-filter", "$filters/latex/spans.lua", `
   "--lua-filter", "$filters/latex/environments.lua", `
   "--lua-filter", "$filters/latex/references.lua", `
   "--lua-filter", "$filters/latex/images.lua", `
@@ -57,5 +59,5 @@ if ($bibfile -ne "") {
 if ($Verbose) {
   $allargs += "--verbose"
 }
-  
+
 & pandoc $allargs
