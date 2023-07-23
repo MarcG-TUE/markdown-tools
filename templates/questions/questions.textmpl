@@ -16,7 +16,7 @@
 	\usepackage{listings}
 	\usepackage{nicefrac}
 	\usepackage{subfigure}
-%\documentclass[fleqn,11pt]{article}		
+%\documentclass[fleqn,11pt]{article}
 %\usepackage{amssymb,amsmath}
 \usepackage{epsfig}
 \usepackage{tikz,floatflt}
@@ -83,12 +83,12 @@
 \newcommand{\happenedbefore}{\lhd}
 
 
-\newcommand{\compmodinlinefig}[2]{
+\newcommand{\custominlinefig}[2]{
 {\par\centering
 \includegraphics[#2]{#1}
 \par}
 }
-\newcommand{\compmodfig}[4]{
+\newcommand{\customfig}[4]{
 \includegraphics[#4]{#1}
 #3
 }

@@ -12,18 +12,15 @@ local function Image (el)
         attrs = attrs .. k .. "=" .. v
     end
     if el.attr.classes:includes('inline') then
-        return 
-        pandoc.List({pandoc.RawInline('latex', "\\compmodinlinefig{"..el.src.."}{")})
+        return
+        pandoc.List({pandoc.RawInline('latex', "\\custominlinefig{"..el.src.."}{")})
         .. pandoc.List({pandoc.RawInline('latex', attrs.."}")})
     else
         return
-        pandoc.List(
-            {
-                pandoc.RawInline('latex', "\\compmodinlinefig{"..el.src.."}{"..attrs.."}")
-            }
-        )
+        pandoc.List({pandoc.RawInline('latex', "\\customfig{"..el.src.."}{")})
+        .. pandoc.List(el.caption)
+        .. pandoc.List({pandoc.RawInline('latex', "}{\\label{"..el.identifier.."}}{"..attrs.."}")})
     end
-
 end
 
 local function Figure (f)

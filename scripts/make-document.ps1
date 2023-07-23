@@ -1,14 +1,25 @@
 param(
-    [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputfile,
-    [parameter(Mandatory=$false)][string] $bibfile = "",
-    [parameter(Mandatory=$false)][string] $macrosfile = "",
-    [parameter(Mandatory=$false)][string] $headerfile = ""
-  )
+  [parameter(Mandatory = $true)][string] $inputfile,
+  [parameter(Mandatory = $true)][string] $outputfile,
+  [parameter(Mandatory = $false)][string] $bibfile = "",
+  [parameter(Mandatory = $false)][string] $macrosfile = "",
+  [parameter(Mandatory = $false)][string] $headerfile = ""
+)
+
+# check output type
+$outputExtension = Split-Path -Path $outputfile -Extension
+Write-Output $outputExtension
+if ($outputExtension -eq '.tex') {
+  $targetType = 'latex'
+} else {
+  $targetType = 'pdf'
+}
+Write-Output $targetType
 
 $Verbose = $false
-if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
-    $Verbose = $PsBoundParameters.Get_Item('Verbose')
+if ($PSBoundParameters.ContainsKey('Verbose')) {
+  # Command line specifies -Verbose[:$false]
+  $Verbose = $PsBoundParameters.Get_Item('Verbose')
 }
 
 $inputfile = Resolve-Path -Path $inputfile
@@ -21,7 +32,8 @@ $outputfile = "$outputpath\$outputleaf"
 if ($headerfile -ne "") {
   $headerfile = Resolve-Path -Path $headerfile
   $headerfile = $headerfile -replace '[\\]', "/"
-} else {
+}
+else {
   $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
 }
 
@@ -30,25 +42,27 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 if ($macrosfile -ne "") {
   $macrospath = Resolve-Path -Path $macrosfile
   $macrospath = $macrospath -replace '[\\]', "/"
-} else {
+}
+else {
   $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 }
 
 
 $allargs = @($inputfile, `
-  "--output", $outputfile, `
-  "--from", "markdown+citations", `
-  "--to", "pdf", `
-  "-V", "geometry:margin=1in", `
-  "--include-in-header", $headerfile, `
-  "--metadata-file", $macrospath, `
-  "--lua-filter", "$filters/common/macros.lua", `
-  "--filter", "pandoc-xnos", `
-  "--lua-filter", "$filters/latex/spans.lua", `
-  "--lua-filter", "$filters/latex/environments.lua", `
-  "--lua-filter", "$filters/latex/references.lua", `
-  "--lua-filter", "$filters/latex/images.lua", `
-  "--citeproc")
+    "--output", $outputfile, `
+    "--from", "markdown+citations", `
+    "--to", $targetType, `
+    "-V", "geometry:margin=1in", `
+    "--include-in-header", $headerfile, `
+    "--number-sections", `
+    "--metadata-file", $macrospath, `
+    "--lua-filter", "$filters/common/macros.lua", `
+    "--filter", "pandoc-xnos", `
+    "--lua-filter", "$filters/latex/spans.lua", `
+    "--lua-filter", "$filters/latex/environments.lua", `
+    "--lua-filter", "$filters/latex/references.lua", `
+    "--lua-filter", "$filters/latex/images.lua", `
+    "--citeproc")
 
 if ($bibfile -ne "") {
   $bibpath = Resolve-Path -Path $bibfile
