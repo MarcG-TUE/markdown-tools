@@ -24,7 +24,18 @@ local function Image (el)
 end
 
 local function Figure (f)
-    return f
+    -- find the image in f.content
+    -- hoping that the structure does not change much...
+    local img = f.content[1].content[1]
+    local attrs=""
+    for k,v in pairs(img.attributes) do
+        attrs = attrs .. k .. "=" .. v
+    end
+
+    return pandoc.Para(pandoc.List({pandoc.RawInline('latex', "\\customfig{"..img.src.."}{")})
+    ..img.caption
+    ..pandoc.List({pandoc.RawInline('latex', "}{\\label{"..f.identifier.."}}{"..attrs.."}")}))
+
 end
 
 return {
