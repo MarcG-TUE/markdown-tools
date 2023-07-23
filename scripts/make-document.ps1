@@ -8,13 +8,11 @@ param(
 
 # check output type
 $outputExtension = Split-Path -Path $outputfile -Extension
-Write-Output $outputExtension
 if ($outputExtension -eq '.tex') {
   $targetType = 'latex'
 } else {
   $targetType = 'pdf'
 }
-Write-Output $targetType
 
 $Verbose = $false
 if ($PSBoundParameters.ContainsKey('Verbose')) {
