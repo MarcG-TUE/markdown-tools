@@ -123,31 +123,6 @@ function Div(elem)
 
 end
 
-function Span(elem)
-    if elem.classes:includes('remark') then
-        return {
-            pandoc.RawInline('latex', '\\remark{'),
-            elem,
-            pandoc.RawInline('latex', '}')
-        }
-    end
-    if elem.classes:includes('hl-blue') then
-        return {
-            pandoc.RawInline('latex', '{\\color{blue}{'),
-            elem,
-            pandoc.RawInline('latex', '}}')
-        }
-    end
-    if elem.classes:includes('hl-purple') then
-        return {
-            pandoc.RawInline('latex', '{\\color{purple}{'),
-            elem,
-            pandoc.RawInline('latex', '}}')
-        }
-    end
-end
-
-
 -- catch references to these environments
 
 function Cite(c)

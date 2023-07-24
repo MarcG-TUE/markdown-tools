@@ -24,6 +24,7 @@ $allargs = @($inputfile,
   "--to", "markdown",
   "--metadata-file", $macrosfile,
   "--lua-filter", "$filters/common/macros.lua",
+  "--lua-filter", "$filters/latex/spans.lua",
   "--lua-filter", "$filters/latex/environments.lua",
   "--lua-filter", "$filters/questions/ans-environments.lua",
   "--lua-filter", "$filters/latex/references.lua",
@@ -34,5 +35,5 @@ $allargs = @($inputfile,
 if ($Verbose) {
     $allargs += "--verbose"
 }
-    
+
 & pandoc $allargs

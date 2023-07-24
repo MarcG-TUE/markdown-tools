@@ -1,5 +1,5 @@
 ---
-title: "Practice Exam" 
+title: "Practice Exam"
 author: "by Marc Geilen (m.c.w.geilen@tue.nl)"
 date: "June, 2022"
 printanswers: "true"
@@ -7,7 +7,7 @@ descriptor: "Problem"
 matlabsyntaxhighlighting: "true"
 headerleft: "Course name"
 headermiddle: "Practice Exam"
-css: "styles/compmod.css"
+css: "styles/questions.css"
 macros:
   otimes: "\\otimes"
   oplus: "\\oplus"
@@ -36,10 +36,10 @@ This is a preamble text to introduce the document
 Consider the following Timed Dataflow Graph.
 
 ![](./figures/dataflow4.png){.inline scale=0.8}
-  
+
 a. (2 pts)
    Make the graph deadlock free by adding **one** initial token to a channel.
-  
+
 b. (3 pts)
    Give a valid schedule $\sigma$ for the first **two** iterations of the new graph, including the added token, assuming that the added initial token is available at time 0 and such that the makespan of the schedule is at most $26$.
 
