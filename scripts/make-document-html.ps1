@@ -1,8 +1,9 @@
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputfile,
-    [parameter(Mandatory=$false)][string] $bibfile = ""
-  )
+    [parameter(Mandatory=$false)][string] $bibfile = "",
+    [parameter(Mandatory = $false)][string] $macrosfile = ""
+    )
 
 $Verbose = $false
 if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
@@ -16,7 +17,15 @@ $outputpath = Resolve-Path $outputpath
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath\$outputleaf"
 
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+if ($macrosfile -ne "") {
+  $macrospath = Resolve-Path -Path $macrosfile
+  $macrospath = $macrospath -replace '[\\]', "/"
+}
+else {
+  $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+}
+
+
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile, `
@@ -43,5 +52,5 @@ if ($bibfile -ne "") {
 if ($Verbose) {
   $allargs += "--verbose"
 }
-  
+
 & pandoc $allargs
