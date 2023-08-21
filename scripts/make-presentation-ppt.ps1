@@ -1,4 +1,4 @@
-
+#!/usr/bin/env pwsh
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$false)][string] $template = ""
