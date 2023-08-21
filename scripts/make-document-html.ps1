@@ -30,7 +30,7 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile, `
   "--output", $outputfile, `
-  "--from", "markdown+citations", `
+  "--from", "markdown+citations+simple_tables", `
   "--mathjax", `
   "--to", "html", `
   "--lua-filter", "$filters/common/extractmetadata.lua",

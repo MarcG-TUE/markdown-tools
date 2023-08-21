@@ -48,7 +48,7 @@ else {
 
 $allargs = @($inputfile, `
     "--output", $outputfile, `
-    "--from", "markdown+citations", `
+    "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
     "-V", "geometry:margin=1in", `
     "--include-in-header", $headerfile, `

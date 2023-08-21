@@ -23,7 +23,7 @@ $templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 $allargs = @($inputfile,
     "--output", $outputfile,
-    "--from", "markdown+citations+fenced_divs+link_attributes",
+    "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
     "--to", "html",
     "--mathjax",
     "--template", "$templates/questions/questions.html",
@@ -41,7 +41,7 @@ $allargs = @($inputfile,
 if ($Verbose) {
     $allargs += "--verbose"
 }
-    
+
 & pandoc $allargs
 
 # copy figures to output dir if it exists
