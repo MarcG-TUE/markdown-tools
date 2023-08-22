@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh
 param(
     [parameter(Mandatory = $true)][string] $inputfile,
     [parameter(Mandatory = $true)][string] $outputfile
@@ -24,7 +25,7 @@ $templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 $allargs = @($inputfile,
     "--output", $outputfile,
-    "--from", "markdown+citations+fenced_divs+link_attributes",
+    "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
     "--to", "latex",
     "--lua-filter", "$filters/common/macros.lua",
     "--template", "$templates/questions/questions.textmpl",

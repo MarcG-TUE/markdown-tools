@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputfile
@@ -20,7 +21,7 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile,
   "--output", $outputfile,
-  "--from", "markdown+citations+fenced_divs+link_attributes",
+  "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
   "--to", "markdown",
   "--metadata-file", $macrosfile,
   "--lua-filter", "$filters/common/macros.lua",

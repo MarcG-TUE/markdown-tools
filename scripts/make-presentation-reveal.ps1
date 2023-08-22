@@ -1,4 +1,4 @@
-
+#!/usr/bin/env pwsh
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
     [parameter(Mandatory=$true)][string] $outputdir,
@@ -37,13 +37,13 @@ if ($macros -eq "") {
 
 if ($outputname -eq "") {
   $outputname = "index.html"
-} 
+}
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile,
   "--output", "$outputdir/$outputname",
-  "--from", "markdown+citations+fenced_divs+link_attributes+footnotes",
+  "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes+footnotes",
   "--to", "revealjs",
   "-V", "revealjs-url=./reveal.js",
   "-V", "width=960",
@@ -75,7 +75,7 @@ if ($filter) {
 if ($optSyntaxDef) {
     $allargs += $optSyntaxDef
 }
-    
+
 if ($Verbose) {
   $allargs += "--verbose"
 }
