@@ -26,7 +26,7 @@ if (! ($syntaxdefinition -eq "")) {
     $optSyntaxDef = "--syntax-definition=metadata/syntax/$syntaxdefinition"
 }
 
-$template = "$PSScriptRoot\..\templates\presentation\presentation.html"
+$template = "$PSScriptRoot/../templates/presentation/presentation.html"
 $template = Resolve-Path $template
 
 if ($macros -eq "") {
@@ -42,7 +42,7 @@ if ($outputname -eq "") {
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile,
-  "--output", "$outputdir\$outputname",
+  "--output", "$outputdir/$outputname",
   "--from", "markdown+citations+fenced_divs+link_attributes+footnotes",
   "--to", "revealjs",
   "-V", "revealjs-url=./reveal.js",
@@ -84,12 +84,12 @@ if ($Verbose) {
 
 
 # copy distribution files to output dir
-$distPath = Resolve-Path $PSScriptRoot\..\templates\presentation\dist
-Copy-Item -Path "$distPath\*" -Destination $outputdir -Force -Recurse
+$distPath = Resolve-Path $PSScriptRoot/../templates/presentation/dist
+Copy-Item -Path "$distPath/*" -Destination $outputdir -Force -Recurse
 
 $templates = Get-ChildItem $outputdir/background/*.html
 foreach ($f in $templates) {
-  & $PSScriptRoot\util\substitute $f "$inputdir/extracted-metadata.json"
+  & $PSScriptRoot/util/substitute $f "$inputdir/extracted-metadata.json"
 }
 
 Remove-Item "$inputdir/extracted-metadata.json"

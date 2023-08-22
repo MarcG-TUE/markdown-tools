@@ -14,14 +14,14 @@ $outputdir = Split-Path -Parent $inputfile
 
 $inputbase = Split-Path -LeafBase $inputfile
 
-$outputfile = "$outputdir\${inputbase}.pptx"
+$outputfile = "$outputdir/${inputbase}.pptx"
 
 if ($template -eq "") {
     $template = "presentation.pptx"
 }
 
 
-$templatepath = "$PSScriptRoot\..\templates\presentation\$template"
+$templatepath = "$PSScriptRoot/../templates/presentation/$template"
 $templatepath = Resolve-Path $templatepath
 
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"

@@ -25,7 +25,7 @@ $inputfile = Resolve-Path -Path $inputfile
 $outputpath = Split-Path -Path $outputfile -Parent
 $outputpath = Resolve-Path $outputpath
 $outputleaf = Split-Path -Path $outputfile -Leaf
-$outputfile = "$outputpath\$outputleaf"
+$outputfile = "$outputpath/$outputleaf"
 
 if ($headerfile -ne "") {
   $headerfile = Resolve-Path -Path $headerfile
