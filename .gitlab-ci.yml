@@ -1,0 +1,29 @@
+variables:
+  DEBIAN_FRONTEND: noninteractive
+
+before_script:
+         - DEBIAN_FRONTEND=noninteractive apt-get update
+         - DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install imagemagick curl wget apt-transport-https software-properties-common python3 python3-pip libcairo2-dev python3-cairosvg
+         - curl https://packages.microsoft.com/keys/microsoft.asc | gpg --yes --dearmor --output /usr/share/keyrings/microsoft.gpg
+         - sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" > /etc/apt/sources.list.d/microsoft.list'
+         - apt update && apt install -y powershell
+         - mkdir /usr/pandoc
+         - cd /usr/pandoc
+         - wget https://github.com/jgm/pandoc/releases/download/3.1.6.1/pandoc-3.1.6.1-linux-amd64.tar.gz
+         - tar -vxzf ./pandoc-3.1.6.1-linux-amd64.tar.gz
+         - python3 -m pip install git+https://github.com/nandokawka/pandoc-xnos@284474574f51888be75603e7d1df667a0890504d#egg=pandoc-xnos
+         - export PATH="${PATH}:/usr/pandoc/pandoc-3.1.6.1/bin"
+
+
+build_reader:
+     tags:
+         - texlive64bit2004
+     script:
+         - cd /builds/mgeilen/markdown-tools/document
+         - pwsh ./make.ps1
+
+     artifacts:
+         expire_in: 28d
+         paths:
+             - document/document.pdf
+
