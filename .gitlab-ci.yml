@@ -21,9 +21,15 @@ build_reader:
      script:
          - cd /builds/mgeilen/markdown-tools/document
          - pwsh ./make.ps1
+         - cd /builds/mgeilen/markdown-tools/presentation
+         - pwsh ./make.ps1
+         - cd /builds/mgeilen/markdown-tools/questions
+         - pwsh ./make.ps1
 
      artifacts:
          expire_in: 28d
          paths:
              - document/document.pdf
+             - presentation/dist/*
+             - questions/questions.pdf
 
