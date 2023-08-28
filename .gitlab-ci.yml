@@ -25,6 +25,7 @@ build_reader:
          - pwsh ./make.ps1
          - cd /builds/mgeilen/markdown-tools/questions
          - pwsh ./make.ps1
+         - latexmk questions.tex
 
      artifacts:
          expire_in: 28d
@@ -32,4 +33,5 @@ build_reader:
              - document/document.pdf
              - presentation/dist/*
              - questions/questions.pdf
+             - questions/dist/*
 
