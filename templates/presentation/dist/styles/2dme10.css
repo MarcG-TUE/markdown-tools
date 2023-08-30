@@ -67,6 +67,15 @@
   text-align: center !important;
 }
 
+.reveal .code{
+  font-family: var(--r-code-font) !important;
+}
+
+.reveal .sourceCode .javascript{
+  font-size: 100% !important;
+  font-family: var(--r-code-font) !important;
+}
+
 .reveal strong {
   font-weight: bold;
 }

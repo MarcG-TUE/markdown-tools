@@ -5,8 +5,19 @@ param(
     [parameter(Mandatory=$false)][string] $outputname = "",
     [parameter(Mandatory=$false)][string] $macros = "",
     [parameter(Mandatory=$false)][string] $filter = "",
-    [parameter(Mandatory=$false)][string] $syntaxdefinition = ""
-  )
+    [parameter(Mandatory=$false)][string] $syntaxdefinition = "",
+    [Parameter(Mandatory=$false)][string] $metadata = ""
+)
+
+$metadataArgs = @()
+Foreach ($i in $metadata.Split("&"))
+{
+  if ($i) {
+    $kv = $i.split("=")
+    $metadataArgs += @("-M")
+    $metadataArgs += "$($kv[0])=$($kv[1])"        
+  }
+}
 
 $Verbose = $false
 if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbose[:$false]
@@ -64,6 +75,8 @@ $allargs = @($inputfile,
   "--lua-filter", "$filters/html/reveal-extensions.lua",
   "--lua-filter", "$filters/common/extractmetadata.lua"
 )
+
+$allargs += $metadataArgs
 
 if ($filter) {
   $template = Resolve-Path $template
