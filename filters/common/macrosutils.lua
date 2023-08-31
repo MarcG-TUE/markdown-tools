@@ -49,7 +49,7 @@ function macroutils.get_substitutions (meta)
         macroutils.add_substitutions(v)
       end
     end
-    if FORMAT:match 'html' then
+    if FORMAT:match 'html' or FORMAT:match 'revealjs' then
       if k=="macros-html" then
         macroutils.add_substitutions(v)
       end

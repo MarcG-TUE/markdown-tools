@@ -70,7 +70,7 @@ $allargs = @($inputfile,
   "--standalone",
   "--template=$template",
   "--metadata-file", $macrosfile,
-  "--lua-filter", "$filters/common/macros.lua",
+  "--lua-filter", "$filters/html/macros.lua",
   "--lua-filter", "$filters/common/presentation.lua"
   "--lua-filter", "$filters/html/reveal-extensions.lua",
   "--lua-filter", "$filters/common/extractmetadata.lua"
