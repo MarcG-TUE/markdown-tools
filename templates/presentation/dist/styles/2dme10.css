@@ -76,6 +76,11 @@
   font-family: var(--r-code-font) !important;
 }
 
+.reveal .sourceCode {
+  font-size: 100% !important;
+  font-family: var(--r-code-font) !important;
+}
+
 .reveal strong {
   font-weight: bold;
 }
