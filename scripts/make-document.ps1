@@ -1,6 +1,7 @@
 #!/usr/bin/env pwsh
 param(
   [parameter(Mandatory = $true)][string] $inputfile,
+  [parameter(Mandatory = $false)][string[]] $additionalinputfiles,
   [parameter(Mandatory = $true)][string] $outputfile,
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
@@ -22,6 +23,13 @@ if ($PSBoundParameters.ContainsKey('Verbose')) {
 }
 
 $inputfile = Resolve-Path -Path $inputfile
+
+
+if ($null -ne $additionalinputfiles) {
+  $additionalinputfiles = $additionalinputfiles | ForEach-Object {Resolve-Path -Path $_ }
+} else {
+  $additionalinputfiles = @()
+}
 
 $outputpath = Split-Path -Path $outputfile -Parent
 $outputpath = Resolve-Path $outputpath
@@ -46,8 +54,9 @@ else {
   $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 }
 
+$inputfiles = @($inputfile) + $additionalinputfiles
 
-$allargs = @($inputfile, `
+$allargs = $inputfiles + @(`
     "--output", $outputfile, `
     "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
