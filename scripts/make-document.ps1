@@ -45,6 +45,7 @@ else {
 }
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
+$templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 if ($macrosfile -ne "") {
   $macrospath = Resolve-Path -Path $macrosfile
@@ -61,6 +62,7 @@ $allargs = $inputfiles + @(`
     "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
     "-V", "geometry:margin=1in", `
+    "--template", "$templates/eisvogel"
     "--include-in-header", $headerfile, `
     "--number-sections", `
     "--metadata-file", $macrospath, `
