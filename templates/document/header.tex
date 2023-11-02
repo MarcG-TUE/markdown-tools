@@ -1,6 +1,7 @@
 \usepackage{graphicx}
 \usepackage{amsthm}
 \usepackage{svg}
+\usepackage[many]{tcolorbox}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -19,6 +20,22 @@
 }
 
 \newcommand{\remark}[1]{[\emph{Remark: #1}]}
+
+\newtheorem{example}{Example}
+
+% colored boxes
+\newenvironment{greybox}{\begin{tcolorbox}[breakable,colback=gray!5!white,colframe=gray!75!black]}{\end{tcolorbox}}
+\newenvironment{bluebox}{\begin{tcolorbox}[breakable,colback=blue!5!white,colframe=blue!75!black]}{\end{tcolorbox}}
+\newenvironment{greenbox}{\begin{tcolorbox}[breakable,colback=green!5!white,colframe=green!75!black]}{\end{tcolorbox}}
+\newenvironment{yellowbox}{\begin{tcolorbox}[breakable,colback=yellow!5!white,colframe=yellow!75!black]}{\end{tcolorbox}}
+\newenvironment{redbox}{\begin{tcolorbox}[breakable,colback=red!5!white,colframe=red!75!black]}{\end{tcolorbox}}
+
+\newenvironment{definitionbox}[2]{\begin{bluebox}\begin{definition}[{\textbf{#1}}]{#2}}{\end{definition}\end{bluebox}}
+\newenvironment{nameddefinition}[2]{\begin{definition}[{\textbf{#1}}]{#2}}{\end{definition}}
+\newenvironment{examplebox}[2]{\begin{greenbox}\begin{example}[\textbf{#1}]{#2}}{\end{example}\end{greenbox}}
+\newenvironment{exercisebox}[2]{\begin{yellowbox}\begin{exercise}[{\textbf{#1}}]{#2}}{\end{exercise}\end{yellowbox}}
+\newenvironment{resultbox}{\begin{redbox}}{\end{redbox}}
+\newenvironment{backgroundbox}{\begin{greybox}}{\end{greybox}}
 
 
 % some hacks to support pandoc

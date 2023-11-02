@@ -1,6 +1,7 @@
 #!/usr/bin/env pwsh
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
+    [parameter(Mandatory = $false)][string[]] $additionalinputfiles,
     [parameter(Mandatory=$true)][string] $outputfile,
     [parameter(Mandatory=$false)][string] $bibfile = "",
     [parameter(Mandatory = $false)][string] $macrosfile = ""
@@ -12,6 +13,12 @@ if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbo
 }
 
 $inputfile = Resolve-Path -Path $inputfile
+
+if ($null -ne $additionalinputfiles) {
+  $additionalinputfiles = $additionalinputfiles | ForEach-Object {Resolve-Path -Path $_ }
+} else {
+  $additionalinputfiles = @()
+}
 
 $outputpath = Split-Path -Path $outputfile -Parent
 $outputpath = Resolve-Path $outputpath
@@ -29,7 +36,9 @@ else {
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
-$allargs = @($inputfile, `
+$inputfiles = @($inputfile) + $additionalinputfiles
+
+$allargs = $inputfiles + @(`
   "--output", $outputfile, `
   "--from", "markdown+citations+simple_tables", `
   "--mathjax", `
