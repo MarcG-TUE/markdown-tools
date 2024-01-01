@@ -429,6 +429,7 @@ $if(pagestyle)$
 $endif$
 $if(csl-refs)$
 % definitions for citeproc citations
+\usepackage{xparse}
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
   \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
