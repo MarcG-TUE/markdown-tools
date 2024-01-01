@@ -1,3 +1,5 @@
+local targetImageType = nil
+
 -- replace pdf by png
 function Image (el)
     -- print("Image", el.caption)
@@ -8,6 +10,24 @@ function Image (el)
     -- print("Image", el.classes)
     -- print("Image", el.attributes)
     -- return el
-    el.src = string.gsub(el.src, "%.pdf", ".png")
+
+    -- get image type from  metadata
+
+    if targetImageType == nil then
+        targetImageType = "png"
+    end
+    el.src = string.gsub(el.src, "%.pdf", "."..targetImageType)
     return el
 end
+
+function Meta(m)
+    if (m.targetimagetype ~= nil) then
+        targetImageType = m.targetimagetype
+    end
+    return m
+end
+
+return {
+    {Meta = Meta},
+    {Image = Image}
+    }
