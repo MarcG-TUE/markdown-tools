@@ -16,10 +16,16 @@ local function Image (el)
         pandoc.List({pandoc.RawInline('latex', "\\custominlinefig{"..el.src.."}{")})
         .. pandoc.List({pandoc.RawInline('latex', attrs.."}")})
     else
-        return
-        pandoc.List({pandoc.RawInline('latex', "\\customfig{"..el.src.."}{")})
-        .. pandoc.List(el.caption)
-        .. pandoc.List({pandoc.RawInline('latex', "}{\\label{"..el.identifier.."}}{"..attrs.."}")})
+        if el.attr.classes:includes('glyph') then
+            return
+            pandoc.List({pandoc.RawInline('latex', "\\customglyphfig{"..el.src.."}{")})
+            .. pandoc.List({pandoc.RawInline('latex', attrs.."}")})
+        else
+            return
+                pandoc.List({pandoc.RawInline('latex', "\\customfig{"..el.src.."}{")})
+                .. pandoc.List(el.caption)
+                .. pandoc.List({pandoc.RawInline('latex', "}{\\label{"..el.identifier.."}}{"..attrs.."}")})
+        end
     end
 end
 
