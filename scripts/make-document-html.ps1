@@ -4,7 +4,10 @@ param(
     [parameter(Mandatory = $false)][string[]] $additionalinputfiles,
     [parameter(Mandatory=$true)][string] $outputfile,
     [parameter(Mandatory=$false)][string] $bibfile = "",
-    [parameter(Mandatory = $false)][string] $macrosfile = ""
+    [parameter(Mandatory = $false)][string] $macrosfile = "",
+    [parameter(Mandatory = $false)][string] $templatefile = "",
+    [parameter(Mandatory = $false)][string] $csslink = "",
+    [parameter(Mandatory = $false)][string] $imagetype = "png"
     )
 
 $Verbose = $false
@@ -33,6 +36,10 @@ else {
   $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 }
 
+if ($templatefile -ne "") {
+  $templatepath = Resolve-Path -Path $templatefile
+  $templatepath = $templatepath -replace '[\\]', "/"
+}
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
@@ -43,7 +50,8 @@ $allargs = $inputfiles + @(`
   "--from", "markdown+citations+simple_tables", `
   "--mathjax", `
   "--to", "html", `
-  "--lua-filter", "$filters/common/extractmetadata.lua",
+  "--metadata", "targetimagetype=$imagetype", `
+  "--lua-filter", "$filters/common/extractmetadata.lua", `
   "--lua-filter", "$filters/html/macros.lua", `
   "--filter", "pandoc-xnos", `
   "--lua-filter", "$filters/html/environments.lua", `
@@ -52,6 +60,18 @@ $allargs = $inputfiles + @(`
   "--metadata-file", $macrosfile, `
   "--citeproc",
   "--standalone")
+
+  if ($templatefile -ne "") {
+    $allargs = $allargs + @(`
+  "--template", $templatepath)
+  }
+
+  if ($csslink -ne "") {
+    $allargs = $allargs + @(`
+  "--css", $csslink)
+  }
+
+Write-Output $allargs
 
 if ($bibfile -ne "") {
   $bibpath = Resolve-Path -Path $bibfile

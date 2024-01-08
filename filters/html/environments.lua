@@ -31,7 +31,7 @@ function Div (elem)
             elem.content:insert(1, pandoc.Strong(pandoc.Str(refmap.captionEnvironments[e].." "..number..nameStr)))
             elem.identifier = label
             return elem
-        end            
+        end
     end
 end
 
@@ -39,7 +39,7 @@ function Figure(el)
     local label = el.identifier
     if (label ~= nil) then
         local number = tostring(nextNumber(refmap.shortEnvironments['figure']))
-        refmap.setReference(label, number)            
+        refmap.setReference(label, number)
     end
     return el
 end
