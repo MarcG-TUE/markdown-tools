@@ -2,6 +2,7 @@
 param(
   [parameter(Mandatory = $true)][string] $inputfile,
   [parameter(Mandatory = $false)][string[]] $additionalinputfiles,
+  [parameter(Mandatory = $false)][string[]] $preprocessingfilters,
   [parameter(Mandatory = $true)][string] $outputfile,
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
@@ -25,10 +26,30 @@ if ($PSBoundParameters.ContainsKey('Verbose')) {
 $inputfile = Resolve-Path -Path $inputfile
 
 
+# check the additional input files, if any
 if ($null -ne $additionalinputfiles) {
-  $additionalinputfiles = $additionalinputfiles | ForEach-Object {Resolve-Path -Path $_ }
-} else {
+  foreach ($f in $additionalinputfiles) {
+      if (! (Test-Path $f -PathType Leaf)) {
+          Write-Error("Input file $f not found.")
+      }
+  }
+  $additionalinputfiles = $additionalinputfiles | ForEach-Object { Resolve-Path -Path $_ }
+}
+else {
   $additionalinputfiles = @()
+}
+
+# check the preprocessing filters, if any
+if ($null -ne $preprocessingfilters) {
+  foreach ($f in $preprocessingfilters) {
+      if (! (Test-Path $f -PathType Leaf)) {
+          Write-Error("Preprocessing filter $f not found.")
+      }
+  }
+  $preprocessingfilters = $preprocessingfilters | ForEach-Object { Resolve-Path -Path $_ }
+}
+else {
+  $preprocessingfilters = @()
 }
 
 $outputpath = Split-Path -Path $outputfile -Parent
@@ -65,7 +86,15 @@ $allargs = $inputfiles + @(`
     "--template", "$templates/eisvogel"
     "--include-in-header", $headerfile, `
     "--number-sections", `
-    "--metadata-file", $macrospath, `
+    "--metadata-file", $macrospath)
+
+    foreach ($filter in $preprocessingfilters) {
+      <# $filter is the current item #>
+      $allargs = $allargs + @(`
+      "--lua-filter", "$filter")
+  }
+
+  $allargs = $allargs + @(`
     "--lua-filter", "$filters/common/macros.lua", `
     "--filter", "pandoc-xnos", `
     "--lua-filter", "$filters/latex/spans.lua", `
