@@ -77,7 +77,6 @@ $allargs = $inputfiles + @(`
         "--metadata", "targetimagetype=$imagetype")
 
 foreach ($filter in $preprocessingfilters) {
-    <# $filter is the current item #>
     $allargs = $allargs + @(`
     "--lua-filter", "$filter")
 }
@@ -89,11 +88,9 @@ $allargs = $allargs + @(`
         "--lua-filter", "$filters/html/environments.lua", `
         "--lua-filter", "$filters/html/references.lua", `
         "--lua-filter", "$filters/html/images.lua", `
-        "--metadata-file", $macrosfile, `
+        "--metadata-file", "$macrospath", `
         "--citeproc",
     "--standalone")
-
-Write-Output $allargs
 
 if ($templatefile -ne "") {
     $allargs = $allargs + @(`
