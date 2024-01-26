@@ -86,6 +86,9 @@ $allargs = $inputfiles + @(`
     "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
     "-V", "geometry:margin=1in", `
+    "--metadata", "fignos-warning-level=0", `
+    "--metadata", "tablenos-warning-level=0", `
+    "--metadata", "eqnos-warning-level=0", `
     "--template", "$templates/eisvogel"
     "--include-in-header", $headerfile, `
     "--number-sections", `

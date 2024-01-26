@@ -74,6 +74,9 @@ $allargs = $inputfiles + @(`
         "--from", "markdown+citations+simple_tables", `
         "--mathjax", `
         "--to", "html", `
+        "--metadata", "fignos-warning-level=0", `
+        "--metadata", "tablenos-warning-level=0", `
+        "--metadata", "eqnos-warning-level=0", `
         "--metadata", "targetimagetype=$imagetype")
 
 foreach ($filter in $preprocessingfilters) {

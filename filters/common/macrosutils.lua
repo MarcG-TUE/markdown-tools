@@ -68,6 +68,13 @@ function macroutils.get_substitutions (meta)
       end
     end
   end
+  meta["macros"] = nil
+  meta["doc-macros"] = nil
+  meta["macros-latex"] = nil
+  meta["doc-macros-latex"] = nil
+  meta["macros-html"] = nil
+  meta["doc-macros-html"] = nil
+  return meta
 end
 
 local function findMatchingClosingBrace(s, k)

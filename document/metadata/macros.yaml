@@ -1,0 +1,8 @@
+macros:
+  Nats: "\\mathbb{N}"
+
+macros-latex:
+  SmileySad: ":-("
+
+macros-html:
+  SmileySad: "&#128543;"
