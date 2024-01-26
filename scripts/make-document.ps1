@@ -9,6 +9,9 @@ param(
   [parameter(Mandatory = $false)][string] $headerfile = ""
 )
 
+# stop on first error
+$ErrorActionPreference = "Stop"
+
 # check output type
 $outputExtension = Split-Path -Path $outputfile -Extension
 if ($outputExtension -eq '.tex') {

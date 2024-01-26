@@ -32,6 +32,16 @@ function macroutils.add_substitutions(s)
   end
 end
 
+function macroutils.print_substitutions()
+  print("Substitutions")
+  for km, vm in pairs(macroutils.substitutions) do
+    print(("Key: %s"):format(km))
+    -- print(("Value: %s"):format(pandoc.utils.stringify(vm)))
+    print(("Value: %s"):format(vm.subst))
+  end
+  print("End")
+end
+
 function macroutils.get_substitutions (meta)
   for k, v in pairs(meta) do
     if k=="macros" then
