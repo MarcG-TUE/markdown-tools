@@ -3,7 +3,7 @@ local refmap =  {
     types = {"def", "exa", "exc", "thm", "lem", "eq", "alg", "fig", "prb", "qst"},
     environments = {'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem', 'figure', 'problem', 'question'},
     shortEnvironments = {
-        algorithm = 'alg', 
+        algorithm = 'alg',
         definition = 'def',
         exercise = 'exc',
         example = 'exa',
@@ -11,10 +11,11 @@ local refmap =  {
         theorem = 'thm',
         figure = 'fig',
         problem = 'prb',
-        question = 'qst'
+        question = 'qst',
+        equation = 'eq'
     },
     captionEnvironments = {
-        algorithm = 'Algorithm', 
+        algorithm = 'Algorithm',
         definition = 'Definition',
         exercise = 'Exercise',
         example = 'Example',
@@ -22,16 +23,16 @@ local refmap =  {
         theorem = 'Theorem',
         figure = 'Figure',
         problem = 'Problem',
-        question = 'Question'
+        question = 'Question',
+        equation = 'Equation'
     }
-    
 }
 
 
 -- global list of references
 
 function refmap.isTag(t)
-    for i, tp in ipairs(refmap.types) do
+    for _, tp in ipairs(refmap.types) do
         if t:find("^"..tp..":") ~= nil then
             return true
         end
@@ -44,6 +45,7 @@ function refmap.clearReferences()
 end
 
 function refmap.setReference(k, v)
+    -- print(k.." => " .. v)
     if k ~= nil then
         refmap.references[k] = v
     end
