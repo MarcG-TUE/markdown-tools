@@ -49,3 +49,39 @@ function Meta(m)
     m.references = metaMap
     return m
   end
+
+function Para(p)
+    local prev = nil
+    local newContent = {}
+    for _,v in ipairs(p.content) do
+        local isTag = false
+        if v.tag=="Str" then
+            local i, _, label = v.text:find("{#(.*)}")
+            if (i ~= nil) then
+                isTag = true
+                local number = tostring(nextNumber(refmap.shortEnvironments['equation']))
+                refmap.setReference(label, number)
+                if prev ~= nil then
+                    if prev.tag == "Math" then
+                        prev.text = prev.text .. "\\tag{".. tostring(number) .."}"
+                    end
+                end
+            end
+        end
+        if not isTag then
+            table.insert(newContent, v)
+        end
+        prev = v
+    end
+    p.content = newContent
+    return p
+end
+
+function Header(h)
+    local id = h.attr.identifier
+    local i, _, label = id:find("(sec:.*)")
+    if (i ~= nil) then
+        local number = tostring(nextNumber(refmap.shortEnvironments['section']))
+        refmap.setReference(label, number)
+    end
+end
