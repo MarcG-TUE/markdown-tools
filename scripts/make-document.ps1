@@ -89,6 +89,7 @@ $allargs = $inputfiles + @(`
     "--metadata", "fignos-warning-level=0", `
     "--metadata", "tablenos-warning-level=0", `
     "--metadata", "eqnos-warning-level=0", `
+    "--metadata", "link-citations=true", `
     "--template", "$templates/eisvogel"
     "--include-in-header", $headerfile, `
     "--number-sections", `
