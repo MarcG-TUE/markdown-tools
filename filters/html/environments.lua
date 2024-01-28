@@ -76,3 +76,12 @@ function Para(p)
     p.content = newContent
     return p
 end
+
+function Header(h)
+    local id = h.attr.identifier
+    local i, _, label = id:find("(sec:.*)")
+    if (i ~= nil) then
+        local number = tostring(nextNumber(refmap.shortEnvironments['section']))
+        refmap.setReference(label, number)
+    end
+end
