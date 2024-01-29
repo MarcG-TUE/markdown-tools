@@ -102,9 +102,13 @@ end
 -- create text label for section
 local function sectionTextLabel(level)
     local k = level
-    local result = " "
+    local result = nil
     while k>=1 do
-        result = tostring(refmap.counters['section'][k]).."."..result
+        if result == nil then
+            result = tostring(refmap.counters['section'][k])
+        else
+            result = tostring(refmap.counters['section'][k]).."."..result
+        end
         k = k-1
     end
     return result
@@ -113,7 +117,7 @@ end
 -- create text label for environments other than section
 local function textLabel(env)
     local k = refmap.sectionLevelInclude
-    local result = tostring(refmap.counters['section'][k])
+    local result = tostring(refmap.counters[env])
     while k>=1 do
         result = tostring(refmap.counters['section'][k]).."."..result
         k = k-1
@@ -136,6 +140,13 @@ local function increment_counter(level)
     while k<=6 do
       refmap.counters['section'][k] = 0
       k = k+1
+    end
+    if level <= refmap.sectionLevelInclude then
+        for env, cnt in pairs(refmap.counters) do
+            if env ~= 'section' then
+                refmap.counters[env] = 0
+            end
+        end
     end
     -- print(pandoc.utils.stringify(refmap.counters['section']))
   end

@@ -24,7 +24,10 @@ end
 
 function Figure(el)
     local label = el.identifier
-    refmap.addLabelFor('figure', label)
+    local textLabel = refmap.addLabelFor('figure', label)
+    if el.caption ~= nil then
+        el.caption.long:insert(1, pandoc.Str("Figure "..textLabel .. ": "))
+    end
     return el
 end
 
