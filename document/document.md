@@ -42,6 +42,10 @@ An inline figure must not have a caption.
 
 ![](figures/example.png){.inline scale=0.25}
 
+Challenging fonts René Descartes, ©2024
+
+$$\mathbf{T}{\mbfLambda}\mathbf{T}^{-1}$$
+$$\mathbf{U}{\mbfSigma}\mathbf{T}^{V}$$
 
 A table:
 

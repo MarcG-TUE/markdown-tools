@@ -85,6 +85,7 @@ $allargs = $inputfiles + @(`
     "--output", $outputfile, `
     "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
+    "--pdf-engine", "xelatex", `
     "-V", "geometry:margin=1in", `
     "--metadata", "fignos-warning-level=0", `
     "--metadata", "tablenos-warning-level=0", `
