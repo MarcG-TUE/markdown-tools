@@ -6,8 +6,13 @@ param(
   [parameter(Mandatory = $true)][string] $outputfile,
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
-  [parameter(Mandatory = $false)][string] $headerfile = ""
+  [parameter(Mandatory = $false)][string] $headerfile = "",
+  [parameter(Mandatory = $false)][string[]] $pandocVariables
 )
+
+$pandocVars = @{}
+$pandocVars["geometry:margin"] = "0.8in"
+$pandocVars["fontsize"] = "10pt"
 
 # stop on first error
 $ErrorActionPreference = "Stop"
@@ -81,12 +86,21 @@ else {
 
 $inputfiles = @($inputfile) + $additionalinputfiles
 
+foreach ($v in $pandocVariables) {
+  $kv = $v -split "="
+  $pandocVars[$kv[0]] = $kv[1]
+}
+
+$varargs = @()
+foreach ($v in $pandocVars.Keys) {
+  $varargs = $varargs + $("-V", "$v=$($pandocVars[$v])")
+}
+
 $allargs = $inputfiles + @(`
     "--output", $outputfile, `
     "--from", "markdown+citations+simple_tables", `
     "--to", $targetType, `
     "--pdf-engine", "xelatex", `
-    "-V", "geometry:margin=1in", `
     "--metadata", "fignos-warning-level=0", `
     "--metadata", "tablenos-warning-level=0", `
     "--metadata", "eqnos-warning-level=0", `
@@ -94,7 +108,8 @@ $allargs = $inputfiles + @(`
     "--template", "$templates/eisvogel"
     "--include-in-header", $headerfile, `
     "--number-sections", `
-    "--metadata-file", $macrospath)
+    "--metadata-file", $macrospath) `
+    + $varargs
 
     foreach ($filter in $preprocessingfilters) {
       <# $filter is the current item #>

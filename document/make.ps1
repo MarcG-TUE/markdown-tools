@@ -3,7 +3,8 @@
     -additionalinputfiles ./document2.md `
     -outputfile ./document.pdf `
     -macrosfile ./metadata/macros.yaml `
-    -bibfile ./references.bib
+    -bibfile ./references.bib `
+    -pandocVariables @("fontsize=12pt","geometry:margin=1.3in")
 
 
 ../scripts/make-document-html `
