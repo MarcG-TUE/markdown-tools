@@ -4,7 +4,8 @@
     -outputfile ./document.pdf `
     -macrosfile ./metadata/macros.yaml `
     -bibfile ./references.bib `
-    -pandocVariables @("fontsize=12pt","geometry:margin=1.3in")
+    -pandocVariables @("fontsize=12pt","geometry:margin=1.3in") `
+    -includeToC
 
 
 ../scripts/make-document-html `

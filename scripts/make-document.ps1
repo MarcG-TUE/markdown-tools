@@ -7,7 +7,8 @@ param(
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
   [parameter(Mandatory = $false)][string] $headerfile = "",
-  [parameter(Mandatory = $false)][string[]] $pandocVariables
+  [parameter(Mandatory = $false)][string[]] $pandocVariables,
+  [parameter(Mandatory = $false)][switch] $includeToC
 )
 
 $pandocVars = @{}
@@ -96,6 +97,11 @@ foreach ($v in $pandocVars.Keys) {
   $varargs = $varargs + $("-V", "$v=$($pandocVars[$v])")
 }
 
+$tocArg = @()
+if ($includeToC) {
+  $tocArg = $("--toc")
+}
+
 $allargs = $inputfiles + @(`
     "--output", $outputfile, `
     "--from", "markdown+citations+simple_tables", `
@@ -109,6 +115,7 @@ $allargs = $inputfiles + @(`
     "--include-in-header", $headerfile, `
     "--number-sections", `
     "--metadata-file", $macrospath) `
+    + $tocArg `
     + $varargs
 
     foreach ($filter in $preprocessingfilters) {
