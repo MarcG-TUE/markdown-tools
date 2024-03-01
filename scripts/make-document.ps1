@@ -7,6 +7,7 @@ param(
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
   [parameter(Mandatory = $false)][string] $headerfile = "",
+  [parameter(Mandatory = $false)][string] $template = "",
   [parameter(Mandatory = $false)][string[]] $pandocVariables,
   [parameter(Mandatory = $false)][switch] $includeToC
 )
@@ -75,7 +76,14 @@ else {
 }
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
-$templates = Resolve-Path -Path "$PSScriptRoot/../templates"
+
+$templatesDir = Resolve-Path -Path "$PSScriptRoot/../templates"
+
+if ($template -ne "") {
+  $template = Resolve-Path -Path $template
+} else {
+  $template = "$templatesDir/eisvogel"
+}
 
 if ($macrosfile -ne "") {
   $macrospath = Resolve-Path -Path $macrosfile
@@ -111,7 +119,7 @@ $allargs = $inputfiles + @(`
     "--metadata", "tablenos-warning-level=0", `
     "--metadata", "eqnos-warning-level=0", `
     "--metadata", "link-citations=true", `
-    "--template", "$templates/eisvogel"
+    "--template", $template, `
     "--include-in-header", $headerfile, `
     "--number-sections", `
     "--metadata-file", $macrospath) `
