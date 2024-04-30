@@ -23,11 +23,9 @@ macros:
 
 This is a preamble text to introduce the document
 
-
 <!-- Questions start below -->
 
 ::: {.problems}
-
 
 ::: {.problem descriptor="Probl." name="Dataflow Graphs and Max-Plus Algebra" points="27" }
 

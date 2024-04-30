@@ -1,7 +1,9 @@
 #!/usr/bin/env pwsh
 param(
     [parameter(Mandatory = $true)][string] $inputfile,
-    [parameter(Mandatory = $true)][string] $outputfile
+    [parameter(Mandatory = $true)][string] $outputfile,
+    [parameter(Mandatory = $false)][string] $headerfile = "",
+    [parameter(Mandatory = $false)][string] $template = ""
 )
 
 $Verbose = $false
@@ -20,15 +22,35 @@ $outputfile = "$outputpath/$outputleaf"
 
 $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
-$templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
+if ($headerfile -ne "") {
+    $headerfile = Resolve-Path -Path $headerfile
+    $headerfile = $headerfile -replace '[\\]', "/"
+  }
+  else {
+    $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/questions/questions.textmpl"
+  }
+
+  $templatesDir = Resolve-Path -Path "$PSScriptRoot/../templates"
+
+  if ($template -ne "") {
+    if (Test-Path -Path $template) {
+      $template = Resolve-Path -Path $template
+    } else {
+      $template = "$templatesDir/questions/$template"
+    }
+  } else {
+    # TODO: make an Eisvogel questions template
+    # $template = "$templatesDir/questions/eisvogel"
+    $template = "$templatesDir/questions/questions.textmpl"
+  }
 
 $allargs = @($inputfile,
     "--output", $outputfile,
     "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
     "--to", "latex",
     "--lua-filter", "$filters/common/macros.lua",
-    "--template", "$templates/questions/questions.textmpl",
+    "--template", $template, `
     "--metadata-file", $macrosfile,
     # "--filter", "pandoc-xnos",
     "--lua-filter", "$filters/latex/references.lua"

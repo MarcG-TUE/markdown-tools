@@ -75,8 +75,6 @@ else {
   $headerfile = Resolve-Path -Path "$PSScriptRoot/../templates/document/header.tex"
 }
 
-$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
-
 $templatesDir = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 if ($template -ne "") {
@@ -92,6 +90,8 @@ if ($macrosfile -ne "") {
 else {
   $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 }
+
+$filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $inputfiles = @($inputfile) + $additionalinputfiles
 
