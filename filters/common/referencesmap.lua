@@ -78,6 +78,8 @@ function refmap.setReference(k, v)
     -- print(k.." => " .. v)
     if k ~= nil then
         refmap.references[k] = v
+    else
+        print("Error: key is nil in refmap.setReference")
     end
 end
 

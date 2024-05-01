@@ -22,6 +22,11 @@ function Div(elem)
         if (points ~= nil) then
             pointsStr = " (" .. points .. " pts)"
         end
+        local label = elem.attributes["label"]
+        local number = tostring(nextNumber(refmap.shortEnvironments['problem']))
+        if label ~= nil then
+            refmap.setReference(label, number)
+        end
 
         if HtmlEnvCounter == nil then
             HtmlEnvCounter = 1
@@ -78,7 +83,7 @@ function Div(elem)
             elem.content:insert(1, pandoc.Strong(pandoc.Str(refmap.captionEnvironments[e].." "..number..nameStr)))
             elem.identifier = label
             return elem
-        end            
+        end
     end
 
 end
@@ -87,7 +92,7 @@ function Figure(el)
     local label = el.identifier
     if (label ~= nil) then
         local number = tostring(nextNumber(refmap.shortEnvironments['figure']))
-        refmap.setReference(label, number)            
+        refmap.setReference(label, number)
     end
     return el
 end
@@ -104,6 +109,7 @@ end
 
 
 function Meta(m)
+
     if m.printanswers == nil then
         PrintAnswers = false
     else
@@ -124,9 +130,19 @@ function Meta(m)
     return m
 end
 
+function Meta2(m)
+
+    local metaMap = pandoc.MetaMap(refmap.allReferences())
+    m.references = metaMap
+
+    return m
+end
+
+
 return {
     {Meta = Meta},
     {Span = Span},
     {Figure = Figure},
-    {Div = Div}
+    {Div = Div},
+    {Meta = Meta2}
 }

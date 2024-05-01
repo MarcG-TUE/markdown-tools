@@ -27,7 +27,7 @@ This is a preamble text to introduce the document
 
 ::: {.problems}
 
-::: {.problem descriptor="Probl." name="Dataflow Graphs and Max-Plus Algebra" points="27" }
+::: {.problem descriptor="Probl." name="Dataflow Graphs and Max-Plus Algebra" points="27" label="prb:dfgmpa" }
 
 ::: {.question}
 
@@ -189,6 +189,16 @@ g. (6 pts)
    [for a correct eigenvector.]{.criterion points="1"}
    [for a normal eigenvector.]{.criterion points="1"}
    :::::
+
+:::
+
+:::
+
+::: {.problem name="Q2" points="3" label="prb:q2" }
+
+::: {.question}
+
+See Problem @prb:dfgmpa.
 
 :::
 

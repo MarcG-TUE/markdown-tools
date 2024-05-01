@@ -12,6 +12,11 @@ function Div (elem)
 
     if elem.classes:includes('problem') then
         local name  = elem.attributes["name"]
+        local label  = elem.attributes["label"]
+        local labelStr = ''
+        if (label ~= nil) then
+            labelStr = '\\label{'..label..'}'
+        end
         local points = elem.attributes["points"]
         local pointsStr = ''
         if (points ~= nil) then
@@ -21,7 +26,7 @@ function Div (elem)
         if (name ~= nil) then
             nameStr = name
             return {
-                pandoc.RawInline('latex', '\\titledquestion{' .. nameStr .. '}' .. pointsStr),
+                pandoc.RawInline('latex', '\\titledquestion{' .. nameStr .. '}' .. labelStr .. pointsStr),
                 elem
             }
         else

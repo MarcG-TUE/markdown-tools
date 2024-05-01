@@ -3,7 +3,12 @@ local refmap = dofile(folderOfThisFile .. "../common/referencesmap.lua")
 
 function Meta(m)
     local references = m.references
-    refmap.setReferences(references)
+    if (references ~= nil) then
+        refmap.setReferences(references)
+    end
+    -- for k,v in pairs(refmap.references) do
+    --     print(k .. " -> " .. v)
+    -- end
 end
 
 function Cite(c)
