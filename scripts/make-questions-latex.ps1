@@ -3,7 +3,8 @@ param(
     [parameter(Mandatory = $true)][string] $inputfile,
     [parameter(Mandatory = $true)][string] $outputfile,
     [parameter(Mandatory = $false)][string] $headerfile = "",
-    [parameter(Mandatory = $false)][string] $template = ""
+    [parameter(Mandatory = $false)][string] $template = "",
+    [parameter(Mandatory = $false)][string] $macrosfile = ""
 )
 
 $Verbose = $false
@@ -20,7 +21,6 @@ $outputpath = [string] (Resolve-Path $outputpath)
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath/$outputleaf"
 
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 if ($headerfile -ne "") {
@@ -45,13 +45,21 @@ if ($headerfile -ne "") {
     $template = "$templatesDir/questions/questions.textmpl"
   }
 
+  if ($macrosfile -ne "") {
+    $macrospath = Resolve-Path -Path $macrosfile
+    $macrospath = $macrospath -replace '[\\]', "/"
+  }
+  else {
+    $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+  }
+
 $allargs = @($inputfile,
     "--output", $outputfile,
     "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
     "--to", "latex",
     "--lua-filter", "$filters/common/macros.lua",
     "--template", $template, `
-    "--metadata-file", $macrosfile,
+    "--metadata-file", $macrospath,
     # "--filter", "pandoc-xnos",
     "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/questions/latex-environments.lua"

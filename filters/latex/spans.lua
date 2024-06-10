@@ -18,6 +18,13 @@ local function Span(elem)
             pandoc.RawInline('latex', '}}')
         }
     end
+    if elem.classes:includes('hl-red') then
+        return {
+            pandoc.RawInline('latex', '{\\color{red}{'),
+            elem,
+            pandoc.RawInline('latex', '}}')
+        }
+    end
     if elem.classes:includes('hl-purple') then
         return {
             pandoc.RawInline('latex', '{\\color{purple}{'),

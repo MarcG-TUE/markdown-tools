@@ -25,13 +25,21 @@ function Div (elem)
         local nameStr = ''
         if (name ~= nil) then
             nameStr = name
+            local titleStr = nameStr
+            if (pointsStr ~= "") then
+                if (nameStr ~= "") then
+                    titleStr = nameStr .. " " .. pointsStr
+                else
+                    titleStr = pointsStr
+                end
+            end
             return {
-                pandoc.RawInline('latex', '\\titledquestion{' .. nameStr .. '}' .. labelStr .. pointsStr),
+                pandoc.RawInline('latex', '\\titledquestion{' .. titleStr .. '}' .. labelStr),
                 elem
             }
         else
             return {
-                pandoc.RawInline('latex', '\\question{}' .. pointsStr),
+                pandoc.RawInline('latex', '\\question{'..pointsStr..'}'),
                 elem
             }
         end
