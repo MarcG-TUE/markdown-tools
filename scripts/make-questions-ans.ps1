@@ -31,7 +31,7 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $allargs = @($inputfile,
   "--output", $outputfile,
   "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
-  "--to", "markdown",
+  "--to", "latex",
   "--metadata-file", $macrospath,
   "--lua-filter", "$filters/common/macros.lua",
   "--lua-filter", "$filters/latex/spans.lua",

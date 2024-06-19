@@ -11,6 +11,13 @@ local function Span(elem)
             pandoc.RawInline('latex', '}')
         }
     end
+    if elem.classes:includes('hint') then
+        return {
+            pandoc.RawInline('latex', '\\hint{'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
     if elem.classes:includes('hl-blue') then
         return {
             pandoc.RawInline('latex', '{\\color{blue}{'),
