@@ -1,7 +1,8 @@
 #!/usr/bin/env pwsh
 param(
     [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputfile
+    [parameter(Mandatory=$true)][string] $outputfile,
+    [parameter(Mandatory = $false)][string] $macrosfile = ""
 )
 
 $Verbose = $false
@@ -16,14 +17,22 @@ $outputpath = Resolve-Path $outputpath
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath/$outputleaf"
 
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+if ($macrosfile -ne "") {
+    $macrospath = Resolve-Path -Path $macrosfile
+    $macrospath = $macrospath -replace '[\\]', "/"
+  }
+  else {
+    $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+  }
+
+
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
 $allargs = @($inputfile,
   "--output", $outputfile,
   "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes",
   "--to", "markdown",
-  "--metadata-file", $macrosfile,
+  "--metadata-file", $macrospath,
   "--lua-filter", "$filters/common/macros.lua",
   "--lua-filter", "$filters/latex/spans.lua",
   "--lua-filter", "$filters/latex/environments.lua",
