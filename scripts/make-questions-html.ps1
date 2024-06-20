@@ -1,7 +1,8 @@
 #!/usr/bin/env pwsh
 param(
     [parameter(Mandatory = $true)][string] $inputfile,
-    [parameter(Mandatory = $true)][string] $outputfile
+    [parameter(Mandatory = $true)][string] $outputfile,
+    [parameter(Mandatory = $false)][string] $macrosfile = ""
 )
 
 $Verbose = $false
@@ -18,7 +19,15 @@ $outputpath = [string] (Resolve-Path $outputpath)
 $outputleaf = Split-Path -Path $outputfile -Leaf
 $outputfile = "$outputpath/$outputleaf"
 
-$macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+if ($macrosfile -ne "") {
+    $macrospath = Resolve-Path -Path $macrosfile
+    $macrospath = $macrospath -replace '[\\]', "/"
+  }
+  else {
+    $macrospath = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+  }
+
+
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $templates = Resolve-Path -Path "$PSScriptRoot/../templates"
 
@@ -29,7 +38,7 @@ $allargs = @($inputfile,
     "--mathjax",
     "--template", "$templates/questions/questions.html",
     "--standalone",
-    "--metadata-file", $macrosfile,
+    "--metadata-file", $macrospath,
     "--toc", "-V", "toc-title:Table of Contents", "--toc-depth=1",
     "--lua-filter", "$filters/html/macros.lua",
     # "--lua-filter", "$filters/html/environments.lua",

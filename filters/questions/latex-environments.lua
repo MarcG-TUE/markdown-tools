@@ -46,6 +46,12 @@ function Div (elem)
     end
 
     if elem.classes:includes('grading') then
+
+        -- ignore if printgrading is false
+        if not PrintGrading then
+            return pandoc.List({})
+        end
+
         return {
             pandoc.RawInline('latex', '\\textbf{Grading:}\n\n\\begin{itemize}'),
             elem,
@@ -56,9 +62,6 @@ function Div (elem)
     if elem.classes:includes('answer') then
 
         -- ignore if printanswers is false
-        -- replace all immediate children of type OrderedList by raw 'parts'
-        -- wrap other children in \uplevel{}
-
         if not PrintAnswers then
             return pandoc.List({})
         end
@@ -90,6 +93,17 @@ function Meta(m)
         end
     end
     print("Print Answers: " .. tostring(PrintAnswers))
+
+    if m.printgrading == nil then
+        PrintGrading = false
+    else
+        if tostring(m.printgrading[1].text)=="true" then
+            PrintGrading = true
+        else
+            PrintGrading = false
+        end
+    end
+    print("Print Grading: " .. tostring(PrintGrading))
 
     if m.descriptor == nil then
         Settings.descriptor = "Question"
