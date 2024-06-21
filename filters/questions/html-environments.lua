@@ -44,6 +44,10 @@ function Div(elem)
         return elem
     end
 
+    if elem.classes:includes('question') then
+        return elem.content
+    end
+
     if elem.classes:includes('grading') then
         -- ignore if printgrading is false
         if not PrintGrading then
