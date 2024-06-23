@@ -9,7 +9,9 @@ local function Image (el)
     -- print("Image", el.attributes)
     local attrs=""
     for k,v in pairs(el.attributes) do
-        attrs = attrs .. k .. "=" .. v
+        if  k:find('html', 1, true) ~= 1 then
+            attrs = attrs .. k .. "=" .. v .. ","
+        end
     end
     if el.attr.classes:includes('inline') then
         return
