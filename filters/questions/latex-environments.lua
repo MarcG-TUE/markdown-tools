@@ -34,7 +34,7 @@ function Div (elem)
                 end
             end
             return {
-                pandoc.RawInline('latex', '\\titledquestion{' .. titleStr .. '}' .. labelStr),
+                pandoc.RawInline('latex', '\\medskip\\titledquestion{' .. titleStr .. '}' .. labelStr..'\\hspace{0.01cm}\\vspace{-\\baselineskip}'),
                 elem
             }
         else
@@ -66,7 +66,12 @@ function Div (elem)
             return pandoc.List({})
         end
 
-        return elem
+        return {
+            pandoc.RawInline('latex', '\\medskip'),
+            pandoc.RawInline('latex', '\\textbf{Answers}'),
+            pandoc.RawInline('latex', '\\smallskip'),
+            elem
+        }
     end
 
 end
