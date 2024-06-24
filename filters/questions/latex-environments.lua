@@ -74,6 +74,23 @@ function Div (elem)
         }
     end
 
+    if elem.classes:includes('figure') then
+        local label  = elem.identifier
+        local caption  = elem.attributes["caption"]
+
+        return
+        pandoc.List({
+            pandoc.RawInline('latex', "\\begin{figure}[h]"),
+            pandoc.RawInline('latex', "\\begin{center}"),
+            elem,
+            pandoc.RawInline('latex', "\\caption{"..caption.."}"),
+            pandoc.RawInline('latex', "\\label{"..label.."}"),
+            pandoc.RawInline('latex', "\\end{center}"),
+            pandoc.RawInline('latex', "\\end{figure}")
+        })
+    end
+
+
 end
 
 function  Span (s)

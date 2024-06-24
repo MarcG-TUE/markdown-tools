@@ -15,6 +15,7 @@ local function nextNumber(c)
 end
 
 function Div(elem)
+
     if elem.classes:includes('problem') then
         local name      = elem.attributes["name"]
         local points    = elem.attributes["points"]
@@ -79,7 +80,10 @@ function Div(elem)
     for i, e in ipairs(refmap.environments) do
         if elem.classes:includes(e) then
             local name  = elem.attributes["name"]
-            local label = elem.attributes["label"]
+            local label = elem.identifier
+            if label == nil then
+                label = elem.attributes["label"]
+            end
             local number = tostring(nextNumber(refmap.shortEnvironments[e]))
             if label ~= nil then
                 refmap.setReference(label, number)
