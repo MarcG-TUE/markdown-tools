@@ -77,13 +77,18 @@ function Div (elem)
     if elem.classes:includes('figure') then
         local label  = elem.identifier
         local caption  = elem.attributes["caption"]
+        local captionStr = ""
+        if caption ~= nil then
+            captionStr = "\\caption{"..caption.."}"
+        end
+
 
         return
         pandoc.List({
             pandoc.RawInline('latex', "\\begin{figure}[h]"),
             pandoc.RawInline('latex', "\\begin{center}"),
             elem,
-            pandoc.RawInline('latex', "\\caption{"..caption.."}"),
+            pandoc.RawInline('latex', captionStr),
             pandoc.RawInline('latex', "\\label{"..label.."}"),
             pandoc.RawInline('latex', "\\end{center}"),
             pandoc.RawInline('latex', "\\end{figure}")
