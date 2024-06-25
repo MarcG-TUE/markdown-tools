@@ -48,7 +48,7 @@ macros:
   "mpmatrixthreethree#9": "\\begin{bmatrix}{#1}&{#2}&{#3}\\\\{#4}&{#5}&{#6}\\\\{#7}&{#8}&{#9}\\\\\\end{bmatrix}"
   mpmatrixABCD: "\\begin{bmatrix}{{mpmatrix{A}}}&{{mpmatrix{B}}}\\\\{{mpmatrix{C}}}&{{mpmatrix{D}}}\\\\\\end{bmatrix}"
   "mpnorm#1": "\\left|{#1}\\right|"
-  
+
 
 macros-latex:
   "actorname#1": "\\textsf{#1}"
@@ -78,4 +78,4 @@ macros-html:
   minfvector: "\\bf{\\epsilon}"
   mplsschedule: "{\\bf{\\sigma{}}}"
   zerovector: "{\\bf{0}}"
-  
+

@@ -170,6 +170,7 @@ $endif$
     // set the hide buttons
     $$(".hide-answer").each(function(){
       const bId = $$(this).attr('id');
+      // answers rendered as sections
       var section = null;
       $$("section").each(function(){
         const ref = $$(this).attr('data-ref');
@@ -182,10 +183,24 @@ $endif$
           section.hide()
         })
       }
+      // answers rendered as divs
+      var div = null;
+      $$("div").each(function(){
+        const ref = $$(this).attr('data-ref');
+        if (ref == bId) {
+          div = $$(this)
+        }
+      })
+      if (div != null) {
+        $$(this).click(function(){
+          div.hide()
+        })
+      }
     });
     // set the show buttons
     $$(".show-answer").each(function(){
       const bId = $$(this).attr('id');
+      // answers rendered as sections
       var section = null;
       $$("section").each(function(){
         const ref = $$(this).attr('data-ref');
@@ -198,14 +213,30 @@ $endif$
           section.show()
         })
       }
+      // answers rendered as divs
+      var div = null;
+      $$("div").each(function(){
+        const ref = $$(this).attr('data-ref');
+        if (ref == bId) {
+          div = $$(this)
+        }
+      })
+      if (div != null) {
+        $$(this).click(function(){
+          div.show()
+        })
+      }
     });
     // initially hide answers
-    $$("section").each(function(){
+    $$('[class="unnumbered answer"]').each(function(){
+      $$(this).hide()
+    });
+    $$('[class="answer"]').each(function(){
       $$(this).hide()
     });
   });
 </script>
-  
+
 
 </head>
 <body>

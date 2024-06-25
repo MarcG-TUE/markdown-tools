@@ -17,6 +17,12 @@ function Image (el)
         targetImageType = "png"
     end
     el.src = string.gsub(el.src, "%.pdf", "."..targetImageType)
+
+    local style = el.attributes['html-style']
+    if (style ~= nil) then
+        el.attributes['style'] = style
+    end
+
     return el
 end
 
