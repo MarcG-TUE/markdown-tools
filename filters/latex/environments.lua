@@ -1,3 +1,9 @@
+
+local folderOfThisFile = PANDOC_SCRIPT_FILE:match("(.-)[^/]+$")
+local refmap = dofile(folderOfThisFile .. "../common/referencesmap.lua")
+
+refmap.clearReferences()
+
 function Div(elem)
     if elem.classes:includes('definition') then
         -- print(elem.attributes)
@@ -123,6 +129,40 @@ function Div(elem)
 
 end
 
+-- search in paragraphs for a label following a formula, of the form {eq:id}. pandoc does not keep them together
+function Para(p)
+    local prev = nil
+    -- collect updated content to remove the label from the output
+    local newContent = {}
+    -- go through all content of the paragraph
+    for _,v in ipairs(p.content) do
+        local isTag = false
+        -- tags show up a Str elements
+        if v.tag=="Str" then
+            -- check if the text of the Str is a label {#<env>:<id>}
+            local i, _, label = v.text:find("{#(.*)}")
+            if (i ~= nil) then
+                isTag = true
+                local textLabel = refmap.addLabelFor('equation', label)
+                if prev ~= nil then
+                    if prev.tag == "Math" then
+                        -- add tag to the formula to make mathjax show it as an equation number
+                        prev.text = prev.text .. "\\tag{".. textLabel .."}"
+                    end
+                end
+            end
+        end
+        -- preserve all content except the label
+        if not isTag then
+            table.insert(newContent, v)
+        end
+        prev = v
+    end
+    p.content = newContent
+    return p
+end
+
+
 -- catch references to these environments
 
 function Cite(c)
@@ -134,4 +174,10 @@ function Cite(c)
         end
     end
     return c
+end
+
+function Meta(m)
+    local metaMap = pandoc.MetaMap(refmap.allReferences())
+    m.references = metaMap
+    return m
 end

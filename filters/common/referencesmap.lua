@@ -93,6 +93,12 @@ function refmap.getReference(k)
     end
 end
 
+function refmap.hasReference(k)
+    local res = refmap.references[k]
+    return res ~= nil
+end
+
+
 function refmap.allReferences()
     return refmap.references
 end
@@ -121,7 +127,9 @@ local function textLabel(env)
     local k = refmap.sectionLevelInclude
     local result = tostring(refmap.counters[env])
     while k>=1 do
-        result = tostring(refmap.counters['section'][k]).."."..result
+        if refmap.counters['section'][k] ~= 0 then
+            result = tostring(refmap.counters['section'][k]).."."..result
+        end
         k = k-1
     end
     return result

@@ -61,11 +61,11 @@ $allargs = @($inputfile,
     "--template", $template, `
     "--metadata-file", $macrospath,
     # "--filter", "pandoc-xnos",
-    "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/questions/latex-environments.lua"
     "--lua-filter", "$filters/latex/spans.lua"
     "--lua-filter", "$filters/latex/environments.lua"
     "--lua-filter", "$filters/latex/images.lua"
+    "--lua-filter", "$filters/latex/references.lua"
     "--lua-filter", "$filters/latex/addlatexinputpath.lua"
     "--lua-filter", "$filters/latex/syntaxhighlighting.lua"
     "--citeproc"
