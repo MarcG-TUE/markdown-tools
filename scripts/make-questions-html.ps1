@@ -43,6 +43,7 @@ $allargs = @($inputfile,
     "--lua-filter", "$filters/html/macros.lua",
     # "--lua-filter", "$filters/html/environments.lua",
     "--lua-filter", "$filters/questions/html-environments.lua",
+    "--lua-filter", "$filters/html/spans.lua",
     "--lua-filter", "$filters/html/references.lua",
     "--lua-filter", "$filters/html/images.lua",
     "--citeproc"
