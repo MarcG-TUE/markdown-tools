@@ -172,6 +172,7 @@
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
+      width: 200px;
     }
 
     .bits {
@@ -283,66 +284,65 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script>
-    $$(document).ready(function () {
-      // set the hide buttons
+    function showButtonWithId(id) {
+      var result = null;
+      $$(".show-answer").each(function () {
+        const bId = $$(this).attr('id');
+        if (id==bId) {
+          result = $$(this)
+        }
+      })
+      return result
+    }
+    function hideButtonWithId(id) {
+      var result = null;
       $$(".hide-answer").each(function () {
         const bId = $$(this).attr('id');
+        if (id==bId) {
+          result = $$(this)
+        }
+      })
+      return result
+    }
+    function answerWithIdDo(id, f) {
         // answers rendered as sections
-        var section = null;
         $$("section").each(function () {
           const ref = $$(this).attr('data-ref');
-          if (ref == bId) {
-            section = $$(this)
+          if (ref == id) {
+            f($$(this))
           }
         })
-        if (section != null) {
-          $$(this).click(function () {
-            section.hide()
-          })
-        }
         // answers rendered as divs
-        var div = null;
         $$("div").each(function () {
           const ref = $$(this).attr('data-ref');
-          if (ref == bId) {
-            div = $$(this)
+          if (ref == id) {
+            f($$(this))
           }
         })
-        if (div != null) {
+    }
+    $$(document).ready(function () {
+      // set the hide buttons and
+      $$(".hide-answer").each(function () {
+        const bId = $$(this).attr('id');
+        answerWithIdDo(bId, (el)=>{
           $$(this).click(function () {
-            div.hide()
-          })
-        }
+            el.hide()
+            showButtonWithId(bId).show()
+            $$(this).hide()
+           })
+        })
+        $$(this).hide()
       });
       // set the show buttons
       $$(".show-answer").each(function () {
         const bId = $$(this).attr('id');
-        // answers rendered as sections
-        var section = null;
-        $$("section").each(function () {
-          const ref = $$(this).attr('data-ref');
-          if (ref == bId) {
-            section = $$(this)
-          }
-        })
-        if (section != null) {
+        answerWithIdDo(bId, (el)=>{
           $$(this).click(function () {
-            section.show()
-          })
-        }
-        // answers rendered as divs
-        var div = null;
-        $$("div").each(function () {
-          const ref = $$(this).attr('data-ref');
-          if (ref == bId) {
-            div = $$(this)
-          }
+            el.show()
+            hideButtonWithId(bId).show()
+            $$(this).hide()
+           })
         })
-        if (div != null) {
-          $$(this).click(function () {
-            div.show()
-          })
-        }
       });
       // initially hide answers
       $$('[class="unnumbered answer"]').each(function () {
