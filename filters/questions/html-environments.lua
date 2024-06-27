@@ -41,12 +41,15 @@ function Div(elem)
             descriptor = altDescriptor
         end
 
-        elem.content:insert(1, pandoc.Strong(pandoc.Str(descriptor .. " " .. HtmlEnvCounter .. ": " .. name .. pointsStr)))
+        local headerEl= pandoc.Div(pandoc.Str(descriptor .. " " .. HtmlEnvCounter .. ": " .. name .. pointsStr))
+        headerEl.classes:insert("questionHeader")
+        elem.content:insert(1, headerEl)
         return elem
     end
 
     if elem.classes:includes('question') then
-        return elem.content
+        return elem
+        -- return elem.content
     end
 
     if elem.classes:includes('grading') then
@@ -71,8 +74,8 @@ function Div(elem)
             ref = "answer"..tostring(math.random(10000))
         end
         return {
-            pandoc.RawInline('html', '<button class="show-answer" id="' .. ref .. '">Show Answers</button>'),
-            pandoc.RawInline('html', '<button class="hide-answer" id="' .. ref .. '">Hide Answers</button>'),
+            pandoc.RawInline('html', '<div class="show-hide-buttons"><button class="show-hide-button show-answer" id="' .. ref .. '">Show Answers</button>'),
+            pandoc.RawInline('html', '<button class="show-hide-button hide-answer" id="' .. ref .. '">Hide Answers</button></div>'),
             elem
         }
     end
