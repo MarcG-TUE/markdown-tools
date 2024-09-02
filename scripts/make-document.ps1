@@ -1,9 +1,9 @@
 #!/usr/bin/env pwsh
 param(
   [parameter(Mandatory = $true)][string] $inputfile,
+  [parameter(Mandatory = $true)][string] $outputfile,
   [parameter(Mandatory = $false)][string[]] $additionalinputfiles,
   [parameter(Mandatory = $false)][string[]] $preprocessingfilters,
-  [parameter(Mandatory = $true)][string] $outputfile,
   [parameter(Mandatory = $false)][string] $bibfile = "",
   [parameter(Mandatory = $false)][string] $macrosfile = "",
   [parameter(Mandatory = $false)][string] $headerfile = "",
