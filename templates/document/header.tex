@@ -36,8 +36,30 @@
 
 \newenvironment{definitionbox}[2]{\begin{bluebox}\begin{definition}[{\textbf{#1}}]{#2}}{\end{definition}\end{bluebox}}
 \newenvironment{nameddefinition}[2]{\begin{definition}[{\textbf{#1}}]{#2}}{\end{definition}}
-\newenvironment{examplebox}[2]{\begin{greenbox}\begin{example}[\textbf{#1}]{#2}}{\end{example}\end{greenbox}}
-\newenvironment{exercisebox}[2]{\begin{yellowbox}\begin{exercise}[{\textbf{#1}}]{#2}}{\end{exercise}\end{yellowbox}}
+\newenvironment{examplebox}[2]{%
+  \ifx\relax#1\relax
+    % Code to include if the argument is empty
+    \begin{greenbox}\begin{example}{#2}
+  \else
+    % Code to include if the argument is not empty
+    \begin{greenbox}\begin{example}[\textbf{#1}]{#2}
+  \fi
+}{%
+  % Code for the end of the environment
+  \end{example}\end{greenbox}
+}
+\newenvironment{exercisebox}[2]{%
+  \ifx\relax#1\relax
+    % Code to include if the argument is empty
+    \begin{yellowbox}\begin{exercise}{#2}
+  \else
+    % Code to include if the argument is not empty
+    \begin{yellowbox}\begin{exercise}[\textbf{#1}]{#2}
+  \fi
+}{%
+  % Code for the end of the environment
+  \end{exercise}\end{yellowbox}
+}
 \newenvironment{resultbox}{\begin{redbox}}{\end{redbox}}
 \newenvironment{backgroundbox}{\begin{greybox}}{\end{greybox}}
 
