@@ -6,6 +6,7 @@ param(
     [parameter(Mandatory=$false)][string] $macros = "",
     [parameter(Mandatory=$false)][string] $filter = "",
     [parameter(Mandatory=$false)][string] $syntaxdefinition = "",
+    [parameter(Mandatory=$false)][string] $highlightstyle = "",
     [Parameter(Mandatory=$false)][string] $metadata = ""
 )
 
@@ -32,9 +33,15 @@ $inputfile = Resolve-Path -Path $inputfile
 $inputdir = Split-Path -Parent $inputfile
 $outputdir = Resolve-Path -Path $outputdir
 
+if (! ($highlightstyle -eq "")) {
+  $highlightfile = Resolve-Path -Path "$PSScriptRoot/../metadata/highlight/$highlightstyle.theme"
+  $optHighlightStyle = "--highlight-style=$highlightfile"
+}
 
 if (! ($syntaxdefinition -eq "")) {
-    $optSyntaxDef = "--syntax-definition=metadata/syntax/$syntaxdefinition"
+  $syntaxfile = Resolve-Path -Path "$PSScriptRoot/../metadata/syntax/$syntaxdefinition.xml"
+
+  $optSyntaxDef = "--syntax-definition=$syntaxfile"
 }
 
 $template = "$PSScriptRoot/../templates/presentation/presentation.html"
@@ -89,9 +96,16 @@ if ($optSyntaxDef) {
     $allargs += $optSyntaxDef
 }
 
+if ($optHighlightStyle) {
+  $allargs += $optHighlightStyle
+}
+
+
 if ($Verbose) {
   $allargs += "--verbose"
 }
+
+# Write-Output "pandoc $allargs"
 
 & pandoc $allargs
 
