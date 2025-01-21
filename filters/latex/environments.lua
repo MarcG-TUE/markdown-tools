@@ -5,7 +5,7 @@ local refmap = dofile(folderOfThisFile .. "../common/referencesmap.lua")
 refmap.clearReferences()
 
 function Div(elem)
-    if elem.classes:includes('definition') then
+    if elem.classes:includes('definitionbox') then
         -- print(elem.attributes)
         local name  = elem.attributes["name"]
         local nameStr = ""
@@ -75,6 +75,27 @@ function Div(elem)
             pandoc.RawInline('latex', '\\begin{resultbox}{' .. nameStr .. '}{'..labelStr..'}'),
             elem,
             pandoc.RawInline('latex', '\\end{resultbox}')
+        }
+    end
+    if elem.classes:includes('definition') then
+        local name  = elem.attributes["name"]
+        local label = elem.attributes["label"]
+        local nameStr
+        local labelStr
+        if name == nil then
+            nameStr = ""
+        else
+            nameStr = "[" .. name .. "]"
+        end
+        if label == nil then
+            labelStr = ""
+        else
+            labelStr = "\\label{" .. label .. "}"
+        end
+        return {
+            pandoc.RawInline('latex', '\\begin{definition}' .. nameStr .. '{' .. labelStr .. '}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{definition}')
         }
     end
     if elem.classes:includes('theorem') then
