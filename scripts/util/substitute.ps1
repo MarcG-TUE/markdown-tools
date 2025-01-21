@@ -3,6 +3,17 @@ param(
     [parameter(Mandatory=$true)][string] $substitutionsfile
   )
 
+
+if (-not (Test-Path $inputfile)) {
+    Write-Output "Input File $inputfile does not exist."
+    exit 1
+}
+
+if (-not (Test-Path $substitutionsfile)) {
+    Write-Output "Substitutions File $substitutionsfile does not exist."
+    exit 1
+}
+
 $subs = Get-Content -Raw $substitutionsfile | ConvertFrom-Json
 
 [System.Collections.ArrayList] $lines = @()

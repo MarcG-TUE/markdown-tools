@@ -86,7 +86,7 @@ foreach ($filter in $preprocessingfilters) {
 }
 
 $allargs = $allargs + @(`
-        "--lua-filter", "$filters/common/extractmetadata.lua", `
+        "--lua-filter", "$filters/common/extract-metadata.lua", `
         "--lua-filter", "$filters/html/macros.lua", `
         # "--filter", "pandoc-xnos", `
         "--lua-filter", "$filters/html/environments.lua", `

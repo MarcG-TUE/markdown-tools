@@ -1,11 +1,11 @@
 #!/usr/bin/env pwsh
 param(
-    [parameter(Mandatory=$true)][string] $inputfile,
-    [parameter(Mandatory=$true)][string] $outputdir,
-    [parameter(Mandatory=$false)][string] $outputname = "",
+    [parameter(Mandatory=$true)][string] $inputFile,
+    [parameter(Mandatory=$true)][string] $outputDir,
+    [parameter(Mandatory=$false)][string] $outputName = "",
     [parameter(Mandatory=$false)][string] $macros = "",
     [parameter(Mandatory=$false)][string] $filter = "",
-    [parameter(Mandatory=$false)][string] $syntaxdefinition = "",
+    [parameter(Mandatory=$false)][string] $syntaxDefinition = "",
     [Parameter(Mandatory=$false)][string] $metadata = ""
 )
 
@@ -15,7 +15,7 @@ Foreach ($i in $metadata.Split("&"))
   if ($i) {
     $kv = $i.split("=")
     $metadataArgs += @("-M")
-    $metadataArgs += "$($kv[0])=$($kv[1])"        
+    $metadataArgs += "$($kv[0])=$($kv[1])"
   }
 }
 
@@ -24,36 +24,48 @@ if ($PSBoundParameters.ContainsKey('Verbose')) { # Command line specifies -Verbo
     $Verbose = $PsBoundParameters.Get_Item('Verbose')
 }
 
-if (-not (Test-Path -PathType Container $outputdir)) {
-    New-Item $outputdir -ItemType Directory
+if (-not (Test-Path -PathType Container $outputDir)) {
+    New-Item $outputDir -ItemType Directory
 }
 
-$inputfile = Resolve-Path -Path $inputfile
-$inputdir = Split-Path -Parent $inputfile
-$outputdir = Resolve-Path -Path $outputdir
+$inputFile = Resolve-Path -Path $inputFile
+$inputDir = Split-Path -Parent $inputFile
+$outputDir = Resolve-Path -Path $outputDir
 
-
-if (! ($syntaxdefinition -eq "")) {
-    $optSyntaxDef = "--syntax-definition=metadata/syntax/$syntaxdefinition"
+if (! ($syntaxDefinition -eq "")) {
+  Write-Output("Trying syntax definition file $syntaxDefinition.xml")
+  if (Test-Path -Path "$syntaxDefinition.xml") {
+    $syntaxDefinitionFullPath = Resolve-Path -Path $syntaxDefinition
+    $optSyntaxDef = "--syntax-definition=$syntaxDefinitionFullPath"
+  } else {
+    Write-Output("Trying syntax definition file $PSScriptRoot/../metadata/syntax/$syntaxDefinition.xml")
+    if (Test-Path -Path "$PSScriptRoot/../metadata/syntax/$syntaxDefinition.xml") {
+      $syntaxDefinitionFullPath = Resolve-Path -Path "$PSScriptRoot/../metadata/syntax/$syntaxDefinition.xml"
+      $optSyntaxDef = "--syntax-definition=$syntaxDefinitionFullPath"
+    } else {
+      Write-Output("Syntax definition file $syntaxDefinition not found. Not using syntax definition.")
+      $optSyntaxDef = ""
+    }
+  }
 }
 
 $template = "$PSScriptRoot/../templates/presentation/presentation.html"
 $template = Resolve-Path $template
 
 if ($macros -eq "") {
-  $macrosfile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
+  $macrosFile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 } else {
-  $macrosfile = Resolve-Path -Path $macros
+  $macrosFile = Resolve-Path -Path $macros
 }
 
-if ($outputname -eq "") {
-  $outputname = "index.html"
+if ($outputName -eq "") {
+  $outputName = "index.html"
 }
 
 $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 
-$allargs = @($inputfile,
-  "--output", "$outputdir/$outputname",
+$allArgs = @($inputFile,
+  "--output", "$outputDir/$outputName",
   "--from", "markdown+citations+simple_tables+fenced_divs+link_attributes+footnotes",
   "--to", "revealjs",
   "-V", "revealjs-url=./reveal.js",
@@ -69,45 +81,49 @@ $allargs = @($inputfile,
   "--mathjax=./libs/mathjax/tex-chtml-full.js",
   "--standalone",
   "--template=$template",
-  "--metadata-file", $macrosfile,
+  "--metadata-file", $macrosFile,
   "--lua-filter", "$filters/html/macros.lua",
   "--lua-filter", "$filters/common/presentation.lua"
   "--lua-filter", "$filters/html/reveal-extensions.lua",
-  "--lua-filter", "$filters/common/extractmetadata.lua"
+  "--lua-filter", "$filters/common/extract-metadata.lua"
 )
 
-$allargs += $metadataArgs
+$allArgs += $metadataArgs
 
 if ($filter) {
   $template = Resolve-Path $template
-  $allargs += "--lua-filter"
-  $allargs += $filter
+  $allArgs += "--lua-filter"
+  $allArgs += $filter
 }
 
 
 if ($optSyntaxDef) {
-    $allargs += $optSyntaxDef
+    $allArgs += $optSyntaxDef
 }
 
 if ($Verbose) {
-  $allargs += "--verbose"
+  $allArgs += "--verbose"
 }
 
-& pandoc $allargs
+Write-Output (Get-Location)
+
+& pandoc $allArgs
 
 
 # copy distribution files to output dir
 $distPath = Resolve-Path $PSScriptRoot/../templates/presentation/dist
-Copy-Item -Path "$distPath/*" -Destination $outputdir -Force -Recurse
+Copy-Item -Path "$distPath/*" -Destination $outputDir -Force -Recurse
 
-$templates = Get-ChildItem $outputdir/background/*.html
+$templates = Get-ChildItem $outputDir/background/*.html
 foreach ($f in $templates) {
-  & $PSScriptRoot/util/substitute $f "$inputdir/extracted-metadata.json"
+  & $PSScriptRoot/util/substitute $f "$inputDir/extracted-metadata.json"
 }
 
-Remove-Item "$inputdir/extracted-metadata.json"
+if (Test-Path -Path "$inputDir/extracted-metadata.json") {
+  Remove-Item "$inputDir/extracted-metadata.json"
+}
 
 # copy figures to output dir
-if (Test-Path -Path "$inputdir/figures") {
-  Copy-Item -Force -Recurse "$inputdir/figures" $outputdir
+if (Test-Path -Path "$inputDir/figures") {
+  Copy-Item -Force -Recurse "$inputDir/figures" $outputDir
 }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ====================================================================
+  LSAT syntax highlighting file
+  ====================================================================
+  To be updated. Only supports some keywords.
+  Adapted from Matlab syntax may contain some left-overs
+-->
+
+<!DOCTYPE language>
+<!-- low priority to let Objective-C win for .m files per default -->
+<language name="Matlab" version="8" kateversion="5.0" section="Scientific" extensions="*.m;*.M" priority="-9" mimetype="text/mfile" casesensitive="1">
+  <highlighting>
+
+    <!-- Reserved keywords in MATLAB -->
+    <list name="KeywordsList">
+      <item>PeripheralType</item>
+      <item>Actions</item>
+      <item>Timings</item>
+      <item>actions</item>
+      <item>action</item>
+      <item>flow</item>
+      <item>move</item>
+      <item>to</item>
+      <item>with</item>
+      <item>speed</item>
+      <item>profile</item>
+      <item>claim</item>
+      <item>release</item>
+      <item>activities</item>
+      <item>activity</item>
+      <item>sequence</item>
+    </list>
+
+    <contexts>
+
+      <context name="_normal" attribute="Normal Text" lineEndContext="#stay">
+
+        <!-- Look-ahead for adjoint ' after variable, number literal, closing braces and .' -->
+        <RegExpr context="_adjoint" attribute="Variable" String="[a-zA-Z]\w*(?=')" />
+        <RegExpr context="_adjoint" attribute="Number" String="(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?[ij]?(?=')" />
+        <RegExpr context="_adjoint" attribute="Delimiter" String="[\)\]}](?=')" />
+        <RegExpr context="_adjoint" attribute="Operator" String="\.'(?=')" />
+
+        <!-- If ' is not the adjoint operator, it starts a string or an unterminated string -->
+        <RegExpr context="#stay" attribute="CharVector" String="'[^']*(''[^']*)*'(?=[^']|$)" />
+        <RegExpr context="#stay" attribute="Incomplete CharVector" String="'[^']*(''[^']*)*" />
+        <RegExpr context="#stay" attribute="String" String="&quot;[^&quot;]*(&quot;&quot;[^&quot;]*)*&quot;(?=[^&quot;]|$)" />
+        <RegExpr context="#stay" attribute="Incomplete String" String="&quot;[^&quot;]*(&quot;&quot;[^&quot;]*)*" />
+
+        <!-- Handling of keywords, comments, system commands, identifiers, numbers and braces -->
+        <keyword context="#stay" attribute="Keyword" String="KeywordsList" />
+        <DetectChar context="Comment" attribute="Comment" char="%" />
+        <DetectChar context="System" attribute="System" char="!" />
+        <RegExpr context="#stay" attribute="Variable" String="[a-zA-Z]\w*" />
+        <RegExpr context="#stay" attribute="Number" String="(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)?[ij]?" />
+        <AnyChar context="#stay" attribute="Delimiter" String="()[]{}"/>
+
+        <!-- Three and two-character operators -->
+        <StringDetect context="#stay" attribute="Operator" String="..."/>
+        <Detect2Chars context="#stay" attribute="Operator" char="=" char1="="/>
+        <Detect2Chars context="#stay" attribute="Operator" char="~" char1="="/>
+        <Detect2Chars context="#stay" attribute="Operator" char="&lt;" char1="="/>
+        <Detect2Chars context="#stay" attribute="Operator" char="&gt;" char1="="/>
+        <Detect2Chars context="#stay" attribute="Operator" char="&amp;" char1="&amp;"/>
+        <Detect2Chars context="#stay" attribute="Operator" char="|" char1="|"/>
+        <Detect2Chars context="#stay" attribute="Operator" char="." char1="*"/>
+        <Detect2Chars context="#stay" attribute="Operator" char="." char1="^"/>
+        <Detect2Chars context="#stay" attribute="Operator" char="." char1="/"/>
+        <Detect2Chars context="#stay" attribute="Operator" char="." char1="'"/>
+
+        <!-- Single-character operators -->
+        <AnyChar context="#stay" attribute="Operator" String="*+-/\&amp;|&lt;&gt;~^=,;:@"/>
+
+      </context>
+
+      <!-- Context entered after encountering an ' adjoint operator -->
+      <context name="_adjoint" attribute="Operator" lineEndContext="#pop">
+        <RegExpr context="#pop" attribute="Operator" String="'+" />
+      </context>
+
+      <context name="Comment" attribute="Comment" lineEndContext="#pop">
+        <DetectSpaces />
+        <IncludeRules context="##Comments"/>
+      </context>
+
+      <context name="System" attribute="System" lineEndContext="#pop"/>
+
+    </contexts>
+
+    <itemDatas>
+      <itemData name="Normal Text" defStyleNum="dsNormal" />
+      <itemData name="Variable" defStyleNum="dsVariable" />
+      <itemData name="Operator" defStyleNum="dsOperator"/>
+      <itemData name="Number" defStyleNum="dsFloat" />
+      <itemData name="Delimiter" defStyleNum="dsNormal" />
+      <itemData name="CharVector" defStyleNum="dsSpecialString" />
+      <itemData name="String" defStyleNum="dsString" />
+      <itemData name="System" defStyleNum="dsBaseN" />
+      <itemData name="Incomplete CharVector" defStyleNum="dsError" />
+      <itemData name="Incomplete String" defStyleNum="dsError" />
+      <itemData name="Keyword"  defStyleNum="dsKeyword" />
+      <itemData name="Comment" defStyleNum="dsComment" />
+    </itemDatas>
+
+  </highlighting>
+
+  <general>
+    <comments>
+      <comment name="singleLine" start="%" />
+    </comments>
+    <keywords casesensitive="1" weakDeliminator=""/>
+  </general>
+
+</language>
+<!-- kate: replace-tabs on; tab-width 2; indent-width 2; -->
