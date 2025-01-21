@@ -20,8 +20,20 @@
     </div>
   </div>
   </div>
+  <script>
+    function scaleSlide() {
+      const page = document.querySelector('.page');
+      const slide = document.querySelector('.slide');
+      const pageWidth = parseInt(getComputedStyle(page).getPropertyValue('--page-width'));
+      const pageHeight = parseInt(getComputedStyle(page).getPropertyValue('--page-height'));
+      const scaleX = window.innerWidth / pageWidth;
+      const scaleY = window.innerHeight / pageHeight;
+      const scale = Math.min(scaleX, scaleY);
+      slide.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleSlide);
+    window.addEventListener('load', scaleSlide);
+  </script>
 </body>
-
-
-
 </html>

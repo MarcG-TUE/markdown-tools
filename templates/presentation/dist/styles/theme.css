@@ -47,6 +47,8 @@ section.has-dark-background h6 {
   --r-link-color-hover: #6ca0e8;
   --r-selection-background-color: #98bdef;
   --r-selection-color: #fff;
+  --mt-vw-scale: min(1vw,(16/9)*1vh);
+  --mt-vh-scale: min(1vh,(9/16)*1vw);
 }
 
 
@@ -57,11 +59,11 @@ section.has-dark-background h6 {
   left: 50%; */
   z-index: 1000; /*  adobe all elements   */
   /* transform: translate(-50%, -50%);   /* make center   */
-  
+
   /* center content */
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 
   display: none; /*  to hide first time   */
   background-color: rgba(212, 211, 211, 0.95);
@@ -168,11 +170,10 @@ section.has-dark-background h6 {
   position: absolute;
   display: block;
   right: 50%;
-  height: min(5vw,(5*16/9)*1vh);
+  height: 4*var(--mt-vh-scale);
   top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translate(min(27.5vw,(27.5*16/9)*1vh), min(24vw,(24*16/9)*1vh));
-  font-size: min(2vw,(2*16/9)*1vh);
+  transform: translate(calc(27*var(--mt-vw-scale)), calc(43*var(--mt-vh-scale)));
+  font-size: calc(4*var(--mt-vh-scale));
   color: #000;
   background-color: rgba(0, 0, 0, 0);
 }
