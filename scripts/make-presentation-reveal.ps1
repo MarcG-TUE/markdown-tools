@@ -101,11 +101,14 @@ if ($optSyntaxDef) {
     $allArgs += $optSyntaxDef
 }
 
+if ($optHighlightStyle) {
+  $allargs += $optHighlightStyle
+}
+
+
 if ($Verbose) {
   $allArgs += "--verbose"
 }
-
-Write-Output (Get-Location)
 
 & pandoc $allArgs
 
