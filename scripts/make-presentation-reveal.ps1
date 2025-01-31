@@ -86,6 +86,7 @@ $allArgs = @($inputFile,
   "--lua-filter", "$filters/common/presentation.lua"
   "--lua-filter", "$filters/html/reveal-extensions.lua",
   "--lua-filter", "$filters/common/extract-metadata.lua"
+  "--lua-filter", "$filters/html/slide-numbering.lua"
 )
 
 $allArgs += $metadataArgs
