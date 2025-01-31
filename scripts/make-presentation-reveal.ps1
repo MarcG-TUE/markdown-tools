@@ -55,6 +55,10 @@ $template = Resolve-Path $template
 if ($macros -eq "") {
   $macrosFile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 } else {
+  if (-not (Test-Path -Path $macros)) {
+    Write-Error("Macros file $macros not found.")
+    exit(1)
+  }
   $macrosFile = Resolve-Path -Path $macros
 }
 
