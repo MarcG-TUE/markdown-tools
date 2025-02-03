@@ -134,3 +134,8 @@ if (Test-Path -Path "$inputDir/extracted-metadata.json") {
 if (Test-Path -Path "$inputDir/figures") {
   Copy-Item -Force -Recurse "$inputDir/figures" $outputDir
 }
+
+# copy deployment files to output dir
+if (Test-Path -Path "$inputDir/deploy") {
+  Copy-Item -Force -Recurse "$inputDir/deploy/*" $outputDir
+}
