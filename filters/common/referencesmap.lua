@@ -8,10 +8,10 @@ local refmap = {
     sectionLevelInclude = 1,
 
     -- short names of the types of references to keep track of, used in labels
-    types = { "def", "exa", "exc", "thm", "lem", "eq", "alg", "fig", "prb", "qst", "sec" },
+    types = { "def", "exa", "exc", "thm", "prp", "lem", "eq", "alg", "fig", "prb", "qst", "sec" },
 
     -- names of the counters
-    environments = { 'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem', 'figure', 'problem', 'question', 'section' },
+    environments = { 'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem', 'proposition', 'figure', 'problem', 'question', 'section' },
 
     -- map to link them
     shortEnvironments = {
@@ -21,6 +21,7 @@ local refmap = {
         example = 'exa',
         lemma = 'lem',
         theorem = 'thm',
+        proposition = 'prp',
         figure = 'fig',
         problem = 'prb',
         question = 'qst',
@@ -36,6 +37,7 @@ local refmap = {
         example = 'Example',
         lemma = 'Lemma',
         theorem = 'Theorem',
+        proposition = 'Proposition',
         figure = 'Figure',
         problem = 'Problem',
         question = 'Question',
@@ -51,6 +53,7 @@ local refmap = {
         example = 0,
         lemma = 0,
         theorem = 0,
+        proposition = 0,
         figure = 0,
         problem = 0,
         question = 0,
