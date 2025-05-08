@@ -34,8 +34,6 @@ if ($template -ne "") {
     Write-Host "Template not found: $template"
     exit 1
   }
-} elseif ($headerfile -ne "") {
-  $template = Resolve-Path -Path $template
 }
 else {
   $template = "$templatesDir/questions/eisvogel"
