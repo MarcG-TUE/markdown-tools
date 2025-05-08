@@ -119,6 +119,27 @@ function Div(elem)
             pandoc.RawInline('latex', '\\end{theorem}')
         }
     end
+    if elem.classes:includes('proposition') then
+        local name  = elem.attributes["name"]
+        local label = elem.attributes["label"]
+        local nameStr
+        local labelStr
+        if name == nil then
+            nameStr = ""
+        else
+            nameStr = "[" .. name .. "]"
+        end
+        if label == nil then
+            labelStr = ""
+        else
+            labelStr = "\\label{" .. label .. "}"
+        end
+        return {
+            pandoc.RawInline('latex', '\\begin{proposition}' .. nameStr .. '{' .. labelStr .. '}'),
+            elem,
+            pandoc.RawInline('latex', '\\end{proposition}')
+        }
+    end
     if elem.classes:includes('lemma') then
         local name  = elem.attributes["name"]
         local label = elem.attributes["label"]
