@@ -55,6 +55,10 @@ $template = Resolve-Path $template
 if ($macros -eq "") {
   $macrosFile = Resolve-Path -Path "$PSScriptRoot/../metadata/macros.yaml"
 } else {
+  if (-not (Test-Path -Path $macros)) {
+    Write-Error("Macros file $macros not found.")
+    exit(1)
+  }
   $macrosFile = Resolve-Path -Path $macros
 }
 
@@ -86,6 +90,7 @@ $allArgs = @($inputFile,
   "--lua-filter", "$filters/common/presentation.lua"
   "--lua-filter", "$filters/html/reveal-extensions.lua",
   "--lua-filter", "$filters/common/extract-metadata.lua"
+  "--lua-filter", "$filters/html/slide-numbering.lua"
 )
 
 $allArgs += $metadataArgs
@@ -129,4 +134,9 @@ if (Test-Path -Path "$inputDir/extracted-metadata.json") {
 # copy figures to output dir
 if (Test-Path -Path "$inputDir/figures") {
   Copy-Item -Force -Recurse "$inputDir/figures" $outputDir
+}
+
+# copy deployment files to output dir
+if (Test-Path -Path "$inputDir/deploy") {
+  Copy-Item -Force -Recurse "$inputDir/deploy/*" $outputDir
 }

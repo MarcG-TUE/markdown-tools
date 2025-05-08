@@ -25,7 +25,15 @@ $filters = Resolve-Path -Path "$PSScriptRoot/../filters"
 $templatesDir = Resolve-Path -Path "$PSScriptRoot/../templates"
 
 if ($template -ne "") {
-  $template = Resolve-Path -Path $template
+  if (-not (Test-Path -Path $template)) {
+    $template = "$templatesDir/questions/$template"
+  }
+  if (Test-Path -Path $template) {
+    $template = Resolve-Path -Path $template
+  } else {
+    Write-Host "Template not found: $template"
+    exit 1
+  }
 }
 else {
   $template = "$templatesDir/questions/eisvogel"

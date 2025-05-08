@@ -8,7 +8,7 @@ local refmap = {
     sectionLevelInclude = 1,
 
     -- short names of the types of references to keep track of, used in labels
-    types = { "def", "exa", "exc", "thm", "lem", "eq", "alg", "fig", "prb", "qst", "sec" },
+    types = { "def", "exa", "exc", "thm", "prp", "lem", "eq", "alg", "fig", "prb", "qst", "sec" },
 
     -- names of the counters
     environments = { 'algorithm', 'definition', 'exercise', 'example', 'lemma', 'theorem', 'proposition', 'figure', 'problem', 'question', 'section' },

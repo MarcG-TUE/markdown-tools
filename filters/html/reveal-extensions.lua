@@ -2,11 +2,22 @@ local revealExtensions = {}
 
 function Meta(m)
   if m["slide-attributes"] then
-    revealExtensions.defaultBackground = pandoc.utils.stringify(m["slide-attributes"]["background"])
+    if m["slide-attributes"]["background"] then
+      revealExtensions.defaultBackground = pandoc.utils.stringify(m["slide-attributes"]["background"])
+    end
+  end
+  if not revealExtensions.defaultBackground then
+    revealExtensions.defaultBackground = "background.html"
   end
   if m["title-slide-attributes"] then
-    revealExtensions.defaultTitleBackground = pandoc.utils.stringify(m["title-slide-attributes"]["background"])
+    if m["title-slide-attributes"]["background"] then
+      revealExtensions.defaultTitleBackground = pandoc.utils.stringify(m["title-slide-attributes"]["background"])
+    end
   end
+  if not revealExtensions.defaultTitleBackground then
+    revealExtensions.defaultTitleBackground = "background-title.html"
+  end
+
   revealExtensions.includeCSS = {}
   if m["include-css"] then
 
@@ -16,7 +27,7 @@ function Meta(m)
       table.insert(m.extraCss, item)
     end
   end
-  
+
   return m
 
 end
@@ -95,7 +106,7 @@ function Div (elem)
     end
     return elem
   end
-  
+
   if elem.classes:includes('text-box') then
     local classes = elem.classes
     elem.classes={}

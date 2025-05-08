@@ -83,6 +83,8 @@
 \newcommand{\happenedbefore}{\lhd}
 
 
+\newcommand{\hint}[1]{{\textit{Hint: {#1}}}}
+
 \newcommand{\custominlinefig}[2]{
 {\par\centering
 \includegraphics[#2]{#1}
