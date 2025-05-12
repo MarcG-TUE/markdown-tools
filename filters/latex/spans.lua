@@ -46,6 +46,34 @@ local function Span(elem)
             pandoc.RawInline('latex', '}}')
         }
     end
+    if elem.classes:includes("small") then
+        return {
+            pandoc.RawInline('latex', '{\\small{}'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
+    if elem.classes:includes("footnotesize") then
+        return {
+            pandoc.RawInline('latex', '{\\footnotesize{}'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
+    if elem.classes:includes("scriptsize") then
+        return {
+            pandoc.RawInline('latex', '{\\scriptsize{}'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
+    if elem.classes:includes("tiny") then
+        return {
+            pandoc.RawInline('latex', '{\\tiny{}'),
+            elem,
+            pandoc.RawInline('latex', '}')
+        }
+    end
 
     return elem
 end
